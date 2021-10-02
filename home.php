@@ -1,33 +1,35 @@
+
+<!--
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaucho Rocket</title>
-    <!-- ESTILOS -->
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Gaucho Rocket</title>
+   -- ESTILOS --
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/home.css">
-    <!-- GOOGLE FONTS -->
+    -- GOOGLE FONTS --
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- SCRIPT -->
+    -- SCRIPT --
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- /////////////////////// Header //////////////////////////// -->
+    -- /////////////////////// Header //////////////////////////// --
     <header>
         <nav class="navbar navbar-expand">
             <div class="container-md">
-                <a href="index.html ">
+                <a href="index.php ">
                     <h1>Gaucho Rocket</h1>
                 </a>
                 <div class="collapse navbar-collapse justify-content-end">
@@ -42,10 +44,10 @@
             </div>
         </nav>
     </header>
-    <!-- /////////////////////// Main //////////////////////////// -->
+    -- /////////////////////// Main //////////////////////////// --
     <main class="bg-white">
         <div class="d-block w-100 banner-buscador">
-            <!-- /////////////////////// Slider //////////////////////////// -->
+            -- /////////////////////// Slider //////////////////////////// --
             <div class="w-100 main-slider">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
@@ -71,7 +73,7 @@
                     </button>
                 </div>
             </div>
-            <!-- /////////////////////// Buscador //////////////////////////// -->
+            -- /////////////////////// Buscador //////////////////////////// --
             <div class="w-100 d-flex justify-content-center" style="position: absolute; bottom: 0;">
                 <div class="p-3 card bg-primary container">
                     <div class="card p-3 container">
@@ -89,7 +91,7 @@
                                 <label class="form-check-label" for="multidestino">Multidestino</label>
                             </div>
                             <div class="row mt-3">
-                                <!-- Fields -->
+                                -- Fields --
                                 <div class="col-lg col-6">
                                     <label for="input-origen" class="form-label">Origen</label>
                                     <input type="text" class="form-control" id="input-origen">
@@ -173,15 +175,15 @@
             </div>
         </div>
     </main>
-    <!-- /////////////////////// Footer //////////////////////////// -->
+    -- /////////////////////// Footer //////////////////////////// --
     <footer>
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
               <p class="col-md-4 mb-0 text-muted">&copy; 2021 Gaucho Rocket</p>
           
-              <!--<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              --<a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-              </a>-->
+              </a>--
           
               <ul class="nav col-md-4 justify-content-end">
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Inicio</a></li>

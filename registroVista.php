@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,22 +16,25 @@
 
     <title>Gaucho Rocket</title>
 </head>
-<body class="login">     
+<body class="login">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-               
+
                 <div class="card iniciosesion">
 
-                    <form class="box">
+                    <form class="box" action="registroimpl.php" method="post" >
 
                         <h1>Gaucho Rocket</h1>
-                        <h3>Login</h3>
-                        <p class="text-muted"> Ingrese su Correo y Contraseña</p>
-                        <input type="text" name="" placeholder="Email">
-                        <input type="password" name="" placeholder="Contraseña"> 
-                        <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a> 
-                        <input type="submit" name="" value="Login" href="#">
+                        <h3>REGISTRARSE</h3>
+                        <br>
+                        <p class="text-muted"> Ingrese su Usuario</p>
+                        <input type="text" name="usuario" placeholder="nombre">
+                        <p class="text-muted"> Ingrese su Contraseña</p>
+                        <input type="password" name="password" placeholder="Contraseña">
+                        <p class="text-muted"> Ingrese su correo electronico</p>
+                        <input type="password" name="mail" placeholder="example@gmail.com">
+                        <input type="submit" name="" value="Registrarse" href="#">
 
                         <div class="col-md-12">
 

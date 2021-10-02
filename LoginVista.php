@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,24 +18,30 @@
 
     <title>Gaucho Rocket</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand fixed-top"> 
-        <div class="container-md">
-            <a href="index.html ">
-                <h1>Gaucho Rocket</h1>
-            </a>
-            <div class="collapse navbar-collapse justify-content-end">
-                <div class="navbar-nav">
-                    <a href="" class="nav-link">Mi reserva</a>
-                    <a href="" class="nav-link">Servicios</a>
-                    <a href="" class="nav-link">Información</a>
-                    <a href="" class="nav-link">Registrarse</a>
-                    <a href="" class="nav-link">Login</a>
+<body class="login">     
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+               
+                <div class="card iniciosesion">
+
+                    <form class="box" action="loginimpl.php" method="post" >
+
+                        <h1>Gaucho Rocket</h1>
+                        <h3>Login</h3>
+                        <p class="text-muted"> Ingrese su Usuario y Contraseña</p>
+                        <input type="text" name="usuario" placeholder="nombre">
+                        <input type="password" name="password" placeholder="Contrasenia">
+                        <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a> 
+                        <input type="submit" name="" value="Login" href="#">
+
+                        <div class="col-md-12">
+
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
-        
-    </nav>
 </body>
 </html>
