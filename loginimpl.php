@@ -1,6 +1,6 @@
 <?php
 
-require_once("Registrar.php");
+require_once("Usuario.php");
 
 if(isset($_POST["usuario"]).isset($_POST["password"])){
     $usuario=$_POST["usuario"];

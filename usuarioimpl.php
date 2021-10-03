@@ -1,6 +1,6 @@
 <?php
 
-require_once ("Registrar.php");
+require_once ("usuario.php");
 
 if(isset($_POST["usuario"]).isset($_POST["password"]).isset($_POST["mail"])){
     $usuario=$_POST["usuario"];
@@ -9,7 +9,7 @@ if(isset($_POST["usuario"]).isset($_POST["password"]).isset($_POST["mail"])){
 }
 
 
-$nuevoUsuario= new Registrar($usuario,$password,$email);
+$nuevoUsuario=registrar($usuario,$clave,$email);
 
 $db= new mysqli("localhost", "root","","db",3308);
 

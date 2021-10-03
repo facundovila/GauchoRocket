@@ -23,7 +23,7 @@
 
                 <div class="card iniciosesion">
 
-                    <form class="box" action="registroimpl.php" method="post" >
+                    <form class="box" action="usuarioimpl.php" method="post" >
 
                         <h1>Gaucho Rocket</h1>
                         <h3>REGISTRARSE</h3>
