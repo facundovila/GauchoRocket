@@ -34,7 +34,7 @@
                         <input type="password" name="password" placeholder="Contraseña">
                         <p class="text-muted"> Ingrese su correo electronico</p>
                         <input type="password" name="mail" placeholder="example@gmail.com">
-                        <input type="submit" name="" value="Registrarse" href="#">
+                        <input type="submit" name="registro" value="Registrarse" href="#">
 
                         <div class="col-md-12">
 
