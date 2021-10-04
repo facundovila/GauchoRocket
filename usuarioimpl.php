@@ -30,31 +30,31 @@ if($user=mysqli_fetch_assoc($resultEmail)){
 
 
 // se crea el usuario en la bd
-/*
+
 $consultaCrearUsuario= " INSERT INTO usuario (usuario, clave, email) VALUES (?,?,?)";
 
-$comm= $db->prepare($consultaCrearUsuario);
-$comm->bind_param("sss" , $usuario,$clave,$email);
-$comm->execute();
-$resultado= $comm->get_result();
-*/
-// Comentado, siempre va a ser false por ser un insert   
+$comm1= $db->prepare($consultaCrearUsuario);
+$comm1->bind_param("sss" , $usuario,$clave,$email);
+$comm1->execute();
+
+
+// Comentado, siempre va a ser false por ser un insert  $resultado= $comm1->get_result();
 
 // se crea el cliente ligado al usuario recien creado
 
 $consultaCrearCliente= " INSERT INTO cliente (fkemailusuario) VALUES (?)";
 
-$comm= $db->prepare($consultaCrearCliente);
-$comm->bind_param("s",$email);
-$comm->execute();
+$comm2= $db->prepare($consultaCrearCliente);
+$comm2->bind_param("s",$email);
+$comm2->execute();
 
 // se inicia la sesion del cliente al terminar el registro
 
 $consultaCrearLogin= " INSERT INTO login (fkemailusuario,clave) VALUES (?,?)";
 
-$comm= $db->prepare($consultaCrearLogin);
-$comm->bind_param("ss",$email,$clave);
-$comm->execute();
+$comm3= $db->prepare($consultaCrearLogin);
+$comm3->bind_param("ss",$email,$clave);
+$comm3->execute();
 
 // se cierra la bd
 
