@@ -1,6 +1,3 @@
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,7 +22,7 @@
                
                 <div class="card iniciosesion">
 
-                    <form class="box" action="loginimpl.php" method="post" >
+                    <form class="box" action="../loginimpl.php" method="post" >
 
                         <h1>Gaucho Rocket</h1>
                         <h3>Login</h3>
@@ -33,7 +30,7 @@
                         <input type="text" name="usuario" placeholder="nombre">
                         <input type="password" name="password" placeholder="Contrasenia">
                         <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a> 
-                        <input type="submit" name="" value="Login" href="#">
+                        <input type="submit" name="login" value="Login" href="#">
 
                         <div class="col-md-12">
 

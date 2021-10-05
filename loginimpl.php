@@ -1,25 +1,17 @@
 <?php
 
+require_once ("establecerConexion.php");
 require_once("Usuario.php");
 
-if(isset($_POST["usuario"]).isset($_POST["password"])){
+if(isset($_POST["login"])){
     $usuario=$_POST["usuario"];
-    $password=$_POST["password"];
-}
-
-
-$basedatos= new mysqli("localhost", "root","","db",3308);
-
-if($basedatos->connect_error){
-    echo "ha ocurrido un error: " .$basedatos->connect_error;
+    $clave=md5($_POST["password"]);
 }
 
 
 $consulta = "SELECT * FROM usuario where usuario = ? and clave = ?";
-//$consulta = "INSERT INTO usuario where usuario = ? and clave = ?";
 
-$comm = $basedatos->prepare($consulta);
-
+$comm = $db->prepare($consulta);
 
 $comm->bind_param("ss",$usuario,$password);
 $comm->execute();
@@ -30,7 +22,7 @@ if( $resultado->fetch_assoc()==true){
     echo "bienvenido a gaucho rocket " . $usuario;
 }
 
-$basedatos->close();
+$db->close();
 /*while($fila = $resultado->fetch_assoc()){
     echo "bienvenido a gaucho rocket".$fila["usuario"];
 
@@ -38,7 +30,7 @@ $basedatos->close();
 
 
 
-/*$queryy = $basedatos->query($consulta);
+/*$query = $basedatos->query($consulta);
 if($basedatos->error){
     echo "la consulta produjo un error :". $basedatos->error;
 }

@@ -1,6 +1,6 @@
 <?php
 
-include ("establecerConexion.php");
+require_once ("establecerConexion.php");
 require_once ("usuario.php");
 
 if(isset($_POST["registro"])){

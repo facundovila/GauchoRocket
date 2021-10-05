@@ -34,7 +34,7 @@ body {
 /* Registrar */
 
 body.login{
-    background-image:url("../img/background.jpg")
+    background-image:url("../../public/background.jpg")
 }
 
 .iniciosesion {
