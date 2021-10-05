@@ -9,8 +9,6 @@ if(isset($_POST["registro"])){
     $email=$_POST["mail"];
 }
 
-
-
 // Verificacion de email no registrado
 
 $verificacionEmailNuevo= " SELECT * FROM usuario WHERE email= ? ";
@@ -23,7 +21,7 @@ $resultEmail=$comm0->get_result();
 if($user=mysqli_fetch_assoc($resultEmail)){
     if($user['email'] == $email){
         echo "email ya registrado";
-
+        die();
     }else
     $nuevoUsuario=new Usuario($usuario,$clave,$email);
 }
@@ -59,3 +57,5 @@ $comm3->execute();
 // se cierra la bd
 
 $db->close();
+
+echo "usuario creado";

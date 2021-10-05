@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if ($_SESSION["usuario"] == null) {
+        header("Location: view/loginView.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,6 +43,7 @@
                     <a href="" class="nav-link">Información</a>
                     <a href="view/registroView.php" class="nav-link">Registrarse</a>
                     <a href="view/loginView.php" class="nav-link">Login</a>
+                    <a href="view/loginView.php?logout=true" class="nav-link">Logout</a>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@
 
                 <div class="card iniciosesion">
 
-                    <form class="box" action="usuarioimpl.php" method="post" >
+                    <form class="box" action="../usuarioimpl.php" method="post" >
 
                         <h1>Gaucho Rocket</h1>
                         <h3>REGISTRARSE</h3>
@@ -33,7 +33,7 @@
                         <p class="text-muted"> Ingrese su Contraseña</p>
                         <input type="password" name="password" placeholder="Contraseña">
                         <p class="text-muted"> Ingrese su correo electronico</p>
-                        <input type="password" name="mail" placeholder="example@gmail.com">
+                        <input type="text" name="mail" placeholder="example@gmail.com">
                         <input type="submit" name="registro" value="Registrarse" href="#">
 
                         <div class="col-md-12">

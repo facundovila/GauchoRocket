@@ -56,6 +56,7 @@ body.login{
 }
 
 .box input[type="text"],
+.box input[type="email"],
 .box input[type="password"] {
     border: 0;
     background: none;

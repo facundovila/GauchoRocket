@@ -1,3 +1,12 @@
+<?php
+    session_start();
+
+    if (isset($_GET["logout"])) {
+        session_unset();
+        session_destroy();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,7 +38,8 @@
                         <p class="text-muted"> Ingrese su Usuario y Contraseña</p>
                         <input type="text" name="usuario" placeholder="nombre">
                         <input type="password" name="password" placeholder="Contrasenia">
-                        <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a> 
+                        <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a>
+                        <a class="olvid text-muted d-block" href="registroView.php">Registrarte</a>
                         <input type="submit" name="login" value="Login" href="#">
 
                         <div class="col-md-12">
