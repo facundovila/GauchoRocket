@@ -1,7 +1,7 @@
 <?php
 
 require_once ("establecerConexion.php");
-require_once ("usuario.php");
+require_once("Usuario.php");
 
 if(isset($_POST["registro"])){
     $usuario=$_POST["usuario"];

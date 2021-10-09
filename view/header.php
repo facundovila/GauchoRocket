@@ -1,7 +1,7 @@
 <?php
     session_start();
     if ($_SESSION["usuario"] == null) {
-        header("Location: view/loginView.php");
+        header("Location: view/loginView.html");
     }
 ?>
 
@@ -41,9 +41,9 @@
                     <a href="" class="nav-link">Mi reserva</a>
                     <a href="" class="nav-link">Servicios</a>
                     <a href="" class="nav-link">Información</a>
-                    <a href="view/registroView.php" class="nav-link">Registrarse</a>
-                    <a href="view/loginView.php" class="nav-link">Login</a>
-                    <a href="view/loginView.php?logout=true" class="nav-link">Logout</a>
+                    <a href="view/registroView.html" class="nav-link">Registrarse</a>
+                    <a href="view/loginView.html" class="nav-link">Login</a>
+                    <a href="view/loginView.html?logout=true" class="nav-link">Logout</a>
                 </div>
             </div>
         </div>
