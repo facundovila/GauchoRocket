@@ -33,4 +33,11 @@ class LoginModel extends BaseModel {
             echo "no existe " . $usuario;
         }*/
     }
+
+    public function validar($hash) {
+        $param = array($hash);
+        $query = "UPDATE usuario SET hash = NULL WHERE hash IS NOT NULL AND hash = ? ";
+
+        return $this->database->query($param, $query);
+    }
 }

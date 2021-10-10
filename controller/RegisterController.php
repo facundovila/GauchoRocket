@@ -25,7 +25,11 @@ class RegisterController extends BaseController {
         $usuario = $_POST["usuario"];
         $email = $_POST["email"];
         $password = $_POST["password"];
+        $hash = md5(date('h:i:s', time()));
 
-        echo json_encode($this->registerModel->registerUser($usuario, $email, md5($password)));
+        //echo json_encode($this->registerModel->registerUser($usuario, $email, $password));
+        $this->registerModel->registerUser($usuario, $email, md5($password), $hash);
+
+        header("Location: /validar/validar/hash=" . $hash);
     }
 }

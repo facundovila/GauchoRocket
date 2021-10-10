@@ -18,6 +18,11 @@ class Configuration{
         return new HomeController($this->createPrinter());
     }
 
+    public function createValidarController() {
+        require_once "controller/ValidarController.php";
+        return new ValidarController($this->createPrinter());
+    }
+
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
