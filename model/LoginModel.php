@@ -1,11 +1,8 @@
 <?php
 
-class LoginModel {
-    private MyDatabase $database;
+require_once "BaseModel.php";
 
-    public function __construct($database) {
-        $this->database = $database;
-    }
+class LoginModel extends BaseModel {
 
     public function login($email) {
         $query = "SELECT * FROM usuario WHERE email = ?";
