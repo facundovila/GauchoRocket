@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validar</title>
+</head>
+<body>
+    <!--<a href="/login/validar/hash=dasdasdas">Validar</a>-->
+    <a href="/login/validar/hash=" id="validar-a">Validar</a>
+
+    <script>
+        let url = window.location.pathname;
+        document.getElementById("validar-a").href += url.split("hash=")[1];
+    </script>
+</body>
+</html>
