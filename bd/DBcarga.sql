@@ -1,7 +1,7 @@
 use dbgr;
 
 insert into usuario(email,rol,usuario)
-             values("admindoko@nomail.com","Admin","Kero");
+             values("admindoko@nomail.com","admin","Kero");
              
 	
 insert into admin(fkemailusuario,id_admin)
