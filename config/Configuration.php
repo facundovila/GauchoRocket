@@ -18,9 +18,9 @@ class Configuration{
         return new HomeController($this->createPrinter());
     }
 
-    public function createValidarController() {
-        require_once "controller/ValidarController.php";
-        return new ValidarController($this->createPrinter());
+    public function createValidatorController(): ValidatorController {
+        require_once "controller/ValidatorController.php";
+        return new ValidatorController($this->createValidatorModel(), $this->createPrinter());
     }
 
     private function createLoginModel(): LoginModel {
@@ -33,6 +33,12 @@ class Configuration{
         require_once "model/RegisterModel.php";
         $database = $this->getDatabase();
         return new RegisterModel($database);
+    }
+
+    private function createValidatorModel() {
+        require_once "model/ValidatorModel.php";
+        $database = $this->getDatabase();
+        return new ValidatorModel($database);
     }
 
     private function getDatabase(): MyDatabase {

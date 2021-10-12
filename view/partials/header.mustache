@@ -1,10 +1,3 @@
-<?php
-    session_start();
-    if ($_SESSION["usuario"] == null) {
-        header("Location: view/loginView.html");
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

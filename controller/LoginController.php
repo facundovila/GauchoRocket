@@ -22,38 +22,18 @@ class LoginController extends BaseController {
         $usuario = $_POST["usuario"];
         $clave = md5($_POST["password"]);
 
-        $result = $this->loginModel->login($usuario);
-
-
-        echo json_encode($result) ."<br>";
-        echo $result[0]["hash"];
+        $result = $this->loginModel->login($usuario, $clave);
 
         if (!empty($result)) {
             $hash = $result[0]["hash"];
+
             if ($hash == null) {
                 header("Location: /home");
             } else {
-                header("Location: /validar/hash=" .$hash);
+                header("Location: /validator/show/hash=" .$hash);
             }
         } else {
             header("Location: /login");
         }
-    }
-
-    public function validar() {
-        if (!isset($_GET["hash"])) {
-            die("dasd");
-        }
-
-        $hash = $_GET["hash"];
-
-        /*if ($this->loginModel->validar($hash)) {
-            echo "sucess";
-        } else {
-            echo "error";
-        }*/
-
-        $this->loginModel->validar($hash);
-        header("Location: /home");
     }
 }

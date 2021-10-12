@@ -1,5 +1,7 @@
 <?php
 
+require_once "helpers/MyDatabase.php";
+
 abstract class BaseModel {
     protected MyDatabase $database;
 
