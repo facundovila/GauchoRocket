@@ -11,6 +11,8 @@ class RegisterController extends BaseController {
     }
 
     public function show() {
+         /* if (isset($_SESSION['role'])) {
+            header("Location: /home"); } */ 
         echo $this->printer->render( "view/registroView.html");
     }
 
@@ -28,7 +30,10 @@ class RegisterController extends BaseController {
         $hash = md5(date('h:i:s', time()));
 
         //echo json_encode($this->registerModel->registerUser($usuario, $email, $password));
-        $this->registerModel->registerUser($usuario, $email,$password, $hash);
+        
+        $this->registerModel->registerUser($usuario,$email,$password);
+        $this->registerModel->registerLogin($email,$password,$hash);
+        
 
         header("Location: /validator/show/hash=" . $hash);
     }
