@@ -15,7 +15,7 @@ class Configuration{
 
     public function createHomeController(): HomeController {
         require_once "controller/HomeController.php";
-        return new HomeController($this->createPrinter());
+        return new HomeController($this->createHomeModel(),$this->createPrinter());
     }
 
     public function createValidatorController(): ValidatorController {
@@ -27,6 +27,12 @@ class Configuration{
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
         return new LoginModel($database);
+    }
+
+    private function createHomeModel(): HomeModel {
+        require_once "model/HomeModel.php";
+        $database = $this->getDatabase();
+        return new HomeModel($database);
     }
 
     private function createRegisterModel(): RegisterModel {

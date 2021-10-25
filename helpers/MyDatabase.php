@@ -25,6 +25,10 @@ class MyDatabase{
         return mysqli_fetch_all($databaseResult,MYSQLI_ASSOC);
     }*/
 
+    public function execute($sql){
+        mysqli_query($this->database, $sql);
+    }
+
     public function query($params, $query) {
         $stmt = $this->database->prepare($query);
 

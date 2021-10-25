@@ -18,4 +18,5 @@ class RegisterModel extends BaseModel {
 
        $this->database->query($params, $request);
     }
+    
 }
