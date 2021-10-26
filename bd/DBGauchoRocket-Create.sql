@@ -29,4 +29,25 @@ hash varchar(40),
 foreign key (fkEmailUsuario) references usuario(email)
 );
 
+create table locacion(
+codigo int primary key auto_increment,
+nombre varchar(50)
+);
+
+create table turnoMedico(
+codigo int primary key AUTO_INCREMENT,
+fkemailusuario varchar(64),
+fechaTurnoMedico datetime,
+codigoLocacion int,
+foreign key (fkemailusuario) references usuario(email),
+foreign key (codigoLocacion) references centroMedico(codigoLocacion)
+);
+
+create table centroMedico(
+codigo int primary key auto_increment,
+turnos int,
+codigoLocacion int,
+foreign key (codigoLocacion) references locacion(codigo)
+);
+
 

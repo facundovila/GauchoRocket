@@ -1,30 +1,42 @@
 use dbgr;
 
-insert into usuario(email,rol,usuario,clave)
-             values("admin","admin","admin",md5("admin"));
+insert into usuario(email,rol,usuario,clave)values			
+										("admin","admin","admin",md5("admin")),
+										("cliente","cliente",md5("cliente"));
 			            
-insert into login(fkemailusuario,clave)
-            values("admin",md5("admin"));
-            
-insert into usuario(email,usuario,clave)
-             values("cliente","cliente",md5("cliente"));
-			            
-insert into login(fkemailusuario,clave)
-            values("cliente",md5("cliente"));
+insert into login(fkemailusuario,clave)values
+										("admin",md5("admin")),
+										("cliente",md5("cliente"));
+                                        
+insert into locacion (nombre) values
+								('Buenos Aires'),
+								('Ankara'),
+								('EEI'),
+								('Orbiter Hotel'),
+								('Luna'),
+								('Marte'),
+								('Europa'),
+								('Io'),
+								('Encelado'),
+								('Titan'),
+								('Ganimedes'),
+								('Neptuno'),
+								('Shanghai');
+                                
+insert into centroMedico (turnos,codigoLocacion) values
+													(300,1),
+                                                    (210,13),
+                                                    (200,2);
 
-select rol
-from usuario as u join login as l on u.email=l.fkemailusuario;
+insert into turnoMedico (fkemailusuario, fechaTurnoMedico, codigoLocacion) values
+											("admin", '2019.01.01 17:00:00',1),
+											("cliente", '2019.01.01 17:00:00',1);
+
+
+
+
  
             
-select*
-from usuario;
-
-select rol 
-from usuario 
-where email = 'cliente' and clave = md5('cliente');
-
-select*
-from login;
 
 
 
