@@ -71,6 +71,11 @@ class Configuration{
         return  $this->config;
     }
 
+    private function getLoginCheck(){
+        require_once("helpers/LoginCheck.php");
+        
+    }
+
     private function getLogger(): Logger {
         require_once("helpers/Logger.php");
         return new Logger();
