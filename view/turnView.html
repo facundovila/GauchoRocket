@@ -1,0 +1,29 @@
+{{> header}}
+<main class="bg-white">
+    {{^ no-disponible}}
+    <form action="turn/sacarTurno" method="post" class="w3-p">
+        <input type="date" name="date">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <select name="centro" id="centro">
+            {{# centros}}
+            <option value="{{codigo}}">{{nombre}}</option>
+            {{/ centros}}
+        </select>
+        <br>
+        <br>
+        <br>
+        <input type="submit" value="Sacar turno">
+    </form>
+    {{/no-disponible}}
+
+    {{# no-disponible}}
+    <div class="p-3">
+        <h2>No hay turnos disponibles</h2>
+    </div>
+    {{/ no-disponible}}
+</main>
+{{> footer}}

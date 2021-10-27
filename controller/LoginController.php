@@ -2,7 +2,8 @@
 
 require_once "BaseController.php";
 
-class LoginController extends BaseController {
+class LoginController extends BaseController
+{
     private LoginModel $loginModel;
 
     public function __construct($loginModel, $printer) {
@@ -11,13 +12,13 @@ class LoginController extends BaseController {
     }
 
     public function show() {
-       /* if (isset($_SESSION['role'])) {
-            header("Location: /home"); } */
-        echo $this->printer->render( "view/loginView.html");
+        /* if (isset($_SESSION['role'])) {
+             header("Location: /home"); } */
+        echo $this->printer->render("view/loginView.html");
     }
 
     public function login() {
-        if(!isset($_POST["login"])){
+        if (!isset($_POST["login"])) {
             header("Location: /login");
         }
 
@@ -25,25 +26,21 @@ class LoginController extends BaseController {
         $clave = md5($_POST["password"]);
 
         $result = $this->loginModel->login($usuario, $clave);
-      
-      
-       // echo "<br>" . json_encode($result) ."<br>";
-        
-      
-        if (!empty($result)) {
-            $hash = $result[0]["hash"];
 
-            if ($hash == null) {
-                $_SESSION["rol"]=json_encode($result);
-                header("Location: /home");
-            } else {
-                $_SESSION["rol"]=json_encode($result);
-                header("Location: /validator/show/hash=" .$hash);
-            }
-        } else {
-            header("Location: /login");
+        if (empty($result)) {
+            die("Algo salió mal.");
         }
-      
-        
+
+        $result = $result[0];
+        $hash = $result["hash"];
+
+        $_SESSION["id"] = $result["id"];
+        $_SESSION["rol"] = $result["rol"];
+
+        if ($hash == null) {
+            header("Location: /home");
+        } else {
+            header("Location: /validator/show/hash=" . $hash);
+        }
     }
 }

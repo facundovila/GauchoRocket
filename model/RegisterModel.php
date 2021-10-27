@@ -9,14 +9,14 @@ class RegisterModel extends BaseModel {
         $params = array($name, $email, $password);
         
 
-        return $this->database->query($params, $request);
+        return $this->database->query2($params, $request);
     }
 
     function registerLogin($email,$password,$hash){
         $request = "INSERT INTO login (fkemailusuario,clave,hash) VALUES (?,?,?)";
         $params = array($email, $password,$hash);
 
-       $this->database->query($params, $request);
+       $this->database->query2($params, $request);
     }
     
 }

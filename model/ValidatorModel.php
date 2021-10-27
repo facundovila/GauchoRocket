@@ -7,6 +7,6 @@ class ValidatorModel extends BaseModel {
         $param = array($hash);
         $query = "UPDATE login SET hash = NULL WHERE hash IS NOT NULL AND hash = ? ";
 
-        return $this->database->query($param, $query);
+        return $this->database->query2($param, $query);
     }
 }

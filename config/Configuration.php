@@ -23,6 +23,11 @@ class Configuration{
         return new ValidatorController($this->createValidatorModel(), $this->createPrinter());
     }
 
+    public function createTurnController(): TurnController {
+        require_once "controller/TurnController.php";
+        return new TurnController($this->createTurnModel(), $this->createPrinter());
+    }
+
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
@@ -45,6 +50,12 @@ class Configuration{
         require_once "model/ValidatorModel.php";
         $database = $this->getDatabase();
         return new ValidatorModel($database);
+    }
+
+    private function createTurnModel(): TurnModel {
+        require_once "model/TurnModel.php";
+        $database = $this->getDatabase();
+        return new TurnModel($database);
     }
 
     private function getDatabase(): MyDatabase {
