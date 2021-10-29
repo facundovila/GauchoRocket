@@ -9,7 +9,7 @@ usuario varchar(50),
 clave varchar(40),
 id int unique auto_increment
 );
-/*
+
 create table admin(
 fkemailusuario varchar(70) primary key,
 id_admin int unique auto_increment,
@@ -21,7 +21,7 @@ fkemailusuario varchar(70) primary key,
 id_cliente int unique auto_increment,
 foreign key (fkEmailUsuario) references usuario(email)
 );
-*/
+
 create table login(
 fkemailusuario varchar(70) primary key,
 clave varchar(40),
@@ -34,6 +34,14 @@ codigo int primary key auto_increment,
 nombre varchar(50)
 );
 
+create table centroMedico(
+codigo int primary key auto_increment,
+turnos int,
+codigoLocacion int,
+foreign key (codigoLocacion) references locacion(codigo)
+);
+
+
 create table turnoMedico(
 codigo int primary key AUTO_INCREMENT,
 fkemailusuario varchar(64),
@@ -43,11 +51,5 @@ foreign key (fkemailusuario) references usuario(email),
 foreign key (codigoLocacion) references centroMedico(codigoLocacion)
 );
 
-create table centroMedico(
-codigo int primary key auto_increment,
-turnos int,
-codigoLocacion int,
-foreign key (codigoLocacion) references locacion(codigo)
-);
 
 

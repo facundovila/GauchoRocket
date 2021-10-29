@@ -1,18 +1,69 @@
 .banner-buscador {
-    height: 38em; 
+    height: 45em;
     position: relative;
+
 }
 
+
+
+
+
+
+
 .main-slider {
-    position: absolute; 
+    position: absolute;
     top: 0;
+
 }
 
 .carousel-inner {
-    height: 32em;
+    height: 35em;
 }
 
 .carousel-inner img {
-    width: 100%; 
-    height: 100%;
+    width: 100%;
+
+}
+
+.center{
+    text-align: center;
+    align-items: center;
+}
+
+
+
+
+@media screen and (max-width:60em){
+    .banner-buscador {
+
+        height: 35em;
+
+    }
+    .carousel-inner {
+
+    }
+    .cartascentradas{
+        align-items: center;
+        align-content: center;
+
+    }
+}
+
+@media screen and (max-width:47em){
+    .banner-buscador {
+        height: 29em;
+
+
+    }
+    .carousel-inner {
+
+    }
+
+    .cartascentradas{
+        align-items: center;
+        align-content: center;
+        margin-left: 5em;
+    }
+
+
 }

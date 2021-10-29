@@ -61,7 +61,7 @@ class Configuration{
     private function getDatabase(): MyDatabase {
         require_once("helpers/MyDatabase.php");
         $config = $this->getConfig();
-        return new MyDatabase($config["servername"], $config["username"], $config["password"], $config["dbname"]);
+        return new MyDatabase($config["servername"], $config["username"], $config["password"], $config["dbname"],$config["port"]);
     }
 
     private function getConfig(): bool|array {
