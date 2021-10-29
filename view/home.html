@@ -7,13 +7,13 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="/public/luna.jpg" class="img-fluid" alt="...">
+                            <img src="/public/img/etapaslunas.jpg" class="img-fluid" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/public/luna.jpg" class="img-fluid" alt="...">
+                            <img src="/public/img/estacionespacial.jpg" class="img-fluid" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="/public/luna.jpg" class="img-fluid" alt="...">
+                            <img src="/public/img/nave.jpg" class="img-fluid" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -28,8 +28,8 @@
                     </button>
                 </div>
             </div>
-            
-            <div class="w-100 d-flex justify-content-center" style="position: absolute; bottom: 0;">
+
+            <div class="w-100  d-flex justify-content-center" style="position: absolute; bottom: 0;">
                 <div class="p-3 card bg-primary container">
                     <div class="card p-3 container">
                         <form>
@@ -47,21 +47,42 @@
                             </div>
                             <div class="row mt-3">
                                 
-                                <div class="col-lg col-6">
-                                    <label for="input-origen" class="form-label">Origen</label>
-                                    <input type="text" class="form-control" id="input-origen">
+                                <div class="col-lg col-3">
+                                    <label for="" class="form-label">origen</label>
+
+                                    <select name="origen" id="" class="form-select">
+                                        <option selected>seleccione un origen</option>
+                                        <option value="buenosAires">Buenos Aires</option>
+                                        <option value="ankara">Ankara</option>
+                                        <option value="shangai">Shangai</option>
+                                    </select>
                                 </div>
+
                                 <div class="col-lg col-6">
-                                    <label for="field-destino" class="form-label">Destino</label>
-                                    <input type="text" class="form-control">
+                                    <label for="" class="form-label">destino</label>
+                                    <select name="destino" id="" class="form-select">
+                                        <option selected>seleccione un destino</option>
+                                        <option value="eei">EEI</option>
+                                        <option value="luna">Luna</option>
+                                        <option value="marte">Marte</option>
+                                        <option value="europa">Europa</option>
+                                        <option value="io">Io</option>
+                                        <option value="encelado">Encelado</option>
+                                        <option value="titan">Titan</option>
+                                        <option value="ganimades">Ganimades</option>
+                                        <option value="neptuno">Neptuno</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="col-lg col-3">
+                                    <label for="" class="form-label">Partida</label>
+                                    <input type="date" name="partida" class="form-control">
                                 </div>
                                 <div class="col-lg col-3">
-                                    <label for="field-destino" class="form-label">Partida</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="col-lg col-3">
-                                    <label for="field-destino" class="form-label">Regreso</label>
-                                    <input type="text" class="form-control">
+                                    <label for="" class="form-label">Regreso</label>
+                                    <input type="date" name="regreso" class="form-control">
                                 </div>
                                 <div class="col-lg col-4">
                                     <label for="clase" class="form-label">Clase</label>
@@ -78,15 +99,16 @@
                 </div>
             </div>
         </div>
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col">
-                    <div class="card col mb-5" style="width: 18rem;">
-                        <img src="/public/luna.jpg" class="card-img-top" alt="...">
+        <div class="container center mt-5 cartascentradas">
+            <h3 class="center mb-4">destinos mas buscados</h3>
+
+            <div class="row center">
+                <div class="col ">
+                    <div class="card  col mb-5" style="width: 18rem;">
+                        <img src="/public/img/luna2.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
+                            <h5 class="card-title">luna</h5>
+                            <p class="card-text">La Luna es el único satélite natural de la Tierra. Con un diámetro ecuatorial de 3476 km, es el quinto satélite más grande del sistema solar.</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -94,11 +116,11 @@
 
                 <div class="col">
                     <div class="card col mb-5" style="width: 18rem;">
-                        <img src="/public/luna.jpg" class="card-img-top" alt="...">
+                        <img src="/public/img/marte2.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
+                            <h5 class="card-title">marte</h5>
+                            <p class="card-text">Marte es el cuarto planeta en orden de distancia al Sol y el segundo más pequeño del sistema solar, después de Mercurio.</p>
+                            <br>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -106,11 +128,10 @@
 
                 <div class="col">
                     <div class="card col mb-5" style="width: 18rem;">
-                        <img src="/public/luna.jpg" class="card-img-top" alt="...">
+                        <img src="/public/img/titan.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
+                            <h5 class="card-title">titan</h5>
+                            <p class="card-text">Titán es el mayor de los satélites de Saturno y el segundo del sistema solar tras Ganimedes y es el único satélite que posee una atmósfera importante.</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
@@ -118,11 +139,11 @@
 
                 <div class="col">
                     <div class="card col mb-5" style="width: 18rem;">
-                        <img src="/public/luna.jpg" class="card-img-top" alt="...">
+                        <img src="/public/img/estacion-espacial.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
+                            <h5 class="card-title">Estacion espacial internacional</h5>
+                            <p class="card-text">La Estación Espacial Internacional es una estación espacial modular ubicada en la órbita terrestre baja.</p>
+                            <br>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>

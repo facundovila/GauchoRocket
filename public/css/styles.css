@@ -33,31 +33,76 @@ body {
 
 /* Registrar */
 
-body.login{
-    background-image:url("../background.jpg")
+.login{
+    background-image:url("../marte.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+/*@media screen and (min-width:47em){*/
+/*    body.login{*/
+
+/*        background-size: 1800px;*/
+/*    }*/
+
+
+/*}*/
+
+
+/*@media screen and (min-width:70em){*/
+/*    body.login{*/
+
+/*        background-size: 1980px;*/
+/*    }*/
+
+
+/*}*/
+
 
 .iniciosesion {
     margin-bottom: 20px;
+    margin-top: 5em;
     border: none
 }
 
 .box {
-    width: 500px;
+    width: 100%;
+    max-width: 70%;
+
+    display: flex;
     padding: 40px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
     background: #191919;
-    ;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    align-items: center;
     transition: 0.25s;
-    margin-top: 100px
+    margin-left: 400px;
+    margin-bottom: 150px;
+
 }
+
+
+@media screen and (max-width:60em){
+    .box{
+        margin-left: 180px;
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width:47em){
+  .box{
+      margin: 0 auto;
+  }
+}
+
+
+
 
 .box input[type="text"],
 .box input[type="email"],
 .box input[type="password"] {
+
     border: 0;
     background: none;
     display: block;

@@ -16,7 +16,7 @@ clave varchar(40),
 id int unique auto_increment,
 foreign key (nivelVuelo) references nivelVuelo(nivel)
 );
-
+/*
 /*
 create table admin(
 fkemailusuario varchar(70) primary key,
@@ -28,7 +28,7 @@ fkemailusuario varchar(70) primary key,
 id_cliente int unique auto_increment,
 foreign key (fkEmailUsuario) references usuario(email)
 );
-*/
+
 
 create table login(
 fkemailusuario varchar(70) primary key,
