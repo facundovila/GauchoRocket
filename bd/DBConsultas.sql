@@ -21,3 +21,8 @@ from centroMedico;
 
 select*
 from turnoMedico;
+
+-- Query de Centros medicos con turnos disponibles
+select CM.codigo
+from centroMedico as CM 
+where CM.turnos > (select count(fechaTurnoMedico) from turnoMedico)
