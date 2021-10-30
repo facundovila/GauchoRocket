@@ -8,9 +8,14 @@ insert into nivelVuelo(nivel)values
 insert into usuario(email,rol,usuario,clave)values			
 										("admin","admin","admin",md5("admin")),
 										("cliente","cliente","cliente",md5("cliente"));
-			            
+	
+
+insert into usuario(email,rol,usuario,clave,nivelVuelo)values	
+													("vuelo","cliente","vuelo",md5("vuelo"),3);
+    
 insert into login(fkemailusuario,clave)values
 										("admin",md5("admin")),
+                                        ("vuelo",md5("vuelo")),
 										("cliente",md5("cliente"));
                                         
 insert into locacion (nombre) values
@@ -29,7 +34,7 @@ insert into locacion (nombre) values
 								('Shanghai');
                                 
 insert into centroMedico (turnos,codigoLocacion) values
-													(1,1),
+													(300,1),
                                                     (210,13),
                                                     (200,2);
 
@@ -37,117 +42,77 @@ insert into turnoMedico (fkemailusuario, fechaTurnoMedico, codigoLocacion) value
 											("admin", '2021.01.01 17:00:00',1),
 											("cliente", '2021.01.01 17:00:00',1);
 
-insert into centroMedico (turnos,codigoLocacion) values
-													(1,1),
-                                                    (210,13),
-                                                    (200,2);
-                                                    
 
 insert into tipoDeTrayecto (nombre) values
 											('Orbitales'),
 											('SubOrbitales');
 
 insert into tipoDeEquipo (nombre) values
-							('Baja aceleracion'),
-							('Alta aceleracion'),
-							('Orbitales');
+							('Orbitales'),
+							('Baja Aceleracion'),
+							('Alta Aceleracion');
 
 
 insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
 							('Aguila',2, 25, 200, 75),
-							('Aguila',2, 25, 200, 75),
-							('Aguila',2, 25, 200, 75),
-							('Aguila',2, 25, 200, 75),
-							('Aguila',2, 25, 200, 75),
-							('Aguilucho',1, 10, 0, 50),
-							('Aguilucho',1, 10, 0, 50),
-							('Aguilucho',1, 10, 0, 50),
-							('Aguilucho',1, 10, 0, 50),
 							('Aguilucho',1, 10, 0, 50),
 							('Calandria',3, 25, 200, 75),
-							('Calandria',3, 25, 200, 75),
-							('Calandria',3, 25, 200, 75),
-							('Calandria',3, 25, 200, 75),
-							('Canario',1, 10, 0, 70),
-							('Canario',1, 10, 0, 70),
-							('Canario',1, 10, 0, 70),
-							('Canario',1, 10, 0, 70),
 							('Canario',1, 10, 0, 70),
 							('Carancho',1, 0, 110, 0),
-							('Carancho',1, 0, 110, 0),
-							('Carancho',1, 0, 110, 0),
-							('Carancho',1,0, 110, 0),
 							('Colibri',3, 2, 100, 18),
-							('Colibri',3, 2, 100, 18),
-							('Colibri',3, 2, 100, 18),
-							('Colibri',3, 2, 100, 18),
-							('Colibri',3, 2, 100, 18),
-							('Condor',2, 40, 300, 10),
-							('Condor',2, 40, 300, 10),
-							('Condor',2, 40, 300, 10),
-							('Condor',2, 40, 300, 10),
 							('Condor',2, 40, 300, 10),
 							('Guanaco',2, 100, 0, 0),
-							('Guanaco',2, 100, 0, 0),
-							('Guanaco',2, 100, 0, 0),
-							('Guanaco',2, 100, 0, 0),
 							('Halcon',2, 25, 150, 25),
-							('Halcon',2, 25, 150, 25),
-							('Halcon',2, 25, 150, 25),
-							('Halcon',2, 25, 150, 25),
-							('Halcon',2, 25, 150, 25),
-							('Zorzal',1, 0, 50, 50),
-							('Zorzal',1, 0, 50, 50),
 							('Zorzal',1, 0, 50, 50); 
 
 
 
 insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					('AA1',1),
-					('AA5',2),
-					('AA9',3),
-					('AA13',4),
-					('AA17',5),
-					('BA8',6),
-					('BA9',7),
-					('BA10',8),
-					('BA11',9),
-					('BA12',10),
-					('O1',11),
-					('O2',12),
-					('O6',13),
-					('O7',14),
-					('BA13',15),
-					('BA14',16),
-					('BA15',17),
-					('BA16',18),
-					('BA17',19),
-					('BA4',20),
-					('BA5',21),
-					('BA6',22),
-					('BA7',23),
-					('O3',24),
-					('O4',25),
-					('O5',26),
-					('O8',27),
-					('O9',28),
-					('AA2',29),
-					('AA6',30),
-					('AA10',31),
-					('AA14',32),
-					('AA18',33),
-					('AA4',34),
-					('AA8',35),
-					('AA12',36),
-					('AA16',37),
-					('AA3',38),
-					('AA7',39),
-					('AA11',40),
-					('AA15',41),
-					('AA19',42),
-					('BA1',43),
-					('BA2',44),
-					('BA3',45); 
+					('AA5',1),
+					('AA9',1),
+					('AA13',1),
+					('AA17',1),
+					('BA8',2),
+					('BA9',2),
+					('BA10',2),
+					('BA11',2),
+					('BA12',2),
+					('O1',3),
+					('O2',3),
+					('O6',3),
+					('O7',3),
+					('BA13',4),
+					('BA14',4),
+					('BA15',4),
+					('BA16',4),
+					('BA17',4),
+					('BA4',5),
+					('BA5',5),
+					('BA6',5),
+					('BA7',5),
+					('O3',6),
+					('O4',6),
+					('O5',6),
+					('O8',6),
+					('O9',6),
+					('AA2',7),
+					('AA6',7),
+					('AA10',7),
+					('AA14',7),
+					('AA18',7),
+					('AA4',8),
+					('AA8',8),
+					('AA12',8),
+					('AA16',8),
+					('AA3',9),
+					('AA7',9),
+					('AA11',9),
+					('AA15',9),
+					('AA19',9),
+					('BA1',10),
+					('BA2',10),
+					('BA3',10); 
 					 
             
  insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto,precio,nombre) values
@@ -179,9 +144,13 @@ insert into tipoDeServicio (descripcion, precio) values
 										(2),
 										(3);
  
- insert into ubicacion(ocupada,fkCodigoViaje,fkCodigoCabina,fkCodigoServicio,nroUbicacion) values
-						(false,1,1,1,20),
-                        (false,2,3,3,2);
+ insert into ubicacion(ocupada,nroUbicacion) values
+						(false,20),
+                        (false,2);
                         
-
+insert into reservaPasaje(codigoReserva,fecha,pago,checkin,fkCodigoViaje) values
+								('codigoRe',now(),false,false,1);
+               
+insert into reservaUsuario(fkemailUsuario,fkcodigoReserva) values 
+							('vuelo','codigoRe');
  
