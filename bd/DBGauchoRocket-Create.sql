@@ -16,19 +16,6 @@ clave varchar(40),
 id int unique auto_increment,
 foreign key (nivelVuelo) references nivelVuelo(nivel)
 );
-/*
-/*
-create table admin(
-fkemailusuario varchar(70) primary key,
-id_admin int unique auto_increment,
-foreign key (fkEmailUsuario) references usuario(email)
-);
-create table cliente(
-fkemailusuario varchar(70) primary key,
-id_cliente int unique auto_increment,
-foreign key (fkEmailUsuario) references usuario(email)
-);
-
 
 create table login(
 fkemailusuario varchar(70) primary key,
@@ -70,7 +57,6 @@ codigoLocacionDestino int,
 codigoTipoDeTrayecto int,
 precio double (10,2),
 nombre varchar(50),
-duracion int, -- determina el costo del viaje, mas dias implican mas costos de alojamiento
 foreign key (codigoLocacionOrigen) references locacion(codigo),
 foreign key (codigoLocacionDestino) references locacion(codigo),
 foreign key (codigoTipoDeTrayecto) references tipoDeTrayecto(codigo)
@@ -101,8 +87,9 @@ foreign key (fkCodigoModeloEquipo) references modeloDeEquipo(codigo)
 create table viaje(
 codigo int primary key auto_increment,
 descripcion varchar(100),
-precio double(10,2),
+precio double(10,2), -- hacer que dependa del equipo que hace el viaje AA mayor costo, BA menor costo igual que orbital
 fecha datetime,
+duracion int, -- determina el costo del viaje, mas dias implican mas costos de alojamiento, tambien depende del equipo que haga el viaje
 matriculaEquipo varchar(15),
 codigoTrayecto int,
 foreign key (codigoTrayecto) references Trayecto(codigo),
@@ -134,12 +121,14 @@ foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServi
 );
 
 
-create table ubicacion(
+create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
 codigoUbicacion int auto_increment primary key,
 ocupada boolean,
 fkCodigoViaje int,
 fkCodigoCabina int,
-nroUbicacion varchar (2),
+fkCodigoServicio int,
+nroUbicacion int ,
+foreign key(fkCodigoServicio) references servicio(codigoServicio),
 foreign key (fkCodigoViaje) references viaje(codigo),
 foreign key (fkCodigoCabina) references cabina(codigoCabina)
 );
@@ -147,7 +136,9 @@ foreign key (fkCodigoCabina) references cabina(codigoCabina)
 create table reservaPasaje(
 codigoDeReserva varchar(8) primary key,
 fecha datetime,
-pago boolean
+pago boolean,
+fkcodigoUbicacion int,
+foreign key (fkcodigoUbicacion) references ubicacion(codigoUbicacion)
 );
 
 create table pasaje(

@@ -26,3 +26,5 @@ from turnoMedico;
 select CM.codigo
 from centroMedico as CM 
 where CM.turnos > (select count(fechaTurnoMedico) from turnoMedico)
+
+select substring('2021.01.01 17:00:00',11,9);
