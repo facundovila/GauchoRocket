@@ -12,8 +12,10 @@ class LoginController extends BaseController
     }
 
     public function show() {
-        /* if (isset($_SESSION['role'])) {
-             header("Location: /home"); } */
+         if (isset($_SESSION['rol'])) {
+             header("Location: /home");
+         }
+
         echo $this->printer->render("view/loginView.html");
     }
 

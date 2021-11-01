@@ -31,6 +31,12 @@
             </a>
             <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav">
+                    {{#logged}}
+                    <a href="/turn" name="turno" class="nav-link">Sacar Turno</a>
+                    {{/logged}}
+                    {{#admin}}
+                    <a href="/turn" name="turno" class="nav-link">Sacar Turno</a>
+                    {{/admin}}
                     <a href="" class="nav-link">Mi reserva</a>
                     <a href="" class="nav-link">Servicios</a>
                     <a href="" class="nav-link">Información</a>

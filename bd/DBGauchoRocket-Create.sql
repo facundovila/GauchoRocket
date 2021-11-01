@@ -38,10 +38,10 @@ foreign key (codigoLocacion) references locacion(codigo)
 
 create table turnoMedico(
 codigo int primary key auto_increment,
-fkemailusuario varchar(64),
+fkIdUsuario int,
 fechaTurnoMedico datetime,
 codigoLocacion int,
-foreign key (fkemailusuario) references usuario(email),
+foreign key (fkIdUsuario) references usuario(id),
 foreign key (codigoLocacion) references centroMedico(codigoLocacion)
 );
 

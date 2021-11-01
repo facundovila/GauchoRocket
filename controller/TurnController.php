@@ -11,6 +11,14 @@ class TurnController extends BaseController {
     }
 
     public function show() {
+        $id = $_SESSION["id"];
+
+        $nivelVuelo = $this->model->checkNivelVuelo($id);
+
+        if (!empty($nivelVuelo)) {
+            header("location: /");
+        }
+
         $response = $this->model->getCentrosMedicos();
 
         if (empty($response)) {
@@ -24,16 +32,23 @@ class TurnController extends BaseController {
 
     public function sacarTurno() {
         $id = $_SESSION["id"];
+
+        $nivelVuelo = $this->model->checkNivelVuelo($id);
+
+        if (!empty($nivelVuelo)) {
+            header("location: /");
+        }
+
         $date = $_POST["date"];
         $centroId = $_POST["centro"];
 
-        $this->model->registrarTurno($id, $date, $centroId);
+        $this->model->registrarTurno($id, $date, intval($centroId));
 
         $random = rand(0, 100);
 
-        if ($random > 60) {
+        if ($random >= 60) {
             $nivel = "3";
-        } else if ($random > 10) {
+        } else if ($random >= 10) {
             $nivel = "2";
         } else {
             $nivel = "1";

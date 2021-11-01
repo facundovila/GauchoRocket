@@ -9,6 +9,6 @@ class LoginModel extends BaseModel {
                   where u.email = ? and u.clave = ?";
         $params = array($email, $password);
 
-        return $this->database->query2($params, $query);
+        return $this->database->executeQueryParams($params, $query);
     }
 }

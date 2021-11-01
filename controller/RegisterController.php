@@ -11,9 +11,11 @@ class RegisterController extends BaseController {
     }
 
     public function show() {
-         /* if (isset($_SESSION['role'])) {
-            header("Location: /home"); } */ 
-        echo $this->printer->render( "view/registroView.html");
+        if (isset($_SESSION['rol'])) {
+            header("Location: /home");
+        }
+
+        echo $this->printer->render("view/registroView.html");
     }
 
     public function register() {
@@ -22,14 +24,10 @@ class RegisterController extends BaseController {
             die();
         }
 
-        //echo json_encode($_POST) ."<br>";
-
         $usuario = $_POST["usuario"];
         $email = $_POST["email"];
         $password = md5( $_POST["password"]);
         $hash = md5(date('h:i:s', time()));
-
-        //echo json_encode($this->registerModel->registerUser($usuario, $email, $password));
         
         $this->registerModel->registerUser($usuario,$email,$password);
         $this->registerModel->registerLogin($email,$password,$hash);

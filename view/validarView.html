@@ -5,11 +5,8 @@
     <title>Validar</title>
 </head>
 <body>
-    <a href="/validator/validate/hash=" id="validar-a">Validar</a>
-
-    <script>
-        let url = window.location.pathname;
-        document.getElementById("validar-a").href += url.split("hash=")[1];
-    </script>
+    {{# hash}}
+    <a href="/validator/validate/hash={{hash}}" id="validar-a">Validar</a>
+    {{/ hash}}
 </body>
 </html>

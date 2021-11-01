@@ -14,7 +14,7 @@ class ValidatorController extends BaseController {
         if (!isset($_GET["hash"])) {
             header("Location: /login");
         } else {
-            $data = $_GET["hash"];
+            $data["hash"] = $_GET["hash"];
 
             echo $this->printer->render("view/validarView.html", $data);
         }
@@ -28,6 +28,6 @@ class ValidatorController extends BaseController {
         $hash = $_GET["hash"];
 
         $this->validatorModel->validate($hash);
-        header("Location: /home");
+        header("Location: /login");
     }
 }

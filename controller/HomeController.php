@@ -11,29 +11,6 @@ require_once "BaseController.php";
     }
 
      public function show() {
-         $data = $this->loginCheck();
-         echo $this->printer->render( "view/home.html",$data);
+         echo $this->printer->render( "view/home.html");
      }
-
-     public function loginCheck() {
-
-        if(isset($_GET["logout"])){
-            session_destroy();
-            header('Location: /');
-            exit();
-        }
-   
-        if (isset($_SESSION["rol"])&&$_SESSION["rol"]=="cliente") {
-            $data["logged"]=true;
-         
-        }else if(isset($_SESSION["rol"])&&$_SESSION["rol"]=="admin"){
-            $data["admin"]=true;
-        }
-        else {
-            $data["notLogged"]= true;
-            
-        }
-        return $data;
-
-    }
  }

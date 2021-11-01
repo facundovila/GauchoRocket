@@ -29,7 +29,7 @@ class MyDatabase{
         mysqli_query($this->database, $sql);
     }
     
-    public function query2($params, $query) {
+    public function executeQueryParams($params, $query) {
         $stmt = $this->database->prepare($query);
 
         $types = "";

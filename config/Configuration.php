@@ -89,7 +89,12 @@ class Configuration{
     private function createPrinter(): MustachePrinter {
         require_once ('third-party/mustache/src/Mustache/Autoloader.php');
         require_once("helpers/MustachePrinter.php");
-        return new MustachePrinter("view/partials");
+        return new MustachePrinter("view/partials", $this->createLoginChecker());
     }
 
+    private function createLoginChecker(): LogginChecker {
+        require_once "helpers/LoginCheck.php";
+
+        return new LogginChecker();
+    }
 }
