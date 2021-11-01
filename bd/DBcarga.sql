@@ -38,9 +38,9 @@ insert into centroMedico (turnos,codigoLocacion) values
                                                     (210,13),
                                                     (200,2);
 
-insert into turnoMedico (fkemailusuario, fechaTurnoMedico, codigoLocacion) values
-											("admin", '2021.01.01 17:00:00',1),
-											("cliente", '2021.01.01 17:00:00',1);
+insert into turnoMedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) values
+											(1, '2021.01.01 17:00:00',1),
+											(2, '2021.01.01 17:00:00',1);
 
 
 insert into tipoDeTrayecto (nombre) values
@@ -153,4 +153,3 @@ insert into reservaPasaje(codigoReserva,fecha,pago,checkin,fkCodigoViaje) values
                
 insert into reservaUsuario(fkemailUsuario,fkcodigoReserva) values 
 							('vuelo','codigoRe');
- 

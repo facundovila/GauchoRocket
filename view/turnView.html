@@ -1,22 +1,20 @@
 {{> header}}
-<main class="bg-white">
+<main class="bg-white container p-3">
     {{^ no-disponible}}
+    <h2 class="text-dark">Solicitar Turno</h2>
     <form action="turn/sacarTurno" method="post" class="w3-p">
-        <input type="date" name="date">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <select name="centro" id="centro">
-            {{# centros}}
-            <option value="{{codigo}}">{{nombre}}</option>
-            {{/ centros}}
-        </select>
-        <br>
-        <br>
-        <br>
-        <input type="submit" value="Sacar turno">
+        <div class="form-group">
+            <label for="date" class="mt-3">Selecciona una fecha</label>
+            <input type="date" name="date" id="date" class="form-control mt-1">
+            <label for="centro" class="mt-3">Selecciona el lugar</label>
+            <select name="centro" id="centro" class="form-control mt-1">
+                {{# centros}}
+                <option value="{{codigo}}">{{nombre}}</option>
+                {{/ centros}}
+            </select>
+
+            <input type="submit" value="Solicitar" class="btn btn-primary mt-5">
+        </div>
     </form>
     {{/no-disponible}}
 
