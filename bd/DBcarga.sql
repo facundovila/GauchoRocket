@@ -47,8 +47,8 @@ insert into turnoMedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) values
 											(2, '2021.01.01',1);
 
 insert into turnoMedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) values
-								(1, '2021.02.02',1);
- */                               
+								(3, '2021.01.01',1);
+ */                         
                                 
 insert into tipoDeTrayecto (nombre) values
 											('Orbitales'),

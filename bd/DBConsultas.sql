@@ -19,6 +19,7 @@ from locacion;
 select*
 from centroMedico;
 
+drop table turnoMedico;
 select*
 from turnoMedico;
 
@@ -50,12 +51,12 @@ where CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico );
 -- Query de Centro medico con turnos disponibles para una fecha determinada
 select distinct codigo as id, turnos,codigoLocacion as Locacion
 from centroMedico as CM 
-where CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = "2021.01.01 17:00:00" );
+where CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = "2021.01.01" );
 
 -- Query de Centro medico con turnos disponibles para una fecha determinada
 select distinct codigo as id, turnos,codigoLocacion as Locacion
 from centroMedico as CM 
-where CM.codigo=1 and CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = "2021.01.01 17:00:00" );
+where CM.codigo=1 and CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = "2021.01.01" );
 
 
 select distinct L.nombre as Locacion,CM.turnos as Turnos_Totales
