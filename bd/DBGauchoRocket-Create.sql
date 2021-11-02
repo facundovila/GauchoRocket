@@ -46,7 +46,7 @@ foreign key (codigoLocacion) references locacion(codigo)
 create table turnoMedico(
 codigo int primary key auto_increment,
 fkIdUsuario int,
-fechaTurnoMedico datetime,
+fechaTurnoMedico date,
 codigoLocacion int,
 foreign key (fkIdUsuario) references usuario(id),
 foreign key (codigoLocacion) references centroMedico(codigoLocacion)

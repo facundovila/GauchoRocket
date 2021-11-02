@@ -4,7 +4,8 @@ require_once "BaseModel.php";
 
 class TurnModel extends BaseModel {
     public function getCentrosMedicos(): array {
-        $query = "select * from centroMedico as CM join locacion l on CM.codigoLocacion = l.codigo where CM.turnos > (select count(fechaTurnoMedico) from turnoMedico)";
+        $query = "SELECT * from centroMedico as CM join locacion l on CM.codigoLocacion = l.codigo";
+        
         return $this->database->query($query);
     }
 
@@ -25,15 +26,18 @@ class TurnModel extends BaseModel {
         $query = "SELECT * from Usuario as U
          join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario 
          join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= ?";
+
         return $this->database->executeQueryParams(array($id), $query);
 
-   
     }
 
-    /*
-    public function checkFechaTurno($date){
-        $query = 
+    public function checkFechaTurno($centroId,$date){
+        $query = "SELECT distinct codigo as id, turnos,codigoLocacion as Locacion
+        from centroMedico as CM where CM.codigo = ? and CM.turnos > 
+        (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = ? )";
+
+        return $this->database->executeQueryParams(array($centroId,$date), $query);
     }
 
-    */
+    
 }
