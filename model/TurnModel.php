@@ -15,12 +15,25 @@ class TurnModel extends BaseModel {
     }
 
     public function setUserLevel($id, $nivel) {
-        $query = "UPDATE usuario SET nivelVuelo = $nivel WHERE id = $id";
-        $this->database->execute($query);
+        $query = "INSERT INTO nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values (?, ?)";
+
+        $this->database->executeQueryParams(array($id, $nivel), $query);
     }
 
     public function checkNivelVuelo($id): array {
-        $query = "SELECT * FROM usuario WHERE id = ? AND nivelVuelo IS NOT NULL";
+
+        $query = "SELECT * from Usuario as U
+         join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario 
+         join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= ?";
         return $this->database->executeQueryParams(array($id), $query);
+
+   
     }
+
+    /*
+    public function checkFechaTurno($date){
+        $query = 
+    }
+
+    */
 }

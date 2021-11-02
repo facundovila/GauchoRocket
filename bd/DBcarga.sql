@@ -1,17 +1,20 @@
 use dbgr;
 
-insert into nivelVuelo(nivel)values
-						(1),
-                        (2),
-                        (3);
+insert into nivelVuelo(nivel,descripcion)values
+						(1,"Nivel Uno"),
+                        (2,"Nivel Dos"),
+                        (3,"Nivel Tres");
 
 insert into usuario(email,rol,usuario,clave)values			
 										("admin","admin","admin",md5("admin")),
 										("cliente","cliente","cliente",md5("cliente"));
 	
 
-insert into usuario(email,rol,usuario,clave,nivelVuelo)values	
-													("vuelo","cliente","vuelo",md5("vuelo"),3);
+insert into usuario(email,rol,usuario,clave)values	
+													("vuelo","cliente","vuelo",md5("vuelo"));
+                                                    
+insert into nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values
+								(3,3);
     
 insert into login(fkemailusuario,clave)values
 										("admin",md5("admin")),
