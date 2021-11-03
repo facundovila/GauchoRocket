@@ -1,6 +1,23 @@
 {{> header}}
 <main class="bg-white container p-3">
-    {{^ no-disponible}}
+
+    <section class="d-flex" id="wrapper">
+
+        <article class="bg-gris text-white border-right" id="sidebar-wrapper">
+            <div>
+                <div class="sidebar-heading">Mi perfil</div>
+                <div class="list-group list-group-flush">
+                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis datos</a>
+                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral"> Turno Medico</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis Vuelos</a>
+
+
+                </div>
+            </div>
+        </article >
+
+        <article  class="contenido" id="page-content-wrapper">
+     {{^ no-disponible}}
     <h2 class="text-dark">Solicitar Turno</h2>
     <form action="turn/sacarTurno" method="post" class="w3-p">
         <div class="form-group">
@@ -23,5 +40,8 @@
         <h2>No hay turnos disponibles</h2>
     </div>
     {{/ no-disponible}}
+
+     </article>
+    </section>
 </main>
 {{> footer}}

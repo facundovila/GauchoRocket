@@ -27,9 +27,13 @@ class RegisterController extends BaseController {
         $usuario = $_POST["usuario"];
         $email = $_POST["email"];
         $password = md5( $_POST["password"]);
+        $nombre = $_POST["nombre"];
+        $apellido= $_POST["apellido"];
+        $dni= $_POST["dni"];
+        $telefono= $_POST["telefono"];
         $hash = md5(date('h:i:s', time()));
         
-        $this->registerModel->registerUser($usuario,$email,$password);
+        $this->registerModel->registerUser($usuario,$email,$password, $nombre, $apellido, $dni, $telefono);
         $this->registerModel->registerLogin($email,$password,$hash);
         
 
