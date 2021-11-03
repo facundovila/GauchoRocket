@@ -2,19 +2,17 @@ drop database if exists dbgr;
 create database dbgr;
 use dbgr;
 
-create table nivelVuelo(
-codigo int primary key auto_increment,
-nivel int unique
-);
-
 create table usuario(
 email varchar(70) primary key,
 rol varchar(10) DEFAULT "cliente",
 usuario varchar(50),
-nivelVuelo int default null,
 clave varchar(40),
-id int unique auto_increment,
-foreign key (nivelVuelo) references nivelVuelo(nivel)
+nombre varchar(40),
+apellido varchar(40),
+dni int(30),
+telefono int(15),
+
+id int unique auto_increment
 );
 
 create table login(
@@ -22,6 +20,20 @@ fkemailusuario varchar(70) primary key,
 clave varchar(40),
 hash varchar(40),
 foreign key (fkEmailUsuario) references usuario(email)
+);
+
+create table nivelVuelo(
+codigo int primary key auto_increment,
+nivel int unique,
+descripcion varchar (10)
+);
+
+create table nivelVueloUsuario(
+id int primary key auto_increment,
+fkIdUsuario int,
+fkNivelVuelo int, 
+foreign key (fkIdUsuario) references usuario(id),
+foreign key (fkNivelVuelo) references nivelVuelo(nivel)
 );
 
 create table locacion(

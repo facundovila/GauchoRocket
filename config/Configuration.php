@@ -28,6 +28,11 @@ class Configuration{
         return new TurnController($this->createTurnModel(), $this->createPrinter());
     }
 
+    public function createUserController(): UserController{
+        require_once "controller/UserController.php";
+        return new UserController($this->createUserModel(), $this->createPrinter());
+
+    }
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
@@ -57,6 +62,13 @@ class Configuration{
         require_once "model/TurnModel.php";
         $database = $this->getDatabase();
         return new TurnModel($database);
+    }
+
+    private function createUserModel(): UserModel{
+        require_once "model/UserModel.php";
+        $database= $this->getDatabase();
+        return new UserModel($database);
+
     }
 
     private function getDatabase(): MyDatabase {
