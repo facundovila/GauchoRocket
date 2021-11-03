@@ -1,0 +1,57 @@
+{{>header}}
+<main class="usuario">
+    <section class="d-flex" id="wrapper">
+
+      <article class="bg-gris text-white border-right" id="sidebar-wrapper">
+          <div>
+              <div class="sidebar-heading">Mi perfil</div>
+              <div class="list-group list-group-flush">
+                  <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis datos</a>
+                  <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral"> Turno Medico</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis Vuelos</a>
+
+
+              </div>
+          </div>
+          <!-- /#sidebar-wrapper -->
+
+
+      </article >
+        {{#datosUsuario}}
+        <article  class="contenido" id="page-content-wrapper">
+
+            <h3>bienvenido {{usuario}}</h3>
+
+            <p>nombre: {{nombre}}</p>
+            <p>apellido: {{apellido}}</p>
+            <p>dni: {{dni}}</p>
+            <p>email: {{email}}</p>
+            <p>telefono registrado: {{telefono}}</p>
+
+            <p >Tu nivel de vuelo es: {{nivel}}</p>
+
+
+
+
+
+        {{/datosUsuario}}
+            <!--  {{# nivel}}
+             <p class="text-light">Tu nivel de vuelo es: {{nivel}}</p>
+             {{/ nivel}} -->
+         </article>
+
+
+
+
+
+
+
+     </section>
+
+
+
+
+
+ </main>
+
+ {{>footer}}
