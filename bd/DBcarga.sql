@@ -127,7 +127,7 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					 (2,13,1,6000,'Ankara - Shanghai'),
                      (13,6,2,35000,'Shanghai - Marte');
                      
-insert into viaje(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
+insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
 				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,now(),3,'AA1',1),
                  ('Viaje Orbital desde Anakara hasta Shanghai',6000,now(),8,'O5',2);
 
@@ -155,7 +155,7 @@ insert into tipoDeServicio (descripcion, precio) values
 						(false,20),
                         (false,2);
                         
-insert into reservaPasaje(codigoReserva,fecha,pago,checkin,fkCodigoViaje) values
+insert into reservaPasaje(codigoReserva,fecha,pago,checkin,fkCodigoVuelo) values
 								('codigoRe',now(),false,false,1);
                
 insert into reservaUsuario(fkemailUsuario,fkcodigoReserva) values 

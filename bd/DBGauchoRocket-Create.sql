@@ -91,7 +91,7 @@ foreign key (fkCodigoModeloEquipo) references modeloDeEquipo(codigo)
 );
 
 
-create table viaje(
+create table vuelo(
 codigo int primary key auto_increment,
 descripcion varchar(100),
 precio double(10,2), -- hacer que dependa del equipo que hace el viaje AA mayor costo, BA menor costo igual que orbital
@@ -131,7 +131,8 @@ foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServi
 create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
 codigoUbicacion int auto_increment primary key,
 ocupada boolean,
-nroUbicacion int 
+filaUbicacion int,
+columnaUbicacion int 
 );
 
 create table reservaPasaje(
@@ -141,10 +142,10 @@ pago boolean,
 checkin boolean,
 totalAPagar double(10,2),
 fkCodigoUbicacion int,
-fkCodigoViaje int,
+fkCodigoVuelo int,
 fkCodigoCabina int,
 fkCodigoServicio int,
-foreign key (fkCodigoViaje) references viaje(codigo),
+foreign key (fkCodigoVuelo) references vuelo(codigo),
 foreign key(fkCodigoServicio) references servicio(codigoServicio),
 foreign key (fkCodigoCabina) references cabina(codigoCabina),
 foreign key (fkCodigoUbicacion) references ubicacion(codigoUbicacion)
