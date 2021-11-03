@@ -11,13 +11,7 @@ class ValidatorController extends BaseController {
     }
 
     public function show() {
-        if (!isset($_GET["hash"])) {
-            header("Location: /login");
-        } else {
-            $data["hash"] = $_GET["hash"];
-
-            echo $this->printer->render("view/validarView.html", $data);
-        }
+        echo $this->printer->render("view/validarView.html");
     }
 
     public function validate() {

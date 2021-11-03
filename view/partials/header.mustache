@@ -10,6 +10,8 @@
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
     <link rel="stylesheet" href="../public/css/home.css" type="text/css">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/perfilUser.css">
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,27 +34,31 @@
             <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav">
                     {{#logged}}
-                    <a href="/turn" name="turno" class="nav-link">Sacar Turno</a>
+
+                            <a href="/user/" name="perfil"   class="nav-link">Mi Perfil</a>
+
+
                     {{/logged}}
                     {{#admin}}
-                    <a href="/turn" name="turno" class="nav-link">Sacar Turno</a>
+                        <a href="/user" name="perfil"  class="nav-link">Mi Perfil</a>
+
                     {{/admin}}
-                    <a href="" class="nav-link">Mi reserva</a>
-                    <a href="" class="nav-link">Servicios</a>
-                    <a href="" class="nav-link">Información</a>
+                        <a href="" class="nav-link">Mi reserva</a>
+                        <a href="" class="nav-link">Servicios</a>
+                        <a href="" class="nav-link">Información</a>
 
                     {{#notLogged}}
-                    <a href="/login" class="nav-link">Login</a>
-                    <a href="/register" class="nav-link">Registrarse</a>
+                        <a href="/login" class="nav-link">Login</a>
+                        <a href="/register" class="nav-link">Registrarse</a>
                     {{/notLogged}}
 
                     {{#logged}}
-                    <a href="?logout=true" name="logout" class="nav-link">Logout</a>
+                        <a href="?logout=true" name="logout" class="nav-link">Logout</a>
                     {{/logged}}
 
                     {{#admin}}
-                    <a href=""  class="nav-link">Administrar</a>
-                    <a href="?logout=true" name="logout" class="nav-link">Logout</a>
+                        <a href=""  class="nav-link">Administrar</a>
+                        <a href="?logout=true" name="logout" class="nav-link">Logout</a>
                     {{/admin}}
 
                 </div>

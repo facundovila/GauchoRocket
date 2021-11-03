@@ -7,6 +7,11 @@ email varchar(70) primary key,
 rol varchar(10) DEFAULT "cliente",
 usuario varchar(50),
 clave varchar(40),
+nombre varchar(40),
+apellido varchar(40),
+dni int(30),
+telefono int(15),
+
 id int unique auto_increment
 );
 

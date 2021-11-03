@@ -28,6 +28,11 @@ class Configuration{
         return new TurnController($this->createTurnModel(), $this->createPrinter());
     }
 
+    public function createUserController(): UserController{
+        require_once "controller/UserController.php";
+        return new UserController($this->createUserModel(), $this->createPrinter());
+
+    }
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
@@ -43,10 +48,11 @@ class Configuration{
     private function createRegisterModel(): RegisterModel {
         require_once "model/RegisterModel.php";
         $database = $this->getDatabase();
-        return new RegisterModel($database);
+        $sendmail = $this->getSendMailHelper();
+        return new RegisterModel($database, $sendmail, $this->getBaseUrl());
     }
 
-    private function createValidatorModel() {
+    private function createValidatorModel(): ValidatorModel {
         require_once "model/ValidatorModel.php";
         $database = $this->getDatabase();
         return new ValidatorModel($database);
@@ -58,10 +64,28 @@ class Configuration{
         return new TurnModel($database);
     }
 
+    private function createUserModel(): UserModel{
+        require_once "model/UserModel.php";
+        $database= $this->getDatabase();
+        return new UserModel($database);
+
+    }
+
     private function getDatabase(): MyDatabase {
         require_once("helpers/MyDatabase.php");
         $config = $this->getConfig();
         return new MyDatabase($config["servername"], $config["username"], $config["password"], $config["dbname"],$config["port"]);
+    }
+
+    private function getSendMailHelper(): SendMail {
+        require_once "helpers/SendMail.php";
+        $config = $this->getConfig();
+        return new SendMail($this->getLogger(), $config["email"], $config["email_password"]);
+    }
+
+    private function getBaseUrl(): string {
+        $config = $this->getConfig();
+        return $config["base_url"];
     }
 
     private function getConfig(): bool|array {
