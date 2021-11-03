@@ -1,0 +1,3 @@
+[21-11-03 01:48:16][INFO] correo enviado con éxito
+[21-11-03 01:49:55][INFO] correo enviado con éxito
+[21-11-03 01:54:26][INFO] correo enviado con éxito
