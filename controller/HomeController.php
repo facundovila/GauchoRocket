@@ -11,6 +11,8 @@ require_once "BaseController.php";
     }
 
      public function show() {
-         echo $this->printer->render( "view/home.html");
+         $data=$this->homeModel->getVuelos();
+
+         echo $this->printer->render( "view/home.html",$data);
      }
  }
