@@ -35,8 +35,9 @@ class RegisterController extends BaseController {
         
         $this->registerModel->registerUser($usuario,$email,$password, $nombre, $apellido, $dni, $telefono);
         $this->registerModel->registerLogin($email,$password,$hash);
-        
 
-        header("Location: /validator/show/hash=" . $hash);
+        $this->registerModel->sendAuthentication($usuario, $email, $hash);
+
+        header("Location: /validator/show");
     }
 }
