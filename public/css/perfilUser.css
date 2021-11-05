@@ -2,8 +2,37 @@
     background-color: white;
     width: 69%;
     margin: auto;
+
+
 }
 
-.contenido{
-    margin-left: 4em;
+
+.contenedor{
+    background-color:#f3ffe6;
+
+}
+
+.contenido1{
+    background-color: white;
+
+
+}
+.contenido2{
+
+    padding: 2em;
+}
+
+
+.cartawidth{
+    width: 70em;
+
+}
+
+.padding{
+    padding-top: 1em;
+}
+
+.margin2{
+    margin-right: 4em;
+
 }

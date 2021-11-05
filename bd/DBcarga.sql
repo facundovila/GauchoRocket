@@ -151,7 +151,7 @@ insert into tipoDeServicio (descripcion, precio) values
 										(2),
 										(3);
  
- insert into ubicacion(ocupada,nroUbicacion) values
+insert into ubicacion(ocupada,nroUbicacion) values
 						(false,20),
                         (false,2);
                         

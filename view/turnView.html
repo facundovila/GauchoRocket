@@ -1,22 +1,22 @@
 {{> header}}
-<main class="bg-white container p-3">
+<main class="usuario">
 
-    <section class="d-flex" id="wrapper">
+    <section class="d-flex contenedor" id="wrapper">
 
-        <article class="bg-gris text-white border-right" id="sidebar-wrapper">
-            <div>
-                <div class="sidebar-heading">Mi perfil</div>
-                <div class="list-group list-group-flush">
-                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis datos</a>
-                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral"> Turno Medico</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis Vuelos</a>
+        <article class="contenido1 " id="sidebar-wrapper">
+            <div >
+
+                <div class="list-group list-group-flush p-2   ">
+                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
+                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
 
 
                 </div>
             </div>
-        </article >
 
-        <article  class="contenido" id="page-content-wrapper">
+        </article>
+        <article  class="contenido2" id="page-content-wrapper">
      {{^ no-disponible}}
     <h2 class="text-dark">Solicitar Turno</h2>
     <form action="turn/sacarTurno" method="post" class="w3-p">

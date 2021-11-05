@@ -1,9 +1,45 @@
 {{> header}}
-<main class="container">
-    {{# nivel}}
-    <h3 class="text-light">Tu nivel de vuelo es: {{nivel}}</h3>
-    {{/ nivel}}
 
-    <a href="/user/">Ir al perfil</a>
+<main class="usuario">
+    <section class="d-flex contenedor" id="wrapper">
+
+        <article class="contenido1 " id="sidebar-wrapper">
+            <div >
+
+                <div class="list-group list-group-flush p-2   ">
+                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
+                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
+
+
+                </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+
+        </article >
+
+        <article  class="contenido2" id="page-content-wrapper">
+
+            {{# nivel}}
+            <h3 class="text-black">Tu nivel de vuelo es: {{nivel}}</h3>
+            {{/ nivel}}
+            <a href="/user/">Ir al perfil</a>
+
+        </article>
+
+
+
+
+
+
+
+    </section>
+
+
+
+
+
 </main>
+
 {{> footer}}

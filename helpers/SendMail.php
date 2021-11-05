@@ -18,12 +18,14 @@ class SendMail {
     }
 
     private function setup($mail, $password) {
+
         $this->mailer->IsSMTP(); // enable SMTP
         $this->mailer->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
         $this->mailer->SMTPAuth = true; // authentication enabled
-        $this->mailer->SMTPSecure = 'tls';
+
         $this->mailer->Host = "smtp.gmail.com";
         $this->mailer->Port = 587; // or 587
+        $this->mailer->SMTPSecure = 'tls';
         $this->mailer->CharSet = "UTF-8";
         $this->mailer->IsHTML(true);
         $this->mailer->Username = $mail;

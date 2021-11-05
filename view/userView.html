@@ -1,14 +1,14 @@
 {{>header}}
 <main class="usuario">
-    <section class="d-flex" id="wrapper">
+    <section class="d-flex contenedor" id="wrapper">
 
-      <article class="bg-gris text-white border-right" id="sidebar-wrapper">
-          <div>
-              <div class="sidebar-heading">Mi perfil</div>
-              <div class="list-group list-group-flush">
-                  <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis datos</a>
-                  <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral"> Turno Medico</a>
-                  <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral"> Mis Vuelos</a>
+      <article class="contenido1 " id="sidebar-wrapper">
+          <div >
+
+              <div class="list-group list-group-flush p-2   ">
+                  <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
+                  <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
+                  <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
 
 
               </div>
@@ -18,31 +18,39 @@
 
       </article >
         {{#datosUsuario}}
-        <article  class="contenido" id="page-content-wrapper">
+        <article  class="contenido2" id="page-content-wrapper">
 
-            <h3>bienvenido {{usuario}}</h3>
+            <h3>Mis datos</h3>
+            <div class="padding">
+                <h5>Datos de cuenta</h5>
+                <div class="card cartawidth" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">usuario:{{usuario}}</li>
+                        <li class="list-group-item">E-mail: {{email}}</li>
+                        <li class="list-group-item">nivel de vuelo :  {{descripcion}}</li>
+                    </ul>
+                </div>
+            </div>
 
-            <p>nombre: {{nombre}}</p>
-            <p>apellido: {{apellido}}</p>
-            <p>dni: {{dni}}</p>
-            <p>email: {{email}}</p>
-            <p>telefono registrado: {{telefono}}</p>
+            <br>
 
-            <p >Tu nivel de vuelo es: {{nivel}}</p>
+            <div class="padding">
+                <h5>Datos Personales</h5>
+                <div class="card cartawidth" >
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">nombre: {{nombre}}</li>
+                        <li class="list-group-item">apellido: {{apellido}}</li>
+                        <li class="list-group-item">dni: {{dni}}</li>
+                        <li class="list-group-item">telefono : {{telefono}}</li>
+                    </ul>
+                </div>
 
-
-
+            </div>
 
 
         {{/datosUsuario}}
-            <!--  {{# nivel}}
-             <p class="text-light">Tu nivel de vuelo es: {{nivel}}</p>
-             {{/ nivel}} -->
+
          </article>
-
-
-
-
 
 
 

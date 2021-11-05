@@ -1,0 +1,3 @@
+[21-11-04 09:39:03][ERROR] error al intentar enviar el correo
+[21-11-04 09:51:41][ERROR] error al intentar enviar el correo
+[21-11-04 10:04:24][ERROR] error al intentar enviar el correo
