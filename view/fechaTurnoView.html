@@ -1,0 +1,28 @@
+{{> header}}
+<main class="usuario">
+
+    <section class="d-flex contenedor" id="wrapper">
+
+        <article class="contenido1 " id="sidebar-wrapper">
+            <div >
+
+                <div class="list-group list-group-flush p-2   ">
+                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
+                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
+                </div>
+            </div>
+
+        </article>
+        <article  class="contenido2" id="page-content-wrapper">
+            {{# turnosacado}}
+            <div class="p-3">
+                <h2>Tu Turno medico es : {{fechaTurnoMedico}}</h2>
+
+            </div>
+            {{/ turnosacado}}
+
+        </article>
+    </section>
+</main>
+{{> footer}}

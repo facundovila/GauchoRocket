@@ -33,6 +33,13 @@ class Configuration{
         return new UserController($this->createUserModel(), $this->createPrinter());
 
     }
+    public function createFechaTurnoController(): FechaTurnoController{
+        require_once "controller/FechaTurnoController.php";
+        return new FechaTurnoController($this->createFechaTurnoModel(), $this->createPrinter());
+
+    }
+
+
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
@@ -68,6 +75,12 @@ class Configuration{
         require_once "model/UserModel.php";
         $database= $this->getDatabase();
         return new UserModel($database);
+
+    }
+    private function createFechaTurnoModel(): FechaTurnoModel{
+        require_once "model/FechaTurnoModel.php";
+        $database= $this->getDatabase();
+        return new FechaTurnoModel($database);
 
     }
 

@@ -15,20 +15,29 @@ class TurnController extends BaseController {
 
         $nivelVuelo = $this->model->checkNivelVuelo($id);
 
+
+
         if (!empty($nivelVuelo)) {
-            header("location: /");
+
+            header("location: /fechaTurno/");
         }
 
         $response = $this->model->getCentrosMedicos();
 
         if (empty($response)) {
             $data["no-disponible"] = true;
+
         } else {
             $data["centros"] = $response;
-        }
 
+        }
         echo $this->printer->render("view/turnView.html", $data);
+
     }
+
+
+
+
 
     public function sacarTurno() {
         $id = $_SESSION["id"];

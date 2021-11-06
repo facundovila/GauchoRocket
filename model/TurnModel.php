@@ -39,5 +39,15 @@ class TurnModel extends BaseModel {
         return $this->database->executeQueryParams(array($centroId,$date), $query);
     }
 
-    
+    public function GetFechaMedica($id): array {
+    $query = "SELECT fechaTurnoMedico FROM turnomedico WHERE fkIdUsuario = ?";
+
+    $response= $this->database->executeQueryParams(array($id), $query);
+    $data["fechaturno"]=$response;
+
+    return $data;
+
+    }
+
+
 }
