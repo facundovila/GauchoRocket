@@ -137,7 +137,9 @@ create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabi
 codigoUbicacion int auto_increment primary key,
 ocupada boolean,
 filaUbicacion int,
-columnaUbicacion int 
+columnaUbicacion int,
+fkCodigoCabina int,
+foreign key (fkCodigoCabina) references cabina(codigoCabina)
 );
 
 create table reservaPasaje(
@@ -148,11 +150,9 @@ checkin boolean,
 totalAPagar double(10,2),
 fkCodigoUbicacion int,
 fkCodigoVuelo int,
-fkCodigoCabina int,
 fkCodigoServicio int,
 foreign key (fkCodigoVuelo) references vuelo(codigo),
 foreign key(fkCodigoServicio) references servicio(codigoServicio),
-foreign key (fkCodigoCabina) references cabina(codigoCabina),
 foreign key (fkCodigoUbicacion) references ubicacion(codigoUbicacion)
 );
 

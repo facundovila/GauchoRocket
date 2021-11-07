@@ -9,13 +9,12 @@ class HomeModel extends BaseModel {
         $con='cliente';
         $query=  "select rol from usuario 
                   where email = '".$usuario."' and clave = md5( '".$con."')";
-
         
-                  
         return $this->database->execute($query); 
     }
 
     public function getVuelos(){
+
         $query = "SELECT Origen,Destino,t1.Nombre from
         (SELECT distinct t.nombre as Nombre,l.nombre as Origen
         from vuelo as v
@@ -33,5 +32,29 @@ class HomeModel extends BaseModel {
         $data["Vuelos"]=$response;
         
         return $data;
+    }
+
+    public function getLocacion(){
+
+        $query = "SELECT codigo,nombre from locacion";
+
+        $response=$this->database->query($query);
+
+        $data["Locaciones"]=$response;
+
+        return $data;
+    }
+
+
+    public function getCabinas(){
+
+        $query = "SELECT codigoTipoDeCabina,descripcion from tipoDeCabina";
+
+        $response=$this->database->query($query);
+
+        $data["Cabinas"]=$response;
+
+        return $data;
+
     }
 }
