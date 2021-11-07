@@ -11,7 +11,7 @@ require_once "BaseController.php";
     }
 
     public function show() {
-        $data["Vuelos"]=$this->vuelosModel->getVuelos();
+        $data=$this->vuelosModel->getVuelos();
         
         echo $this->printer->render("view/vuelosView.html",$data);
     }
