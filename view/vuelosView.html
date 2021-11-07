@@ -1,0 +1,25 @@
+{{>header}}
+<tittle>Vuelos</tittle>
+<main>
+
+    <table>
+        <tr>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Nombre</th>
+        </tr>
+        {{#Vuelos}}
+        <tr>
+            <td><p>{{origen}}</p></td>
+            <td><p>{{destino}}</p></td>
+            <td><p>{{nombre}}</p></td>
+        </tr>
+        {{/Vuelos}}
+    </table>
+
+
+
+
+ </main>
+
+ {{>footer}}
