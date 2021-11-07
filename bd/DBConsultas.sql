@@ -28,7 +28,7 @@ from nivelVueloUsuario ;
 
 select codigo,nombre from locacion;
 
-
+select codigo,nombre from locacion;
 
 -- Trae todos los usuarios con nivel de vuelo asignado
 select U.usuario, NV.nivel 
@@ -70,15 +70,15 @@ where CM.turnos > (select count(fechaTurnoMedico) from turnoMedico);
 
 
 
--- query que trae nombre,origen y destino de un vuelo
+-- query que trae nombre,origen y destino de todos los vuelos
 
-select Origen,Destino,t1.Nombre from
+select codigo,Origen,Destino,t1.Nombre from
 (select distinct t.nombre as Nombre,l.nombre as Origen
 from vuelo as v
 inner join trayecto as t on v.codigoTrayecto=t.codigo
 inner join locacion as l on t.codigoLocacionOrigen=l.codigo) as t1
 inner join
-(select distinct t.nombre as nombre,l.nombre as Destino
+(select distinct t.codigo,t.nombre as nombre,l.nombre as Destino
 from vuelo as v
 inner join trayecto as t on v.codigoTrayecto=t.codigo
 inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2

@@ -38,6 +38,10 @@ class Configuration{
         return new FechaTurnoController($this->createFechaTurnoModel(), $this->createPrinter());
 
     }
+    public function createVuelosController(): VuelosController{
+        require_once "controller/VuelosController.php";
+        return new VuelosController($this->createVuelosModel(),$this->createPrinter());
+    }
 
 
     private function createLoginModel(): LoginModel {
@@ -83,6 +87,12 @@ class Configuration{
         return new FechaTurnoModel($database);
 
     }
+    private function createVuelosModel(): VuelosModel{
+        require_once "model/VuelosModel.php";
+        $database= $this->getDatabase();
+        return new VuelosModel($database);
+    }
+
 
     private function getDatabase(): MyDatabase {
         require_once("helpers/MyDatabase.php");

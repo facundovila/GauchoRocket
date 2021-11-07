@@ -14,6 +14,6 @@ require_once "BaseController.php";
          $data=$this->homeModel->getLocacion();
          $data+=$this->homeModel->getCabinas();
 
-         echo $this->printer->render( "view/home.html",$data);
+         echo $this->printer->render("view/home.html",$data);
      }
  }
