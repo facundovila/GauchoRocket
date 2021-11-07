@@ -26,6 +26,8 @@ from turnoMedico;
 select *
 from nivelVueloUsuario ;
 
+select codigo,nombre from locacion;
+
 
 
 -- Trae todos los usuarios con nivel de vuelo asignado
