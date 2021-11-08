@@ -43,6 +43,10 @@ class Configuration{
         return new VuelosController($this->createVuelosModel(),$this->createPrinter());
     }
 
+    public function createReservarController(): ReservarController {
+        require_once 'controller/ReservarController.php';
+        return new ReservarController($this->createReservaModel(), $this->createPrinter());
+    }
 
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
@@ -93,6 +97,11 @@ class Configuration{
         return new VuelosModel($database);
     }
 
+    private function createReservaModel(): ReservarModel {
+        require_once 'model/ReservarModel.php';
+        $database= $this->getDatabase();
+        return new ReservarModel($database);
+    }
 
     private function getDatabase(): MyDatabase {
         require_once("helpers/MyDatabase.php");

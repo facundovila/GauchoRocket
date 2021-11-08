@@ -151,12 +151,12 @@ insert into tipoDeServicio (descripcion, precio) values
 										(2),
 										(3);
  
-insert into ubicacion(ocupada,nroUbicacion) values
+/*insert into ubicacion(ocupada,nroUbicacion) values
 						(false,20),
-                        (false,2);
+                        (false,2);*/
                         
-insert into reservaPasaje(codigoReserva,fecha,pago,checkin,fkCodigoVuelo) values
+/*insert into reservaPasaje(codigoReserva,fecha,pago,checkin,fkCodigoVuelo) values
 								('codigoRe',now(),false,false,1);
                
 insert into reservaUsuario(fkemailUsuario,fkcodigoReserva) values 
-							('vuelo','codigoRe');
+							('vuelo','codigoRe');*/

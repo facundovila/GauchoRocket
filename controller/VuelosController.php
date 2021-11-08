@@ -16,9 +16,14 @@ require_once "BaseController.php";
         echo $this->printer->render("view/vuelosView.html",$data);
     }
 
+    public function showFlights() {
+        $origen = $_POST["origen"];
+        $destino = $_POST["destino"];
+        $fecha_partida = $_POST["fecha_partida"];
+        $clase = $_POST["clase"];
 
+        $data = $this->vuelosModel->getVuelosDisponibles($origen, $destino, $fecha_partida, $clase);
 
+        echo $this->printer->render("view/vuelosView.html", $data);
+    }
 }
-
-
-?>

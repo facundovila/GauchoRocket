@@ -1,25 +1,47 @@
 {{>header}}
-<tittle>Vuelos- Gaucho Rocket</tittle>
-<main>
 
-    <table>
-        <tr>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th>Nombre</th>
-        </tr>
-        {{#Vuelos}}
-        <tr>
-            <td><p>{{Origen}}</p></td>
-            <td><p>{{Destino}}</p></td>
-            <td><p>{{Nombre}}</p></td>
-        </tr>
-        {{/Vuelos}}
-    </table>
+<main class="usuario">
+    <section class="d-flex contenedor" id="wrapper">
+        <article class="contenido1 " id="sidebar-wrapper">
+            <div >
+                <div class="list-group list-group-flush p-2   ">
+                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
+                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
+                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
+                </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+        </article >
+        <article  class="contenido2" id="page-content-wrapper">
+            <h3>Mis vuelos</h3>
+            <div class="padding">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">origen</th>
+                        <th scope="col">destino</th>
+                        <th scope="col">nombre</th>
+                        <th scope="col">fecha de partida</th>
+                        <th scope="col">precio</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#vuelos}}
+                    <tr>
+                        <td><p>{{origen}}</p></td>
+                        <td><p>{{destino}}</p></td>
+                        <td><p>{{nombre}}</p></td>
+                        <td><p>{{fecha}}</p></td>
+                        <td><p>{{precio}}</p></td>
+                        <td><a href="/reservar/show/vuelo-id={{vueloId}}">reservar</a></td>
+                    </tr>
+                    {{/vuelos}}</tbody>
+                </table>
+            </div>
+            <br>
+        </article>
+    </section>
+</main>
 
-
-
-
- </main>
-
- {{>footer}}
+{{>footer}}
