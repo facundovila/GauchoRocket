@@ -70,31 +70,84 @@ where CM.turnos > (select count(fechaTurnoMedico) from turnoMedico);
 
 
 
--- query que trae nombre,origen y destino de todos los vuelos
+-- query que trae nombre,origen y destino de todos los vuelos done
+
+SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
+        (select distinct t.nombre as Nombre,l.nombre as Origen,fecha, v.precio as precio
+        from vuelo as v
+        inner join trayecto as t on v.codigoTrayecto=t.codigo
+        inner join locacion as l on t.codigoLocacionOrigen=l.codigo) as t1
+        inner join
+        (select distinct t.codigo,t.nombre as nombre,l.nombre as Destino
+        from vuelo as v
+        inner join trayecto as t on v.codigoTrayecto=t.codigo
+        inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
+        on t1.nombre=t2.nombre;
+
+
+-- Altsers done
+select codigo,origen,destino,t1.Nombre as nombre,fecha,precio,nombreTrayecto from
+(select distinct t.nombre as Nombre,l.nombre as Origen,fecha, v.precio as precio,TT.nombre as nombreTrayecto
+from vuelo as v
+inner join trayecto as t on v.codigoTrayecto=t.codigo
+inner join locacion as l on t.codigoLocacionOrigen=l.codigo
+inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
+where t.codigoLocacionOrigen= 1 and fecha= '2021-11-08' and TT.codigo=2) as t1
+inner join
+(select distinct t.codigo,t.nombre as nombre,l.nombre as Destino
+from vuelo as v
+inner join trayecto as t on v.codigoTrayecto=t.codigo
+inner join locacion as l on t.codigoLocacionDestino=l.codigo
+where t.codigoLocacionDestino= 3 ) as t2
+on t1.nombre=t2.nombre;
 
 select codigo,Origen,Destino,t1.Nombre from
 (select distinct t.nombre as Nombre,l.nombre as Origen
 from vuelo as v
 inner join trayecto as t on v.codigoTrayecto=t.codigo
-inner join locacion as l on t.codigoLocacionOrigen=l.codigo) as t1
+inner join locacion as l on t.codigoLocacionOrigen=l.codigo
+inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
+where t.codigoLocacionOrigen= 1 and fecha= now() and TT.nombre = 'SubOrbitales') as t1
 inner join
 (select distinct t.codigo,t.nombre as nombre,l.nombre as Destino
 from vuelo as v
 inner join trayecto as t on v.codigoTrayecto=t.codigo
-inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
+inner join locacion as l on t.codigoLocacionDestino=l.codigo
+where t.codigoLocacionDestino= 3 ) as t2
 on t1.nombre=t2.nombre;
 
+-- query para sumar los precios de todo (not done)
 
-select distinct l.nombre as nombre, t.codigoLocacionOrigen as codigo
-from trayecto as t 
-inner join locacion as l on t.codigoLocacionOrigen = l.codigo;
+select distinct sum(V.precio+TS.precio+TC.precio) from vuelo as V join  on V.codigoTrayecto;
 
-select distinct l.nombre as codigo, t.codigoLocacionOrigen as nombre
-from trayecto as t 
-inner join locacion as l on t.codigoLocacionOrigen = l.codigo;
+-- calcular capacidad total de equipo
+select ME.nombre,sum(capacidadSuit+capacidadFamiliar+capacidadGeneral) as Capacidad
+from modeloDeEquipo as ME
+group by ME.nombre;
+
+-- Capacidad total de un equipo segun su matricula
+select distinct ME.nombre,sum(capacidadSuit+capacidadFamiliar+capacidadGeneral) as Capacidad_Total
+from modeloDeEquipo as ME
+inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+inner join vuelo as V on V.matriculaEquipo=E.matricula
+where E.matricula ='O5';
+
+select E.matricula 
+from equipo as E
+inner join vuelo as V on V.matriculaEquipo=E.matricula
+where V.codigo = 1;
 
 
-
+-- Capacidad Total de un equipo determinada segun el codigo del vuelo 
+set @Matricula=(select E.matricula 
+from equipo as E
+inner join vuelo as V on V.matriculaEquipo=E.matricula
+where V.codigo = 1);
+select distinct ME.nombre,sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as Capacidad_Total ,E.matricula 
+from modeloDeEquipo as ME
+inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+inner join vuelo as V on V.matriculaEquipo=E.matricula
+where E.matricula = @Matricula;
 
 select *
 from centroMedico;
@@ -120,20 +173,91 @@ left join tipoDeEquipo as te on me.fkCodigoTipoEquipo=te.codigo
 where u.nivelVuelo=3 and te.nombre like '%Aceleracion%';
 
 
+
+
 select fkEmailId from turnoMedico where fkEmailId = $id ;
 
 
 insert into nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values
 								(3,3);
-
-create procedure rP_calcularTotal()
-as
+   
+-- procedure Total de un equipo determinada segun el codigo del vuelo 
+DELIMITER //
+create procedure GR_CapacidadTotalXVuelo(in codigoVuelo int)
 begin
 
-end
+	set @Matricula=(select E.matricula 
+	from equipo as E
+	inner join vuelo as V on V.matriculaEquipo=E.matricula
+	where V.codigo = 1);
+    
+	select distinct ME.nombre,sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as Capacidad_Total ,E.matricula 
+	from modeloDeEquipo as ME
+	inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+	inner join vuelo as V on V.matriculaEquipo=E.matricula
+	where E.matricula = @Matricula;
+    
+end//
+DELIMITER ;
+
+-- procedure para obtener matricula de el equipo que haga X vuelo
+DELIMITER //
+create procedure GR_obtenerMatricula(in codigoVuelo int, out Matricula varchar(15))
+begin
+		select E.matricula 
+		from equipo as E
+		inner join vuelo as V on V.matriculaEquipo=E.matricula
+		where V.codigo = codigoVuelo;
+end//
+DELIMITER ;
 
 
+DELIMITER //
+create procedure GR_todosLosVuelos()
+begin
 
-/*
+	SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
+        (select distinct t.nombre as Nombre,l.nombre as Origen,fecha, v.precio as precio
+        from vuelo as v
+        inner join trayecto as t on v.codigoTrayecto=t.codigo
+        inner join locacion as l on t.codigoLocacionOrigen=l.codigo) as t1
+        inner join
+        (select distinct t.codigo,t.nombre as nombre,l.nombre as Destino
+        from vuelo as v
+        inner join trayecto as t on v.codigoTrayecto=t.codigo
+        inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
+        on t1.nombre=t2.nombre;
+    
+end//
+DELIMITER ;
+
+drop procedure GR_todosLosVuelosTodosLosParametros;
+DELIMITER //
+create procedure GR_todosLosVuelosTodosLosParametros(in origenO int,in destinoO int,in fechaO date,in tipoO int)
+begin
+
+		SELECT codigo,origen,destino,t1.Nombre as nombre, fecha, precio, vueloId,nombreTrayecto from
+                        (select distinct t.nombre as Nombre,l.nombre as origen, fecha, v.precio as precio,
+                        TT.nombre as nombreTrayecto, v.codigo as vueloId
+                        from vuelo as v
+                        inner join trayecto as t on v.codigoTrayecto=t.codigo
+                        inner join locacion as l on t.codigoLocacionOrigen=l.codigo
+                        inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
+                        where t.codigoLocacionOrigen= origenO and TT.codigo = tipoO and fecha = fechaO) as t1
+                        inner join
+                        (select distinct t.codigo,t.nombre as nombre,l.nombre as destino
+                        from vuelo as v
+                        inner join trayecto as t on v.codigoTrayecto=t.codigo
+                        inner join locacion as l on t.codigoLocacionDestino=l.codigo
+                        where t.codigoLocacionDestino= destinoO ) as t2
+                        on t1.nombre=t2.nombre;
+    
+end//
+DELIMITER ;
+
+-- call GR_obtenerMatricula(1,@Matricula);
+ call GR_todosLosVuelos;
+-- call GR_CapacidadTotalXVuelo(1);
+ call GR_todosLosVuelosTodosLosParametros(1,3,NOW(),2);
+
 select substring('2021.01.01 17:00:00',11,9);
-*/

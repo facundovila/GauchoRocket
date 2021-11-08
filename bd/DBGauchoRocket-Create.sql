@@ -145,8 +145,6 @@ foreign key (fkCodigoCabina) references cabina(codigoCabina)
 create table reservaPasaje(
 codigoReserva varchar(8) primary key,
 fecha datetime,
-pago boolean,
-checkin boolean,
 totalAPagar double(10,2),
 fkCodigoUbicacion int,
 fkCodigoVuelo int,
