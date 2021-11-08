@@ -80,12 +80,12 @@
                                     <input type="date" name="fecha_regreso" class="form-control" id="fecha_regreso">
                                 </div>
                                 <div class="col-lg col-4">
-                                    <label for="clase" class="form-label">Clase</label>
+                                    <label for="clase" class="form-label">Tipo de Trayecto</label>
                                     <select name="clase" id="clase" class="form-select">
                                         <option selected>Selecione un opción</option>
-                                        {{#Cabinas}}
-                                        <option value="{{codigoTipoDeCabina}}">{{descripcion}}</option>
-                                        {{/Cabinas}}
+                                        {{#TiposT}}
+                                        <option value="{{codigo}}">{{nombre}}</option>
+                                        {{/TiposT}}
                                     </select>
                                 </div>
                             </div>

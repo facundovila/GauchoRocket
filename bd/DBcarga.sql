@@ -51,11 +51,12 @@ insert into turnoMedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) values
  */                         
                                 
 insert into tipoDeTrayecto (nombre) values
-											('Orbitales'),
-											('SubOrbitales');
+											('Orbital'),
+											('SubOrbitales'),
+                                            ('Entre Destinos');
 
 insert into tipoDeEquipo (nombre) values
-							('Orbitales'),
+							('Suborbital'), -- Solo hace vuelos Suborbitales el resto pueden hacer cualquier vuelo(tipo de trayecto)
 							('Baja Aceleracion'),
 							('Alta Aceleracion');
 

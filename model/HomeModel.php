@@ -15,7 +15,7 @@ class HomeModel extends BaseModel {
 
     public function getLocacion(){
 
-        $query = "SELECT codigo,nombre from locacion";
+        $query = "SELECT codigo,nombre from locacion where nombre <> 'Shanghai' ";
 
         $response=$this->database->query($query);
 
@@ -25,15 +25,14 @@ class HomeModel extends BaseModel {
     }
 
 
-    public function getCabinas(){
+    public function getTiposTrayecto(){
 
-        $query = "SELECT codigoTipoDeCabina,descripcion from tipoDeCabina";
+        $query = "SELECT codigo,nombre from tipoDeTrayecto";
 
         $response=$this->database->query($query);
 
-        $data["Cabinas"]=$response;
+        $data["TiposT"]=$response;
 
         return $data;
-
     }
 }

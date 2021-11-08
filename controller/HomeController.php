@@ -12,7 +12,7 @@ require_once "BaseController.php";
 
      public function show() {
          $data=$this->homeModel->getLocacion();
-         $data+=$this->homeModel->getCabinas();
+         $data+=$this->homeModel->getTiposTrayecto();
 
          echo $this->printer->render("view/home.html",$data);
      }
