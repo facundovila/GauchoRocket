@@ -2,6 +2,7 @@ USE dbgr;
 drop procedure GR_todosLosVuelos;
 drop procedure GR_todosLosVuelosTodosLosParametros;
 drop procedure GR_capacidadTotalXVuelo;
+drop procedure GR_capacidadTotalXVueloSoloCantidad;
 drop procedure GR_obtenerMatricula;
 
 
@@ -56,9 +57,27 @@ begin
 	set @Matricula=(select E.matricula 
 	from equipo as E
 	inner join vuelo as V on V.matriculaEquipo=E.matricula
-	where V.codigo = 1);
+	where V.codigo = codigoVuelo);
     
 	select distinct ME.nombre,sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as Capacidad_Total ,E.matricula 
+	from modeloDeEquipo as ME
+	inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+	inner join vuelo as V on V.matriculaEquipo=E.matricula
+	where E.matricula = @Matricula;
+    
+end//
+DELIMITER ;
+
+DELIMITER //
+create procedure GR_capacidadTotalXVueloSoloCantidad(in codigoVuelo int)
+begin
+
+	set @Matricula=(select E.matricula 
+	from equipo as E
+	inner join vuelo as V on V.matriculaEquipo=E.matricula
+	where V.codigo = codigoVuelo);
+    
+	select distinct sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as capacidad
 	from modeloDeEquipo as ME
 	inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
 	inner join vuelo as V on V.matriculaEquipo=E.matricula
@@ -78,8 +97,26 @@ begin
 end//
 DELIMITER ;
 
-
+select * from vuelo;
 -- call GR_obtenerMatricula(1,@Matricula);
 -- call GR_todosLosVuelos;
--- call GR_CapacidadTotalXVuelo(1);
+-- call GR_CapacidadTotalXVuelo(4);
 -- call GR_todosLosVuelosTodosLosParametros(1,3,NOW(),2);
+
+
+set @Matricula=(select E.matricula 
+	from equipo as E
+	inner join vuelo as V on V.matriculaEquipo=E.matricula
+	where V.codigo = 4);
+SELECT distinct sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as Capacidad_Total
+                                from modeloDeEquipo as ME
+                                inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+                                inner join vuelo as V on V.matriculaEquipo=E.matricula
+                                where E.matricula = @Matricula;
+                                
+SELECT distinct sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as Capacidad_Total
+                                from modeloDeEquipo as ME
+                                inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+                                inner join vuelo as V on V.matriculaEquipo=E.matricula
+                                where E.matricula =(select E.matricula from equipo as E
+                                              inner join vuelo as V on V.matriculaEquipo=E.matricula where V.codigo = 4); 

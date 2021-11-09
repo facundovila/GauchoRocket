@@ -17,11 +17,21 @@ require_once "BaseController.php";
 
     }else{
 
-      echo $this->printer->render("view/adminView.html");
+      $data=$this->adminModel->getVuelosSinPasajes(); 
+
+      echo $this->printer->render("view/adminView.html",$data);
 
     }
 
                        
+    }
+
+    public function createReservas(){
+
+        $codigoVuelo= $_GET["codigoVuelo"];
+
+        $this->adminModel->createReservasYUbicacionesParaUnVuelo($codigoVuelo);
+
     }
 
 }

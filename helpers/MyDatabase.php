@@ -28,6 +28,10 @@ class MyDatabase{
     public function execute($sql){
         mysqli_query($this->database, $sql);
     }
+
+    public function insertQuery($query){
+        return  mysqli_query($this->database, $query);
+    }
     
     public function executeQueryParams($params, $query) {
         $stmt = $this->database->prepare($query);
