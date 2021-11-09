@@ -1,16 +1,21 @@
 USE dbgr;
+drop procedure GR_todosLosVuelos;
+drop procedure GR_todosLosVuelosTodosLosParametros;
+drop procedure GR_capacidadTotalXVuelo;
+drop procedure GR_obtenerMatricula;
+
 
 DELIMITER //
 create procedure GR_todosLosVuelos()
 begin
 
 	SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
-        (select distinct t.nombre as Nombre,l.nombre as Origen,fecha, v.precio as precio
+        (select distinct v.descripcion as Nombre,l.nombre as Origen,fecha, v.precio as precio
         from vuelo as v
         inner join trayecto as t on v.codigoTrayecto=t.codigo
         inner join locacion as l on t.codigoLocacionOrigen=l.codigo) as t1
         inner join
-        (select distinct t.codigo,t.nombre as nombre,l.nombre as Destino
+        (select distinct t.codigo,v.descripcion as nombre,l.nombre as Destino
         from vuelo as v
         inner join trayecto as t on v.codigoTrayecto=t.codigo
         inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
@@ -43,8 +48,9 @@ end//
 DELIMITER ;
 
 -- procedure Total de un equipo determinada segun el codigo del vuelo --------------------------------------------------
+
 DELIMITER //
-create procedure GR_CapacidadTotalXVuelo(in codigoVuelo int)
+create procedure GR_capacidadTotalXVuelo(in codigoVuelo int)
 begin
 
 	set @Matricula=(select E.matricula 

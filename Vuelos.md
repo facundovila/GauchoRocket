@@ -1,6 +1,6 @@
 # GauchoRocket
 
-Suborbitales (Orbitales):                                                     
+Suborbitales:                                                     
                                                                               
 ----Dia----||-N° de Vuelos-||-------Equipos------||-Duracion-||-Origen-       Entre Destinos (AA y BA):
 -Lunes     ||       5      ||Calandria y Colibri ||8hs       ||3BA/2AK-       -Tipo-||--Circuito--||---------Destinos-Duracion---------

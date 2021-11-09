@@ -8,8 +8,11 @@ insert into nivelVuelo(nivel,descripcion)values
 insert into usuario(email,rol,usuario,clave)values			
 										("admin","admin","admin",md5("admin")),
 										("cliente","cliente","cliente",md5("cliente"));
+                                        
+insert into usuario(email,usuario,clave,nombre,apellido,dni,telefono)values	
+										("jucampana@alumno.unlam.edu.ar","Spike",md5("swordfish1"),"Spike","Spiegel",'44444444','111111111'),
+                                        ("juanfrancocamp@gmail.com","Jet",md5("swordfish2"),"Jet","Black",'333333333','2222222222');
 	
-
 insert into usuario(email,rol,usuario,clave)values	
 													("vuelo","cliente","vuelo",md5("vuelo"));
                                                     
@@ -20,6 +23,11 @@ insert into login(fkemailusuario,clave)values
 										("admin",md5("admin")),
                                         ("vuelo",md5("vuelo")),
 										("cliente",md5("cliente"));
+    
+    
+insert into login(fkemailusuario,clave)values
+											("jucampana@alumno.unlam.edu.ar",md5("swordfish1")),
+											("juanfrancocamp@gmail.com",md5("swordfish2"));
                                         
 insert into locacion (nombre) values
 								('Buenos Aires'),
@@ -71,9 +79,7 @@ insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGen
 							('Condor',2, 40, 300, 10),
 							('Guanaco',2, 100, 0, 0),
 							('Halcon',2, 25, 150, 25),
-							('Zorzal',1, 0, 50, 50); 
-
-
+							('Zorzal',1, 0, 50, 50);
 
 insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					('AA1',1),
@@ -121,17 +127,15 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					('BA1',10),
 					('BA2',10),
 					('BA3',10); 
-					 
-            
- insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto,precio,nombre) values
-					 (1,3,2,20000,'Buenos Aires - EEI'),
-					 (2,13,1,6000,'Ankara - Shanghai'),
-                     (13,6,2,35000,'Shanghai - Marte');
+                    
+ insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
+					 (1,3,2),
+					 (2,13,1);
                      
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
 				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-11-08',3,'AA1',1),
                  ('Viaje Orbital desde Anakara hasta Shanghai',6000,'2021-11-08',8,'O5',2);
-
+                 
 insert into tipoDeCabina (descripcion, precio) values
 									('General', 350),
 									('Familiar', 550),
@@ -152,6 +156,22 @@ insert into tipoDeServicio (descripcion, precio) values
 										(2),
 										(3);
  
+ 
+ -- BEBOP TEST RUN -------------------------------------------------
+insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
+('BepBop',3, 1, 1, 1);
+ 
+insert into Equipo (matricula,fkCodigoModeloEquipo) values
+('BEBOP',11); 
+  
+insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
+(6,7,3);
+
+insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
+('Vuelo del BEBOP entre Marte y Europa',42000,'2021-11-08',8,'BEBOP',3);
+                    
+                    
+ -- ----------------------------------------------------------------
 /*insert into ubicacion(ocupada,nroUbicacion) values
 						(false,20),
                         (false,2);*/

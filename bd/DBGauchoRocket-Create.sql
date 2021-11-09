@@ -9,8 +9,8 @@ usuario varchar(50),
 clave varchar(40),
 nombre varchar(40),
 apellido varchar(40),
-dni int(30),
-telefono int(15),
+dni varchar(40),
+telefono varchar(40),
 
 id int unique auto_increment
 );
@@ -67,8 +67,6 @@ codigo int primary key auto_increment,
 codigoLocacionOrigen int,
 codigoLocacionDestino int,
 codigoTipoDeTrayecto int,
-precio double (10,2),
-nombre varchar(50),
 foreign key (codigoLocacionOrigen) references locacion(codigo),
 foreign key (codigoLocacionDestino) references locacion(codigo),
 foreign key (codigoTipoDeTrayecto) references tipoDeTrayecto(codigo)

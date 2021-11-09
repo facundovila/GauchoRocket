@@ -4,12 +4,16 @@ require_once "BaseModel.php";
 
 class AdminModel extends BaseModel{
 
-    public function crearReservasParaVuelo($matriculaEquipo,$codigoVuelo){
-        $consulta = "SELECT capacidad from aeronave where idAeronave = '".$idAeronave."'";
-        $capacidadDeLaAeronave =  $this->database->obtenerArrayRegistro($consulta);
-        $caracteresPermitidos = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    public function crearReservasYUbicacionesParaUnVuelo($codigoVuelo){
+       
+        $query = 'call GR_capacidadTotalXVuelo(?)';
+        $params = array($codigoVuelo);
 
-        for ($i = 1 ; $i <= $capacidadDeLaAeronave["capacidad"]; $i++){
+        $response = $this->database->executeQueryParams($params,$query);
+        
+        $ubicaciones["cantidad"] = $response;
+
+        for ($i = 1 ; $i <= $ubicaciones["cantidad"]; $i++){
             $numeroAlfanumerico = substr(str_shuffle($caracteresPermitidos),0,8);
 
             $reserva = "INSERT INTO reserva (idViaje, asiento, codigoAlfanumerico)
