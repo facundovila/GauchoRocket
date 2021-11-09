@@ -135,11 +135,8 @@ foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServi
 
 create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
 codigoUbicacion int auto_increment primary key,
-ocupada boolean,
-filaUbicacion int,
-columnaUbicacion int,
-fkCodigoCabina int,
-foreign key (fkCodigoCabina) references cabina(codigoCabina)
+ocupada boolean default false,
+asiento int
 );
 
 create table reservaPasaje(

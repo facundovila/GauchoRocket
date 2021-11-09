@@ -129,8 +129,8 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
                      (13,6,2,35000,'Shanghai - Marte');
                      
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
-				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,now(),3,'AA1',1),
-                 ('Viaje Orbital desde Anakara hasta Shanghai',6000,now(),8,'O5',2);
+				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-11-08',3,'AA1',1),
+                 ('Viaje Orbital desde Anakara hasta Shanghai',6000,'2021-11-08',8,'O5',2);
 
 insert into tipoDeCabina (descripcion, precio) values
 									('General', 350),
