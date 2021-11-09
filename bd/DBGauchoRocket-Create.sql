@@ -158,11 +158,13 @@ foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva),
 foreign key (fkemailUsuario) references usuario(email)
 );
 
+
+/*
 create table pasaje(
 id int primary key auto_increment,
 fkCodigoReserva varchar(8),
 foreign key (fkCodigoReserva) references reservaPasaje(codigoReserva)
 );
 
-
+*/
 

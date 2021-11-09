@@ -48,6 +48,11 @@ class Configuration{
         return new ReservarController($this->createReservaModel(), $this->createPrinter());
     }
 
+    public function createAdminController(): AdminController {
+        require_once 'controller/AdminController.php';
+        return new AdminController($this->createAdminModel(), $this->createPrinter());
+    }
+
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();
@@ -101,6 +106,12 @@ class Configuration{
         require_once 'model/ReservarModel.php';
         $database= $this->getDatabase();
         return new ReservarModel($database);
+    }
+
+    private function createAdminModel(): AdminModel {
+        require_once 'model/AdminModel.php';
+        $database= $this->getDatabase();
+        return new AdminModel($database);
     }
 
     private function getDatabase(): MyDatabase {

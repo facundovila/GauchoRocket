@@ -32,6 +32,10 @@ class TurnModel extends BaseModel {
     }
 
     public function checkFechaTurno($centroId,$date){
+        if($centroId=13){
+            $centroId=3;
+        }
+
         $query = "SELECT distinct codigo as id, turnos,codigoLocacion as Locacion
         from centroMedico as CM where CM.codigo = ? and CM.turnos > 
         (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = ? )";

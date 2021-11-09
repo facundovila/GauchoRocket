@@ -29,7 +29,7 @@ where CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico wher
 -- Query de Centro medico con turnos disponibles para una fecha y centro determinado -----------------------------------------------
 select distinct codigo as id, turnos,codigoLocacion as Locacion
 from centroMedico as CM 
-where CM.codigo=1 and CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = "2021.01.01" );
+where CM.codigo=3 and CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = "2021.01.01" );
 
 -- query que trae nombre,origen,destino,fecha y precio de todos los vuelos  -----------------------------------------------
 SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
@@ -104,3 +104,7 @@ where u.nivelVuelo=3 and te.nombre like '%Aceleracion%';
 
 
 select substring('2021.01.01 17:00:00',11,9);
+
+select substring(md5(now()),1,8);
+
+select substring(md5(rand()),1,8);
