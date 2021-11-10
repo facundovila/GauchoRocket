@@ -35,7 +35,7 @@ class AdminModel extends BaseModel{
         for ($i = 1 ; $i <= $ubicaciones["capacidad"]; $i++){
 
 
-            $queryUbicacion = "INSERT into ubicacion(asiento) values (?);";
+            $queryUbicacion = "INSERT into ubicacion(asiento) values (?)";
             $paramsUbicacion = $i;
             $this->database->executeQueryParams($paramsUbicacion,$queryUbicacion);
 
@@ -45,7 +45,7 @@ class AdminModel extends BaseModel{
 
 
             $queryInsertReserva = "INSERT into reservaPasaje (codigoReserva,fkCodigoUbicacion, codigoVuelo)
-                                   values (substring(md5(now()),1,8),' ".$lastUbicacion."'.,' ".$codigoVuelo."')";
+                                   values (substring(md5(now()),1,8),' ".$lastUbicacion."',' ".$codigoVuelo."')";
             $this->database->insertQuery($queryInsertReserva);
 
 

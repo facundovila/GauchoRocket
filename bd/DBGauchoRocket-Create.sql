@@ -146,21 +146,22 @@ foreign key (fkcodigoVuelo) references
 );
 */
 
-create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
-codigoUbicacion int auto_increment primary key,
-ocupada boolean default false,
-asiento int 
-);
-
 create table reservaPasaje(
+numero int,
 codigoReserva varchar(8) primary key,
 totalAPagar double(10,2),
-fkCodigoUbicacion int,
 fkCodigoVuelo int,
 fkCodigoServicio int,
 foreign key (fkCodigoVuelo) references vuelo(codigo),
-foreign key(fkCodigoServicio) references servicio(codigoServicio),
-foreign key (fkCodigoUbicacion) references ubicacion(codigoUbicacion)
+foreign key(fkCodigoServicio) references servicio(codigoServicio)
+);
+
+create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
+codigoUbicacion int auto_increment primary key,
+ocupado boolean default false,
+asiento int,
+fkcodigoReserva varchar(8),
+foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva) 
 );
 
 create table reservaUsuario(

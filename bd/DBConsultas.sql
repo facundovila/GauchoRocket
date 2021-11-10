@@ -114,6 +114,9 @@ left join tipoDeEquipo as te on me.fkCodigoTipoEquipo=te.codigo
 where u.nivelVuelo=3 and te.nombre like '%Aceleracion%';
 
 */
+
+select * from usuario;
+
 select substring('2021.01.01 17:00:00',11,9);
 
 select substring(md5(now()),1,8);
