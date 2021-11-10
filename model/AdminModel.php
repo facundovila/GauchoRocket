@@ -24,37 +24,37 @@ class AdminModel extends BaseModel{
       //$response = $this->database->executeQueryParams($params,$query);
 
         $response = $this->database->query($query);
-        
+
         $ubicaciones["capacidad"]= $response;
 
 
-        echo json_encode($ubicaciones["capacidad"]);
-        die();
-        
+        /*echo json_encode($ubicaciones["capacidad"][0]["capacidad"]);
+        die();*/
 
-        for ($i = 1 ; $i <= $ubicaciones["capacidad"]; $i++){
-
-
+        $db = new MyDatabase("localhost", "root", "root", "dbgr","3306");
+        for ($i = 1 ; $i <= $ubicaciones["capacidad"][0]["capacidad"]; $i++){
             $queryUbicacion = "INSERT into ubicacion(asiento) values (?);";
-            $paramsUbicacion = $i;
-            $this->database->executeQueryParams($paramsUbicacion,$queryUbicacion);
-
+            $paramsUbicacion = array($i);
+            //$db = new MyDatabase("localhost", "root", "root", "dbgr","3306");
+            $db->executeQueryParams($paramsUbicacion,$queryUbicacion);
 
             $querySelectLastUbicacion = "SELECT codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1";
-            $lastUbicacion=$this->database->query($querySelectLastUbicacion);
+            //$db = new MyDatabase("localhost", "root", "root", "dbgr","3306");
+            $lastUbicacion=$db->query($querySelectLastUbicacion);
 
+            $queryInsertReserva = "INSERT into reservaPasaje (codigoReserva,fkCodigoUbicacion, fkCodigoVuelo)
+                                   values (substring(md5(now()), 1, 8),' ".$lastUbicacion[0]["codigoUbicacion"]."',' ".$codigoVuelo."')";
 
-            $queryInsertReserva = "INSERT into reservaPasaje (codigoReserva,fkCodigoUbicacion, codigoVuelo)
-                                   values (substring(md5(now()),1,8),' ".$lastUbicacion."'.,' ".$codigoVuelo."')";
-            $this->database->insertQuery($queryInsertReserva);
-
+            //$db = new MyDatabase("localhost", "root", "root", "dbgr","3306");
+            $db->insertQuery($queryInsertReserva);
 
             $querySelectLastReserva = "SELECT codigoReserva from reservaPasaje order by codigoReserva desc limit 1";
-            $lastReserva=$this->database->query($querySelectLastReserva);
+            //$db = new MyDatabase("localhost", "root", "root", "dbgr","3306");
+            $lastReserva=$db->query($querySelectLastReserva);
 
-
-            $queryInsertReserva = "insert into reservaUsuario(fkcodigoReserva) values ('".$lastReserva."')";
-            $this->database->insertQuery($queryInsertReserva);
+            $queryInsertReserva = "insert into reservaUsuario(fkcodigoReserva) values ('".$lastReserva[0]["codigoReserva"]."')";
+            //$db = new MyDatabase("localhost", "root", "root", "dbgr","3306");
+            $db->insertQuery($queryInsertReserva);
         }
 
     }

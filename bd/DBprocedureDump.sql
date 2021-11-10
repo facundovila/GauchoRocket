@@ -96,7 +96,7 @@ begin
 		where V.codigo = codigoVuelo;
 end//
 DELIMITER ;
-
+/*
 select * from vuelo;
 -- call GR_obtenerMatricula(1,@Matricula);
 -- call GR_todosLosVuelos;
@@ -119,4 +119,4 @@ SELECT distinct sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)as Capacida
                                 inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
                                 inner join vuelo as V on V.matriculaEquipo=E.matricula
                                 where E.matricula =(select E.matricula from equipo as E
-                                              inner join vuelo as V on V.matriculaEquipo=E.matricula where V.codigo = 4); 
+                                              inner join vuelo as V on V.matriculaEquipo=E.matricula where V.codigo = 4); */
