@@ -118,7 +118,6 @@ begin
 end//
 DELIMITER ;
 
-
 drop procedure if exists GR_crearReservasVaciasParaUnVuelo;
 DELIMITER //
 create procedure GR_crearReservasVaciasParaUnVuelo(in codigoVuelo int)
@@ -149,9 +148,9 @@ begin
 end//
 DELIMITER ;
 
-drop procedure if exists GR_crearReservasVaciasParaUnVueloAlt;
+drop procedure if exists GR_crearReservasVaciasParaUnVueloFinal;
 DELIMITER //
-create procedure GR_crearReservasVaciasParaUnVueloAlt(in codigoVuelo int)
+create procedure GR_crearReservasVaciasParaUnVueloFinal(in codigoVuelo int)
 begin         
 		declare i int default 1;
         
@@ -193,22 +192,21 @@ DELIMITER ;
 -- select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1;
 
 -- CALLS ----------------------------------------------------
-
 -- call GR_obtenerMatricula(1,@Matricula);
 -- call GR_todosLosVuelos;
 -- call GR_CapacidadTotalXVuelo(4);
 -- call GR_todosLosVuelosTodosLosParametros(1,3,NOW(),2);
- call GR_crearReservasVaciasParaUnVueloAlt (3);
+-- call GR_crearReservasVaciasParaUnVueloFinal (3);
 
 -- call GR_obtenerMatricula(3,@matricula);
 -- select @matricula;
-
 
 
 -- call GR_capacidadTotalXVueloSoloCantidadOUT(3,@cantidad);
 -- select @cantidad as a;
 
 -- ---------------------------------------------------------------
+
 select * from vuelo;
 		
 select count(codigoReserva)  from reservaPasaje;
@@ -226,3 +224,4 @@ select distinct codigoReserva from reservaPasaje where fkCodigoVuelo = 2);
 delete from reservaPasaje where fkCodigoVuelo = 2;
 
 select codigoReserva from reservaPasaje order by codigoReserva desc limit 1;
+
