@@ -118,6 +118,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_crearReservasVaciasParaUnVuelo;
 DELIMITER //
 create procedure GR_crearReservasVaciasParaUnVuelo(in codigoVuelo int)
@@ -192,6 +193,7 @@ DELIMITER ;
 -- select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1;
 
 -- CALLS ----------------------------------------------------
+
 -- call GR_obtenerMatricula(1,@Matricula);
 -- call GR_todosLosVuelos;
 -- call GR_CapacidadTotalXVuelo(4);
@@ -200,6 +202,7 @@ DELIMITER ;
 
 -- call GR_obtenerMatricula(3,@matricula);
 -- select @matricula;
+
 
 
 -- call GR_capacidadTotalXVueloSoloCantidadOUT(3,@cantidad);

@@ -51,6 +51,7 @@ class MyDatabase{
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
+            $stmt->free_result();
 
             if ($result) {
                 if (is_bool($result)) {
