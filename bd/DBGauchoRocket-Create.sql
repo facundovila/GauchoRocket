@@ -131,22 +131,37 @@ foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServi
 );
 
 
-create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
-codigoUbicacion int auto_increment primary key,
-ocupada boolean default false,
-asiento int
+-- tabla capacidad para almacenar la capacidad de cada tipo de cabina del equipo? atarla a pasaje y pasaje a ubicacion
+-- asi manejar para cada ubicacion una comparacion similar a la de centros, pero en este caso para cada tipo de cabina
+-- quiza se puede hacer sin la tabla, necesitaria mas joins pero creo que se puede, por ahora queda asi, pero va a tener
+-- que ser implementado tarde o temprano. quiza funciona asi como esta, sin hacer querys es dificl verlo
+/* Redundante ? unfinished
+create table capacidad(
+codigo int auto_increment primary key,
+capacidadSuit int,
+capacidadGeneral int,
+capacidadFamiliar int,
+fkcodigoVuelo int
+foreign key (fkcodigoVuelo) references 
 );
+*/
 
 create table reservaPasaje(
+numero int,
 codigoReserva varchar(8) primary key,
-fecha datetime,
 totalAPagar double(10,2),
-fkCodigoUbicacion int,
 fkCodigoVuelo int,
 fkCodigoServicio int,
 foreign key (fkCodigoVuelo) references vuelo(codigo),
-foreign key(fkCodigoServicio) references servicio(codigoServicio),
-foreign key (fkCodigoUbicacion) references ubicacion(codigoUbicacion)
+foreign key(fkCodigoServicio) references servicio(codigoServicio)
+);
+
+create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
+codigoUbicacion int auto_increment primary key,
+ocupado boolean default false,
+asiento int,
+fkcodigoReserva varchar(8),
+foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva) 
 );
 
 create table reservaUsuario(

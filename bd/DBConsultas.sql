@@ -88,12 +88,19 @@ where E.matricula = @Matricula;
 
 -- select distinct sum(V.precio+TS.precio+TC.precio) from vuelo as V join  on V.codigoTrayecto;
 
--- query para agregar una reserva vacia junto a un asiento vacio para un vuelo
+/* querys para agregar una reserva vacia junto a un asiento vacio para un vuelo 
 
-insert into reserva (idViaje, asiento, codigoAlfanumerico)
-            values ('".$idDelVuelo."' , '".$i."', '".$numeroAlfanumerico."')
+insert into ubicacion(asiento) values ();
 
+-- query que trae el id del ultimo asiento agregado
+select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1;
 
+insert into reservaPasaje (codigoReserva,fkCodigoUbicacion, codigoVuelo)
+            values (substring(md5(now()),1,8), , '".$i."', '".$numeroAlfanumerico."')
+
+insert into reservaUsuario(fkcodigoReserva) values ();
+
+*/
 -- deprecada  identificar --------------------------------------------------------------------------------
 /*
 select u.email as Email, u.usuario as Nombre, u.nivelVuelo as Nivel_De_Vuelo
@@ -107,6 +114,9 @@ left join tipoDeEquipo as te on me.fkCodigoTipoEquipo=te.codigo
 where u.nivelVuelo=3 and te.nombre like '%Aceleracion%';
 
 */
+
+select * from usuario;
+
 select substring('2021.01.01 17:00:00',11,9);
 
 select substring(md5(now()),1,8);

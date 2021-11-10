@@ -4,25 +4,31 @@ require_once "BaseModel.php";
 
 class AdminModel extends BaseModel{
 
-    public function crearReservasYUbicacionesParaUnVuelo($codigoVuelo){
-       
-        $query = 'call GR_capacidadTotalXVuelo(?)';
-        $params = array($codigoVuelo);
+    public function getVuelosSinPasajes(){
+      
+        $query = 'call GR_todosLosVuelos'; // Crear Procedure para esto, temporal
 
-        $response = $this->database->executeQueryParams($params,$query);
+        $response=$this->database->query($query);
+
+        $data["vuelos"]=$response;
         
-        $ubicaciones["cantidad"] = $response;
+        return $data;
+    }
 
-        for ($i = 1 ; $i <= $ubicaciones["cantidad"]; $i++){
-            $numeroAlfanumerico = substr(str_shuffle($caracteresPermitidos),0,8);
+    public function createReservasYUbicacionesParaUnVuelo($codigoVuelo){
+       
+          $query = 'call GR_crearReservasVaciasParaUnVueloFinal(?)';
+          $params = array($codigoVuelo);
 
-            $reserva = "INSERT INTO reserva (idViaje, asiento, codigoAlfanumerico)
-            values ('".$idDelVuelo."' , '".$i."', '".$numeroAlfanumerico."')";
+          $response = $this->database->executeQueryParams($params,$query);
+          
+          $data["Reservas"] = $response;
 
-            $this->database->agregar($reserva);
+          return $data;
+
         }
 
-    }
+    
 
    
 }

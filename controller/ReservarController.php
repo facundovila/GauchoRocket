@@ -11,7 +11,7 @@ class ReservarController extends BaseController {
     }
 
     public function show() {
-        $vueloId = $_GET["vuelo-id"];
-        echo $vueloId;
+        $codigoVuelo = $_GET["codigoVuelo"];
+        echo $codigoVuelo;
     }
 }

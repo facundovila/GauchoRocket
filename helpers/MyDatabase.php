@@ -28,6 +28,10 @@ class MyDatabase{
     public function execute($sql){
         mysqli_query($this->database, $sql);
     }
+
+    public function insertQuery($query){
+        return  mysqli_query($this->database, $query);
+    }
     
     public function executeQueryParams($params, $query) {
         $stmt = $this->database->prepare($query);
@@ -47,6 +51,7 @@ class MyDatabase{
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
+            $stmt->free_result();
 
             if ($result) {
                 if (is_bool($result)) {
