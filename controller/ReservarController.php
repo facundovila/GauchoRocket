@@ -11,7 +11,15 @@ class ReservarController extends BaseController {
     }
 
     public function show() {
-        $codigoVuelo = $_GET["codigoVuelo"];
-        echo $codigoVuelo;
+        //$codigoVuelo = $_GET["codigoVuelo"];
+        //echo $codigoVuelo;
+        $id = $_SESSION["id"];
+
+        $datosUsuario= $this->model->getdatosUsuario($id);
+
+        $data["datosUsuario"]=$datosUsuario;
+
+        echo $this->printer->render("view/reservarView.html",$data);
+
     }
 }

@@ -1,0 +1,2 @@
+[21-11-11 10:23:29][ERROR] error al intentar enviar el correo
+[21-11-11 10:42:27][INFO] correo enviado con éxito

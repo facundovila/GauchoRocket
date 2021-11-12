@@ -2,18 +2,8 @@
 <title>Vuelos-Gaucho Rocket</title>
 <main class="usuario">
     <section class="d-flex contenedor" id="wrapper">
-        <article class="contenido1 " id="sidebar-wrapper">
-            <div >
-                <div class="list-group list-group-flush p-2   ">
-                    <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
-                    <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
-                </div>
-            </div>
-            <!-- /#sidebar-wrapper -->
-        </article >
         <article  class="contenido2" id="page-content-wrapper">
-            <h3>Mis vuelos</h3>
+            <h3>vuelos</h3>
             <div class="padding">
                 <table class="table">
                     <thead>
@@ -34,7 +24,7 @@
                         <td><p>{{nombre}}</p></td>
                         <td><p>{{fecha}}</p></td>
                         <td><p>{{precio}}</p></td>
-                        <td><a href="/reservar/show/codigoVuelo={{codigo}}">reservar</a></td>
+                        <td><a href="/reservar/">reservar</a></td>
                     </tr>
                     {{/vuelos}}</tbody>
                 </table>
