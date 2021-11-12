@@ -14,10 +14,11 @@ class ReservarController extends BaseController {
         //$codigoVuelo = $_GET["codigoVuelo"];
         //echo $codigoVuelo;
         $id = $_SESSION["id"];
+        $codigo = $_GET["codigo"];
 
-        $datosUsuario= $this->model->getdatosUsuario($id);
+        $data= $this->model->getdatosUsuario($id);
+        $data+= $this->model->getReserva($codigo);
 
-        $data["datosUsuario"]=$datosUsuario;
 
         echo $this->printer->render("view/reservarView.html",$data);
 

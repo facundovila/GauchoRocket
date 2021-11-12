@@ -20,13 +20,14 @@
                             <h4 class="card-subtitle mb-2 text-muted">datos de reserva </h4>
                             <div class=" px-2 ">
                                 {{#reserva}}
-                                <p>Partida:{{nombre}}</p>
-                                <p>Destino: {{nombre}}</p>
+                                <p>Partida:{{origen}}</p>
+                                <p>Destino: {{destino}}</p>
+                                <p>tipo de vuelo: {{nombre}}</p>
                                 <p>fecha de partida: {{fecha}}</p>
                                 <p>fecha de regreso: {{fecha}}</p>
 
                                 <p>nivel de vuelo: {{descripcion}}</p>
-                                <p>tipo de vuelo: {{nombre}}</p>
+
                                 <p>tipo de servicio: {{descripcion}}</p>
                                 <p>precio: {{precio}}</p>
                                 {{/reserva}}

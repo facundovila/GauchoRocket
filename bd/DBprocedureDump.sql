@@ -17,7 +17,7 @@ begin
         from vuelo as v
         inner join trayecto as t on v.codigoTrayecto=t.codigo
         inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
-        on t1.nombre=t2.nombre;
+        on t1.nombre=t2.nombre ;
     
 end//
 DELIMITER ;
