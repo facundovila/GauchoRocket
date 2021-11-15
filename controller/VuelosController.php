@@ -35,4 +35,19 @@ require_once "BaseController.php";
         
 
     }
+
+     public function datosReserva() {
+         //$codigoVuelo = $_GET["codigoVuelo"];
+         //echo $codigoVuelo;
+         $id = $_SESSION["id"];
+         $codigo = $_GET["codigo"];
+
+         $data= $this->vuelosModel->getdatosUsuario($id);
+         $data+= $this->vuelosModel->getReserva($codigo);
+
+
+         echo $this->printer->render("view/reservarView.html",$data);
+
+     }
+
 }

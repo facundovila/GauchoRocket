@@ -11,7 +11,7 @@ class ValidatorController extends BaseController {
     }
 
     public function show() {
-        echo $this->printer->render("view/validarView.html");
+        echo $this->printer->render("view/validatorView.html");
     }
 
     public function validate() {
