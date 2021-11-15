@@ -24,13 +24,26 @@ class LoginController extends BaseController
             header("Location: /login");
         }
 
-        $usuario = $_POST["usuario"];
-        $clave = md5($_POST["password"]);
+        $email = $_POST["email"];
+        $password = $_POST["password"];
 
-        $result = $this->loginModel->login($usuario, $clave);
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->showError($email, $password, "error-email", "El email ingresado no es válido");
+            exit();
+        }
+
+        if ($password == null || strlen($password) < 6) {
+            $this->showError($email, $password, "error-password", "La contraseña ingresada no es válida");
+            exit();
+        }
+
+        $clave = md5($password);
+
+        $result = $this->loginModel->login($email, $clave);
 
         if (empty($result)) {
-            die("Algo salió mal.");
+            $this->showError($email, $password, "error", "Algo salió mal");
+            exit();
         }
 
         $result = $result[0];
@@ -44,5 +57,13 @@ class LoginController extends BaseController
         } else {
             header("Location: /validator/show/hash=" . $hash);
         }
+    }
+
+    private function showError($email, $password, $key, $message) {
+        $data[$key] = $message;
+        $data["email"] = $email;
+        $data["password"] = $password;
+
+        echo $this->printer->render("view/loginView.html", $data);
     }
 }
