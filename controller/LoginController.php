@@ -32,7 +32,7 @@ class LoginController extends BaseController
             exit();
         }
 
-        if ($password == null || strlen($password) < 6) {
+        if ($password == null || strlen($password) < 3) {
             $this->showError($email, $password, "error-password", "La contraseña ingresada no es válida");
             exit();
         }
@@ -52,7 +52,7 @@ class LoginController extends BaseController
         $_SESSION["id"] = $result["id"];
         $_SESSION["rol"] = $result["rol"];
 
-        if ($hash == null) {
+        if ($hash == null || empty($hash)) {
             header("Location: /home");
         } else {
             header("Location: /validator/show/hash=" . $hash);
