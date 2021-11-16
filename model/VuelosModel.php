@@ -39,11 +39,32 @@ class VuelosModel extends BaseModel{
         $data["datosUsuario"]=$response;
 
         return $data;
-
-
-
     }
 
+    public function selectVuelo($codigo){
+        $query ='call GR_vuelosPorId(?)';
+        $params = array($codigo);
+
+        $response = $this->database->executeQueryParams($params,$query);
+
+        $data["vueloSeleccionado"] = $response;
+
+        return $data;
+    }
+
+    public function getCabinasYServicios(){
+        $query ='call GR_traerServiciosYCabinas()';
+
+        $response = $this->database->query($query);
+
+        $data["CabinasYServicios"] = $response;
+
+        return $data;
+    }
+
+
+
+    /*
     public function getReserva($codigo):array{
 
         $query= "SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
@@ -63,7 +84,7 @@ class VuelosModel extends BaseModel{
 
         $data["reserva"]=$response;
 
-        return $data;
+        return $data; 
 
 
 
@@ -71,5 +92,5 @@ class VuelosModel extends BaseModel{
 
 
 
-    }
+    } */
 }

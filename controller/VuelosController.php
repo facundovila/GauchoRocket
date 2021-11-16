@@ -36,14 +36,17 @@ require_once "BaseController.php";
 
     }
 
-     public function datosReserva() {
+     public function datosReserva() {  
          //$codigoVuelo = $_GET["codigoVuelo"];
          //echo $codigoVuelo;
          $id = $_SESSION["id"];
          $codigo = $_GET["codigo"];
 
          $data= $this->vuelosModel->getdatosUsuario($id);
-         $data+= $this->vuelosModel->getReserva($codigo);
+      //   $data+= $this->vuelosModel->getReserva($codigo); comentado por que no hace nada y rompe logout
+         $data+= $this->vuelosModel->selectVuelo($codigo);
+         $data+= $this->vuelosModel->getCabinasYServicios();
+         //$data+= $this->vuelosModel->getServicios();
 
 
          echo $this->printer->render("view/reservarView.html",$data);

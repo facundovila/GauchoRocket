@@ -22,13 +22,56 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_vuelosPorId;
+DELIMITER //
+create procedure GR_vuelosPorId(in codigoVuelo int)
+begin
+		SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
+                        (select distinct v.descripcion as Nombre,l.nombre as origen, fecha, v.precio as precio,
+                        TT.nombre as nombreTrayecto, v.codigo as vueloId
+                        from vuelo as v
+                        inner join trayecto as t on v.codigoTrayecto=t.codigo
+                        inner join locacion as l on t.codigoLocacionOrigen=l.codigo
+                        inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
+                        where v.codigo = codigoVuelo ) as t1
+                        inner join
+                        (select distinct t.codigo,v.descripcion as nombre,l.nombre as destino
+                        from vuelo as v
+                        inner join trayecto as t on v.codigoTrayecto=t.codigo
+                        inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
+                        on t1.nombre=t2.nombre;
+    
+end//
+DELIMITER ;
+
+
+drop procedure if exists GR_validarNivelVuelo;  -- Para validar que reservas se pueden hacer o no
+DELIMITER //
+create procedure GR_validarNivelVuelo(in idUsuario int,out result boolean)
+begin
+         
+		if exists(SELECT NV.nivel from Usuario as U
+				  join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario 
+				  join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= idUsuario)
+		then
+		set result=true;
+        
+		else 
+		set result=false;
+		end if;
+        
+        select result;
+end//
+DELIMITER ;
+
+
 drop procedure if exists GR_todosLosVuelosTodosLosParametros;
 DELIMITER //
 create procedure GR_todosLosVuelosTodosLosParametros(in origenO int,in destinoO int,in fechaO date,in tipoO int)
 begin
 
-		SELECT codigo,origen,destino,t1.Nombre as nombre, fecha, precio, vueloId,nombreTrayecto from
-                        (select distinct t.nombre as Nombre,l.nombre as origen, fecha, v.precio as precio,
+			SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
+                        (select distinct v.descripcion as Nombre,l.nombre as origen, fecha, v.precio as precio,
                         TT.nombre as nombreTrayecto, v.codigo as vueloId
                         from vuelo as v
                         inner join trayecto as t on v.codigoTrayecto=t.codigo
@@ -36,7 +79,7 @@ begin
                         inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
                         where t.codigoLocacionOrigen= origenO and TT.codigo = tipoO and fecha = fechaO) as t1
                         inner join
-                        (select distinct t.codigo,t.nombre as nombre,l.nombre as destino
+                        (select distinct t.codigo,v.descripcion as nombre,l.nombre as destino
                         from vuelo as v
                         inner join trayecto as t on v.codigoTrayecto=t.codigo
                         inner join locacion as l on t.codigoLocacionDestino=l.codigo
@@ -45,6 +88,8 @@ begin
     
 end//
 DELIMITER ;
+
+
 
 -- procedure Total de un equipo determinada segun el codigo del vuelo --------------------------------------------------
 
@@ -115,6 +160,32 @@ begin
 		from equipo as E
 		inner join vuelo as V on V.matriculaEquipo=E.matricula
 		where V.codigo = codigoVuelo;
+end//
+DELIMITER ;
+
+drop procedure if exists GR_traerCabinas;
+DELIMITER //
+create procedure GR_traerCabinas()
+begin
+		select codigoTipoDeCabina as codigoC,descripcion,precio
+		from TipoDeCabina;
+end//
+DELIMITER ;
+
+select codigoTipoDeCabina as codigoC,TC.descripcion as descripcionC,TC.precio as precioC
+		from TipoDeCabina as TC
+        union 
+select codigoTipoDeServicio as codigoS,TS.descripcion as descripcionS,TS.precio as precioS
+		from TipoDeServicio as TS;	
+
+drop procedure if exists GR_traerServiciosYCabinas;
+DELIMITER //
+create procedure GR_traerServiciosYCabinas() -- esto solo funciona asi, esta hardcodeado, sin el where traeria multiples veces los resultados
+begin
+		select distinct codigoTipoDeServicio as codigoS,TS.descripcion as descripcionS,TS.precio as precioS,
+        codigoTipoDeCabina as codigoC,TC.descripcion as descripcionC,TC.precio as precioC
+		from TipoDeServicio as TS cross join TipoDeCabina as TC
+        where codigoTipoDeServicio=codigoTipoDeCabina;
 end//
 DELIMITER ;
 
@@ -196,7 +267,9 @@ DELIMITER ;
 -- call GR_todosLosVuelos;
 -- call GR_CapacidadTotalXVuelo(4);
 -- call GR_todosLosVuelosTodosLosParametros(1,3,NOW(),2);
+-- call GR_validarNivelVuelo(2,@a);
 -- call GR_crearReservasVaciasParaUnVueloFinal (3);
+-- call GR_vuelosPorId(2);
 
 -- call GR_obtenerMatricula(3,@matricula);
 -- select @matricula;

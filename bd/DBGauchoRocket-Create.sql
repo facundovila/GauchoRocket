@@ -115,7 +115,9 @@ precio double(10,2)
 create table cabina(
 codigoCabina int primary key auto_increment,
 fkCodigoTipoDeCabina int,
-foreign key (fkCodigoTipoDeCabina) references tipoDeCabina(codigoTipoDeCabina)
+fkcodigoReserva int,
+foreign key (fkCodigoTipoDeCabina) references tipoDeCabina(codigoTipoDeCabina),
+foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva) 
 );
 
 create table tipoDeServicio(
@@ -127,7 +129,9 @@ descripcion varchar(50)
 create table servicio(
 codigoServicio int primary key auto_increment,
 fkcodigoTipoDeServicio int,
-foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServicio)
+fkcodigoReserva int,
+foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServicio),
+foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva) 
 );
 
 

@@ -1,15 +1,16 @@
 {{>header}}
-
+<title>Reservas-GauchoRocket</title>
 <main>
     <main class="usuario">
         <section class="d-flex contenedor" id="wrapper">
             <article  class="contenido2 " id="page-content-wrapper">
 
-                <div class="card padding mx-auto" style="width: 70rem;">
+                <div class="card padding mx-auto" style="width: 45rem;">
 
                     <div class=" card-body padding px-5 ">
                         <h3 class="card-title">Reserva</h3>
                         <div class=" padding px-2 ">
+
                             {{#datosUsuario}}
                             <h4 class="card-subtitle mb-2 text-muted">datos del pasajero</h4>
                             <div class=" px-2 ">
@@ -17,21 +18,32 @@
                                 <p> email: {{email}}</p>
                             </div>
                             {{/datosUsuario}}
-                            <h4 class="card-subtitle mb-2 text-muted">datos de reserva </h4>
+
+                            <h4 class="card-subtitle mb-2 text-muted">datos del vuelo </h4>
                             <div class=" px-2 ">
-                                {{#reserva}}
+                                {{#vueloSeleccionado}}
                                 <p>Partida:{{origen}}</p>
                                 <p>Destino: {{destino}}</p>
                                 <p>tipo de vuelo: {{nombre}}</p>
                                 <p>fecha de partida: {{fecha}}</p>
                                 <p>fecha de regreso: {{fecha}}</p>
-
-                                <p>nivel de vuelo: {{descripcion}}</p>
-
-                                <p>tipo de servicio: {{descripcion}}</p>
-                                <p>precio: {{precio}}</p>
-                                {{/reserva}}
+                                {{/vueloSeleccionado}}
                             </div>
+
+                            <label for="cabinas" class="mt-2">Selecciona el tipo de Cabina</label>
+                            <select name="cabinas" id="cabinas" class="form-select">
+                                {{#CabinasYServicios}}
+                                <option value="{{codigoC}}">{{descripcionC}}  ${{precioC}}</option>
+                                {{/CabinasYServicios}}
+                            </select>
+
+                            <label for="servicios" class="mt-2">Selecciona el tipo de Servicio</label>
+                            <select name="servicios" id="servicios" class="form-select">
+                                {{#CabinasYServicios}}
+                                <option value="{{codigoS}}">{{descripcionS}}  ${{precioS}}</option>
+                                {{/CabinasYServicios}}
+                            </select>
+
                             <a href="#" class="btn btn-primary">Confirmar Reserva</a>
                         </div>
 
