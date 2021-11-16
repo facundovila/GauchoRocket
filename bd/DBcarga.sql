@@ -59,14 +59,15 @@ insert into turnoMedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) values
  */                         
                                 
 insert into tipoDeTrayecto (nombre) values
-											('Orbital'),
-											('SubOrbitales'),
-                                            ('Entre Destinos');
+											('SubOrbitales'), -- nivel 1
+                                            ('EntreDestinos'), -- nivel 2
+                                            ('Tour');-- nivel 3
+                                            
 
 insert into tipoDeEquipo (nombre) values
-							('Suborbital'), -- Solo hace vuelos Suborbitales el resto pueden hacer cualquier vuelo(tipo de trayecto)
-							('Baja Aceleracion'),
-							('Alta Aceleracion');
+							('Suborbital'), -- nivel 1 Solo hace vuelos Suborbitales el resto pueden hacer cualquier vuelo(tipo de trayecto)
+							('Baja Aceleracion'), -- nivel 2
+							('Alta Aceleracion'); -- nivel 3
 
 
 insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
@@ -129,8 +130,8 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					('BA3',10); 
                     
  insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
-					 (1,3,2),
-					 (2,13,1);
+					 (1,3,3),
+					 (2,13,2);
                      
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
 				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-11-08',3,'AA1',1),
@@ -141,22 +142,14 @@ insert into tipoDeCabina (descripcion, precio) values
 									('Familiar', 550),
 									('Suite', 850);
                                     
- insert into cabina (fkcodigoTipoDeCabina) values
-										(1),
-										(2),
-										(3);
+
                                         
 insert into tipoDeServicio (descripcion, precio) values
 							('Standard', 1000),
 							('Gourmet', 2000),
 							('Spa', 4000);
                             
- insert into servicio (fkcodigoTipoDeServicio) values
-										(1),
-										(2),
-										(3);
- 
- 
+
  -- BEBOP TEST RUN -------------------------------------------------
 insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
 ('BepBop',3, 1, 1, 1);
@@ -165,7 +158,7 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 ('BEBOP',11); 
   
 insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
-(6,7,3);
+(6,7,2);
 
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
 ('Vuelo del BEBOP entre Marte y Europa',42000,'2021-11-08',8,'BEBOP',3);
