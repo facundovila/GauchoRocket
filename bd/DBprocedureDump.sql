@@ -291,36 +291,6 @@ end//
 DELIMITER ;
 
 
-drop procedure if exists GR_crearReservasVaciasParaUnVuelo;
-DELIMITER //
-create procedure GR_crearReservasVaciasParaUnVuelo(in codigoVuelo int)
-begin         
-		declare i int default 1;
-        
-			call GR_capacidadTotalXVueloSoloCantidadOUT(codigoVuelo,@cantidad);
-			select @cantidad;
-        
-        while i <= @cantidad
-        do
-
-			insert into ubicacion(asiento) values (i);
-
-			set @cU=(select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1);
-						
-			insert into reservaPasaje (codigoReserva,fkCodigoUbicacion, fkcodigoVuelo)
-							 values (substring(md5(rand()),1,8),@cU ,codigoVuelo); 
-								 
-			set @cR=(select codigoReserva from reservaPasaje order by fkCodigoUbicacion desc limit 1);
-
-			insert into reservaUsuario(fkcodigoReserva) values (@cR);
-			
-			set i = i + 1;
-        
-        end while;
-
-end//
-DELIMITER ;
-
 drop procedure if exists GR_crearReservasVaciasParaUnVueloFinal;
 DELIMITER //
 create procedure GR_crearReservasVaciasParaUnVueloFinal(in codigoVuelo int)
@@ -365,6 +335,7 @@ DELIMITER ;
 
 
 /*
+select* from ubicacion;
 
 select codigoTipoDeCabina as codigoC,TC.descripcion as descripcionC,TC.precio as precioC
 		from TipoDeCabina as TC
@@ -391,4 +362,37 @@ select distinct codigoReserva from reservaPasaje where fkCodigoVuelo = 2);
 delete from reservaPasaje where fkCodigoVuelo = 2;
 
 select codigoReserva from reservaPasaje order by codigoReserva desc limit 1;
+
+
+
+
+drop procedure if exists GR_crearReservasVaciasParaUnVuelo;
+DELIMITER //
+create procedure GR_crearReservasVaciasParaUnVuelo(in codigoVuelo int)
+begin         
+		declare i int default 1;
+        
+			call GR_capacidadTotalXVueloSoloCantidadOUT(codigoVuelo,@cantidad);
+			select @cantidad;
+        
+        while i <= @cantidad
+        do
+
+			insert into ubicacion(asiento) values (i);
+
+			set @cU=(select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1);
+						
+			insert into reservaPasaje (codigoReserva,fkCodigoUbicacion, fkcodigoVuelo)
+							 values (substring(md5(rand()),1,8),@cU ,codigoVuelo); 
+								 
+			set @cR=(select codigoReserva from reservaPasaje order by fkCodigoUbicacion desc limit 1);
+
+			insert into reservaUsuario(fkcodigoReserva) values (@cR);
+			
+			set i = i + 1;
+        
+        end while;
+
+end//
+DELIMITER ;
 */

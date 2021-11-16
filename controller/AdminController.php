@@ -32,6 +32,8 @@ require_once "BaseController.php";
 
         $this->adminModel->createReservasYUbicacionesParaUnVuelo($codigoVuelo);
 
+        header("Location:/home"); // agregar algo que diga que se esta haciendo y redireccionar o algo
+
     }
 
 }
