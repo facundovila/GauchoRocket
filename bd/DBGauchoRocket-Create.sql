@@ -112,23 +112,12 @@ descripcion varchar(50),
 precio double(10,2)
 );
 
-create table cabina(
-codigoCabina int primary key auto_increment,
-fkCodigoTipoDeCabina int,
-foreign key (fkCodigoTipoDeCabina) references tipoDeCabina(codigoTipoDeCabina)
-);
-
 create table tipoDeServicio(
 codigoTipoDeServicio int primary key auto_increment,
 precio double (10,2),
 descripcion varchar(50)
 );
 
-create table servicio(
-codigoServicio int primary key auto_increment,
-fkcodigoTipoDeServicio int,
-foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServicio)
-);
 
 
 -- tabla capacidad para almacenar la capacidad de cada tipo de cabina del equipo? atarla a pasaje y pasaje a ubicacion
@@ -146,21 +135,24 @@ foreign key (fkcodigoVuelo) references
 );
 */
 
-create table reservaPasaje(
+create table reservaPasaje( 
 numero int,
+checkin boolean default false,
 codigoReserva varchar(8) primary key,
 totalAPagar double(10,2),
 fkCodigoVuelo int,
-fkCodigoServicio int,
+fkcodigoTipoDeServicio int,
 foreign key (fkCodigoVuelo) references vuelo(codigo),
-foreign key(fkCodigoServicio) references servicio(codigoServicio)
+foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServicio)
 );
 
-create table ubicacion(  -- ubicacion puede tener determinados serivicios y cabina o eso puede pasarse a pasaje, revisar
+create table ubicacion(  -- determinar el tipo de cabina al momento de la creacion de la ubicacion acorde al equipo
 codigoUbicacion int auto_increment primary key,
 ocupado boolean default false,
 asiento int,
 fkcodigoReserva varchar(8),
+fkCodigoTipoDeCabina int,
+foreign key (fkCodigoTipoDeCabina) references tipoDeCabina(codigoTipoDeCabina),
 foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva) 
 );
 
@@ -171,13 +163,27 @@ foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva),
 foreign key (fkemailUsuario) references usuario(email)
 );
 
-
-/*
 create table pasaje(
 id int primary key auto_increment,
 fkCodigoReserva varchar(8),
 foreign key (fkCodigoReserva) references reservaPasaje(codigoReserva)
 );
 
+
+
+/*
+create table cabina(
+codigoCabina int primary key auto_increment,
+fkCodigoTipoDeCabina int,
+foreign key (fkCodigoTipoDeCabina) references tipoDeCabina(codigoTipoDeCabina)
+);
+
+create table servicio(
+codigoServicio int primary key auto_increment,
+fkcodigoTipoDeServicio int,
+foreign key (fkcodigoTipoDeServicio) references tipoDeServicio(codigoTipoDeServicio)
+);
 */
+
+
 
