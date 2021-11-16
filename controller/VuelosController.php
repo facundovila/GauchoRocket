@@ -36,13 +36,24 @@ require_once "BaseController.php";
 
     }
 
-     public function datosReserva() {  
+    public function datosReserva() {  // logout sigue roto desde este punto
          //$codigoVuelo = $_GET["codigoVuelo"];
          //echo $codigoVuelo;
          $id = $_SESSION["id"];
          $codigo = $_GET["codigo"];
 
+         $result=$this->vuelosModel->validarNivelVueloUsuario($id,$codigo);
+
+         if(1!=($result[0]['@resultado'])){
+            header("location:/home");
+
+            /* $data['nivelInvalido']=true;
+
+            echo $this->printer->render("view/vuelosView.html",$data); */
+         }
+
          $data= $this->vuelosModel->getdatosUsuario($id);
+         
       //   $data+= $this->vuelosModel->getReserva($codigo); comentado por que no hace nada y rompe logout
          $data+= $this->vuelosModel->selectVuelo($codigo);
          $data+= $this->vuelosModel->getCabinasYServicios();

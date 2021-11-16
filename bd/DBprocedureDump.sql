@@ -9,6 +9,7 @@ USE dbgr;
 -- call GR_crearReservasVaciasParaUnVueloFinal (3);
 -- call GR_vuelosPorId(2);
 -- call GR_tipoDeTrayectoDeUnVuelo(2,@trayecto);
+-- call GR_compararNivelUsuarioVuelo(2,1,@res);
 
 -- call GR_obtenerMatricula(3,@matricula);
 -- select @matricula;
@@ -66,7 +67,7 @@ drop procedure if exists GR_tipoDeTrayectoDeUnVueloNombre;
 DELIMITER //
 create procedure GR_tipoDeTrayectoDeUnVueloNombre(in codigoVuelo int,out trayecto varchar(40))
 begin
-		set @trayecto=	(SELECT nombreTrayecto from
+		set trayecto=	(SELECT nombreTrayecto from
                         (select distinct v.descripcion as Nombre,l.nombre as origen, fecha, v.precio as precio,
                         TT.nombre as nombreTrayecto, v.codigo as vueloId
                         from vuelo as v
@@ -81,7 +82,6 @@ begin
                         inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
                         on t1.nombre=t2.nombre);
                         
-		select @trayecto;
     
 end//
 DELIMITER ;
@@ -106,8 +106,6 @@ begin
                         inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
                         on t1.nombre=t2.nombre);
                         
-		-- select trayecto;
-    
 end//
 DELIMITER ;
 
@@ -129,14 +127,14 @@ begin
 		set result=0;
 		end if;
         
-       -- select result;
+       
 end//
 DELIMITER ;
 
 
-drop procedure if exists GR_compararNivelUsuarioVuelo;  -- Para validar que reservas se pueden hacer o no
+drop procedure if exists GR_compararNivelUsuarioVueloAlt;  
 DELIMITER //
-create procedure GR_compararNivelUsuarioVuelo(in idUsuario int,in codigoVuelo int,out resultado boolean)
+create procedure GR_compararNivelUsuarioVueloAlt(in idUsuario int,in codigoVuelo int,out resultado boolean) -- Para validar que reservas se pueden hacer o no
 begin
          call GR_validarNivelUsuario(idUsuario,@nivel);
          call GR_tipoDeTrayectoDeUnVuelo(codigoVuelo,@trayecto);
@@ -152,7 +150,25 @@ begin
 end//
 DELIMITER ;
 
-call GR_compararNivelUsuarioVuelo(3,1,@res);
+drop procedure if exists GR_compararNivelUsuarioVuelo;  
+DELIMITER //
+create procedure GR_compararNivelUsuarioVuelo(in idUsuario int,in codigoVuelo int) -- Para validar que reservas se pueden hacer o no
+begin
+         call GR_validarNivelUsuario(idUsuario,@nivel);
+         call GR_tipoDeTrayectoDeUnVuelo(codigoVuelo,@trayecto);
+         
+         if (@nivel>=@trayecto) then 
+             set @resultado = true;
+         elseif (@nivel<@trayecto) then
+			 set @resultado = null;
+         end if;
+         
+         select @resultado;
+			
+end//
+DELIMITER ;
+
+call GR_compararNivelUsuarioVueloa(1,1);
 
 
 drop procedure if exists GR_todosLosVuelosTodosLosParametros;

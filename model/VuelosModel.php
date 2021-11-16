@@ -62,6 +62,34 @@ class VuelosModel extends BaseModel{
         return $data;
     }
 
+    public function validarNivelVueloUsuario($idUsuario,$codigo){
+        
+
+        $query ='call GR_compararNivelUsuarioVuelo(?,?)';
+        $params = array($idUsuario, $codigo);
+
+        $response = $this->database->executeQueryParams($params,$query);
+
+        $data = $response;
+
+        return $data;
+    }
+
+    /* Ejemplo de utilizacion de sp con out
+    public function validarNivelVueloUsuarioB($idUsuario,$codigo){
+        
+
+        $result=9;
+        $query ='call GR_compararNivelUsuarioVueloAlt(?,?,?)';
+        $params = array($idUsuario, $codigo,$result);
+
+        $response = $this->database->executeQueryParams($params,$query);
+
+        $data = $response;
+
+        return $data;
+    }
+    /*
 
 
     /*
