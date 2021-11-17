@@ -11,6 +11,7 @@ class ReservarController extends BaseController {
     }
 
     public function show() {
-
+        $usuarioId = $_SESSION["id"];
+        $data = $this->model->getReservas($usuarioId);
     }
 }

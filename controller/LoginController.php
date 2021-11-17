@@ -27,7 +27,7 @@ class LoginController extends BaseController
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        /*if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $this->showError($email, $password, "error-email", "El email ingresado no es válido");
             exit();
         }
@@ -35,7 +35,7 @@ class LoginController extends BaseController
         if ($password == null || strlen($password) < 3) {
             $this->showError($email, $password, "error-password", "La contraseña ingresada no es válida");
             exit();
-        }
+        }*/
 
         $clave = md5($password);
 

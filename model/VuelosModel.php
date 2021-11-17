@@ -75,6 +75,14 @@ class VuelosModel extends BaseModel{
         return $data;
     }
 
+    public function getUbicaciones($vueloId) {
+        $query = "call GR_listarUbicaciones(?)";
+        $params = array($vueloId);
+
+        $data["ubicaciones"] = $this->database->executeQueryParams($params, $query);
+        return $data;
+    }
+
     /* Ejemplo de utilizacion de sp con out
     public function validarNivelVueloUsuarioB($idUsuario,$codigo){
         
@@ -121,4 +129,10 @@ class VuelosModel extends BaseModel{
 
 
     } */
+    public function asignarReserva(string $usuarioId, string $codigoVuelo, string $codigoUbicacion) {
+        $query = "call GR_ocuparPasajeYUbicacion(?, ?, ?)";
+        $params = array($usuarioId, $codigoUbicacion, $codigoVuelo);
+
+        $this->database->executeQueryParams($params, $query);
+    }
 }
