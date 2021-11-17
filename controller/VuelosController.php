@@ -36,32 +36,40 @@ require_once "BaseController.php";
 
     }
 
-    public function datosReserva() {  // logout sigue roto desde este punto
-         //$codigoVuelo = $_GET["codigoVuelo"];
-         //echo $codigoVuelo;
+     public function datosReserva() {  // logout sigue roto desde este punto
          $id = $_SESSION["id"];
-         $codigo = $_GET["codigo"];
 
-         $result=$this->vuelosModel->validarNivelVueloUsuario($id,$codigo);
+         $data[] = [];
 
-         if(1!=($result[0]['@resultado'])){
-            header("location:/home");
+         if(isset($_GET['codigo'])) {
+             $codigo = $_GET['codigo'];
 
-            /* $data['nivelInvalido']=true;
+             $result = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
 
-            echo $this->printer->render("view/vuelosView.html",$data); */
+             /*if(1 != ($result[0]['@resultado'])){
+                 // TODO pantalla de error
+                die("No podés reservar un pasaje para este vuelo");
+             }*/
+
+             $data["codigo_vuelo"] = $codigo;
+             $data += $this->vuelosModel->getdatosUsuario($id);
+
+             $data += $this->vuelosModel->getUbicaciones($codigo);
+
+             $data += $this->vuelosModel->selectVuelo($codigo);
+             $data += $this->vuelosModel->getCabinasYServicios();
          }
 
-         $data= $this->vuelosModel->getdatosUsuario($id);
-         
-      //   $data+= $this->vuelosModel->getReserva($codigo); comentado por que no hace nada y rompe logout
-         $data+= $this->vuelosModel->selectVuelo($codigo);
-         $data+= $this->vuelosModel->getCabinasYServicios();
-         //$data+= $this->vuelosModel->getServicios();
-
-
-         echo $this->printer->render("view/reservarView.html",$data);
-
+         echo $this->printer->render("view/reservarView.html", $data);
      }
 
+     public function asignarReserva() {
+         $usuarioId = $_SESSION["id"];
+         $codigoVuelo = $_POST["codigo_vuelo"];
+         $codigoUbicacion = $_POST["ubicacion_vuelo"];
+
+         $this->vuelosModel->asignarReserva($usuarioId, $codigoVuelo, $codigoUbicacion);
+
+         header("location: /reservar");
+     }
 }

@@ -66,21 +66,37 @@
 
                 <div class="iniciosesion">
 
-                    <form class="box" action="login/login" method="post" >
-
-
+                    <form class="box" action="/login/login" method="post" >
                         <h3>INICIAR SESI&Oacute;N</h3><br>
-                        <p class="text-muted"> Ingrese su Usuario </p>
-                        <input type="text" name="usuario" placeholder="Nombre">
+                        <p class="text-muted"> Ingrese su Email </p>
+                        {{^ error-email}}
+                        <input type="text" name="email" placeholder="Email" value="{{email}}">
+                        {{/ error-email}}
+                        {{# error-email}}
+                        <input type="text" name="email" placeholder="Email" class="is-invalid" value="{{email}}">
+                        <div id="validationEmail" class="invalid-feedback">
+                            {{error-email}}
+                        </div>
+                        {{/ error-email}}
+
                         <p class="text-muted"> Ingrese su contraseña </p>
-                        <input type="password" name="password" placeholder="Contraseña">
+                        {{^ error-password}}
+                        <input type="password" name="password" placeholder="Contraseña" value="{{password}}">
+                        {{/ error-password}}
+
+                        {{# error-password}}
+                        <input type="password" name="password" placeholder="Contraseña" value="{{password}}" class="is-invalid">
+                        <div id="validationPassword" class="invalid-feedback">
+                            {{error-password}}
+                        </div>
+                        {{/ error-password}}
+
                         <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a>
                         <a class="olvid text-muted d-block" href="/register">Registrarte</a>
                         <input type="submit" name="login" value="Login" href="#">
 
-
-
                     </form>
+
                 </div>
             </div>
         </div>
@@ -89,6 +105,28 @@
 </main>
 
 
-    {{>footer}}
+{{# error}}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="toast-error" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Error</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {{error}}
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = () => {
+        let element = document.querySelector('#toast-error')
+        let toast = new bootstrap.Toast(element)
+        toast.show()
+    }
+</script>
+{{/ error}}
+
+{{>footer}}
 
 
