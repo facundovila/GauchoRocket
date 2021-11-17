@@ -10,12 +10,16 @@ USE dbgr;
 -- call GR_vuelosPorId(2);
 -- call GR_tipoDeTrayectoDeUnVuelo(2,@trayecto);
 -- call GR_compararNivelUsuarioVuelo(2,1,@res);
+-- call GR_ocuparPasajeYUbicacionalt(2,2);
 
 -- call GR_obtenerMatricula(3,@matricula);
 -- select @matricula;
 
 -- call GR_capacidadTotalXVueloSoloCantidadOUT(3,@cantidad);
 -- select @cantidad as a;
+
+-- call GR_getUsuarioEmailFromId(1,@email);
+-- select @email;
 
 -- ---------------------------------------------------------------
 
@@ -41,6 +45,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_vuelosPorId;
 DELIMITER //
 create procedure GR_vuelosPorId(in codigoVuelo int)
@@ -62,6 +67,7 @@ begin
     
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_tipoDeTrayectoDeUnVueloNombre;
 DELIMITER //
@@ -85,6 +91,7 @@ begin
     
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_tipoDeTrayectoDeUnVuelo;
 DELIMITER //
@@ -150,6 +157,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_compararNivelUsuarioVuelo;  
 DELIMITER //
 create procedure GR_compararNivelUsuarioVuelo(in idUsuario int,in codigoVuelo int) -- Para validar que reservas se pueden hacer o no
@@ -167,6 +175,7 @@ begin
 			
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_todosLosVuelosTodosLosParametros;
 DELIMITER //
@@ -193,7 +202,6 @@ end//
 DELIMITER ;
 
 
-
 -- procedure Total de un equipo determinada segun el codigo del vuelo --------------------------------------------------
 
 drop procedure if exists GR_capacidadTotalXVuelo;
@@ -215,6 +223,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_capacidadTotalXVueloSoloCantidad;
 DELIMITER //
 create procedure GR_capacidadTotalXVueloSoloCantidad(in codigoVuelo int)
@@ -233,6 +242,7 @@ begin
     
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_capacidadTotalXVueloSoloCantidadOUT;
 DELIMITER //
@@ -328,6 +338,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_listarUbicaciones;
 DELIMITER //
 create procedure GR_listarUbicaciones(in codigoVuelo int)
@@ -338,9 +349,10 @@ begin
 end//
 DELIMITER ;
 
-drop procedure if exists GR_getUsuarioEmailFromId;
+
+drop procedure if exists GR_getUsuarioEmailFromIdConNivel;
 DELIMITER //
-create procedure GR_getUsuarioEmailFromId(in idUsuario int,out email varchar(70))
+create procedure GR_getUsuarioEmailFromIdConNivel(in idUsuario int,out email varchar(70))
 begin
     if exists(SELECT NV.nivel from Usuario as U
                                        join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario
@@ -354,43 +366,59 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_getUsuarioEmail;
+DELIMITER //
+create procedure GR_getUsuarioEmail(in idUsuario int,out email varchar(70))
+begin
+        set email=(SELECT U.email from Usuario as U
+                   WHERE U.id= idUsuario);
+end//
+DELIMITER ;
+
+
 drop procedure if exists GR_ocuparPasajeYUbicacion;
 DELIMITER //
-create procedure GR_ocuparPasajeYUbicacion(in idUsuario int,in codigoU int,in codigoVuelo int)
+create procedure GR_ocuparPasajeYUbicacion(in idUsuario int,in codigoU int)
 begin
 
+    call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+    set @codigoReserva=(select fkcodigoReserva from ubicacion where codigoUbicacion=codigoU);
 
-
-    set @emailUsuario=GR_getUsuarioEmailFromId(idUsuario);
-
-    /*update reservaUsuario set fkEmailUsuario = @emailUsuario where fkEmailUsuario is null and
-            fkcodigoReserva in (
-            select codigoReserva from reservaPasaje as rP
-            where rP.fkCodigoVuelo=codigoVuelo );*/
-
-    update reservaUsuario as rU inner join reservaPasaje as rP on rU.fkcodigoReserva=rP.codigoReserva
-    set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null and
-            rP.fkCodigoVuelo = codigoVuelo;
-
-    set @codigoReserva=(select codigoReserva from reservaPasaje as rP left join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
-                        where rU.fkemailUsuario=@emailUsuario and rP.fkCodigoVuelo=codigoVuelo);
-
-
+    update reservaUsuario as rU set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null and
+            rU.fkcodigoReserva = @codigoReserva;
 
     update ubicacion set ocupado = true where codigoUbicacion = codigoU and fkCodigoReserva=@codigoReserva;
+
+end//
+DELIMITER ;
+
+
+/*
+drop procedure if exists GR_validarPasajeUnicoPorUsuarioVuelo;
+DELIMITER //
+create procedure GR_validarPasajeUnicoPorUsuarioVuelo()
+begin
 
 
 end//
 DELIMITER ;
+
+*/
+
+
+
+
+-- call GR_getUsuarioEmailFromId(2,@emailUsuario);
+-- set @emailUsuario=(select email from usuario where id = 2);
+-- update reservaUsuario as rU set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null;
+
 
 drop procedure if exists GR_getReservasFromUserId;
 DELIMITER //
 create procedure GR_getReservasFromUserId(in idUsuario int)
 begin
 
-
-
-    set @emailUsuario=GR_getEmailUsuarioFromId(idUsuario);
+    call GR_getUsuarioEmailFromId(idUsuario,@emailUsuario);
 
     select * from reservaPasaje as rP join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
     where rU.fkemailUsuario=@emailUsuario;
@@ -399,7 +427,22 @@ begin
 end//
 DELIMITER ;
 
+select* from ubicacion;
+
 /*
+
+update reservaUsuario set fkEmailUsuario = emailUsuario where  fkEmailUsuario = '';
+
+select codigoReserva from reservaPasaje as rP left join reservaUsuario as rU on rP.codigoResera=rU.fkcodigoReserva
+where rU.fkemailUsuario=emailUsuario;
+
+update ubicacion set ocupado = true where codigoUbicacion = codigoUbicacion and fkCodigoReserva=codigoReserva;
+
+SELECT asiento,ocupado from Ubicacion as U left join reservaPasaje as rP on U.fkcodigoReserva=rP.codigoReserva
+        left join vuelo as v on rP.fkcodigoVuelo=v.codigo
+        where fkcodigoVuelo = 3
+        order by asiento;
+        
 select* from ubicacion;
 
 select codigoTipoDeCabina as codigoC,TC.descripcion as descripcionC,TC.precio as precioC
