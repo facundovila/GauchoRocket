@@ -129,9 +129,9 @@ class VuelosModel extends BaseModel{
 
 
     } */
-    public function asignarReserva(string $usuarioId, string $codigoVuelo, string $codigoUbicacion) {
-        $query = "call GR_ocuparPasajeYUbicacion(?, ?, ?)";
-        $params = array($usuarioId, $codigoUbicacion, $codigoVuelo);
+    public function asignarReserva($usuarioId,$codigoUbicacion) {
+        $query = "call GR_ocuparPasajeYUbicacion(?,?)";
+        $params = array($usuarioId, $codigoUbicacion);
 
         $this->database->executeQueryParams($params, $query);
     }

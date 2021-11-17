@@ -65,10 +65,11 @@ require_once "BaseController.php";
 
      public function asignarReserva() {
          $usuarioId = $_SESSION["id"];
-         $codigoVuelo = $_POST["codigo_vuelo"];
-         $codigoUbicacion = $_POST["ubicacion_vuelo"];
+         $codigoUbicacion =(int) $_POST["ubicacion_vuelo"];
 
-         $this->vuelosModel->asignarReserva($usuarioId, $codigoVuelo, $codigoUbicacion);
+        
+
+         $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion);
 
          header("location: /reservar");
      }

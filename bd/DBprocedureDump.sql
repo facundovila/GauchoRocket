@@ -393,18 +393,24 @@ end//
 DELIMITER ;
 
 
-/*
 drop procedure if exists GR_validarPasajeUnicoPorUsuarioVuelo;
 DELIMITER //
-create procedure GR_validarPasajeUnicoPorUsuarioVuelo()
+create procedure GR_validarPasajeUnicoPorUsuarioVuelo(in usuarioId int, in codigoVuelo int,out esValido boolean)
 begin
-
+      call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+      
+      if exists(select * from reservaUsuario
+				left join reservaPasaje on fkcodigoReserva=codigoReserva
+				where fkcodigoVuelo = codigoVuelo and fkemailUsuario=@emailUsuario)
+	  
+      then
+	  set esValido=false;
+      else
+	  set esValido = true;
+      end if;
 
 end//
 DELIMITER ;
-
-*/
-
 
 
 
