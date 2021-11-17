@@ -1,0 +1,36 @@
+{{>header}}
+<title>Mis Reservas - Gaucho Rocket</title>
+<main class="usuario">
+    <section class="d-flex contenedor" id="wrapper">
+        <article  class="contenido2" id="page-content-wrapper">
+            <h3>Reservas</h3>
+            <div class="padding">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Origen</th>
+                        <th scope="col">Destino</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{# reservas}}
+                    <tr>
+                        <td><p>{{codigoReserva}}</p></td>
+                        <td><p>{{origen}}</p></td>
+                        <td><p>{{destino}}</p></td>
+                        <td><p>{{fecha}}</p></td>
+                        <td><p>{{precio}}</p></td>
+                        <td><a href="/vuelos/datosReserva?codigo={{codigo}}">reservar</a></td>
+                    </tr>
+                    {{/ reservas}}</tbody>
+                </table>
+            </div>
+            <br>
+        </article>
+    </section>
+</main>
+
+{{>footer}}

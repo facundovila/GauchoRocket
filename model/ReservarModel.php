@@ -7,9 +7,6 @@ class ReservarModel extends BaseModel {
         $query = "call GR_getReservasFromUserId(?)";
         $param = array($usuarioId);
 
-        $data = $this->database->executeQueryParams($param, $query);
-        die(json_encode($data));
-
-        return $data;
+        return $this->database->executeQueryParams($param, $query);
     }
 }

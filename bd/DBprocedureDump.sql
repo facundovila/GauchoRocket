@@ -424,9 +424,15 @@ DELIMITER //
 create procedure GR_getReservasFromUserId(in idUsuario int)
 begin
 
-    call GR_getUsuarioEmailFromId(idUsuario,@emailUsuario);
+    call GR_getUsuarioEmailFromIdConNivel(idUsuario,@emailUsuario);
 
-    select * from reservaPasaje as rP join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
+    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio
+    from reservaPasaje as rP
+             join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
+             join vuelo v on v.codigo = rP.fkCodigoVuelo
+             join trayecto t on v.codigoTrayecto = t.codigo
+             join locacion l on l.codigo = t.codigoLocacionDestino
+             join locacion l2 on l2.codigo = t.codigoLocacionOrigen
     where rU.fkemailUsuario=@emailUsuario;
 
 

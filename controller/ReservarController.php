@@ -12,6 +12,8 @@ class ReservarController extends BaseController {
 
     public function show() {
         $usuarioId = $_SESSION["id"];
-        $data = $this->model->getReservas($usuarioId);
+        $data["reservas"] = $this->model->getReservas($usuarioId);
+
+        echo $this->printer->render("view/misReservasView.html", $data);
     }
 }
