@@ -25,5 +25,6 @@ class PdfPrinter {
 
         // Output the generated PDF to Browser
         $this->dompdf->stream();
+
     }
 }

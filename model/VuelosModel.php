@@ -63,16 +63,12 @@ class VuelosModel extends BaseModel{
     }
 
     public function validarNivelVueloUsuario($idUsuario,$codigo){
-        
-
         $query ='call GR_compararNivelUsuarioVuelo(?,?)';
         $params = array($idUsuario, $codigo);
 
-        $response = $this->database->executeQueryParams($params,$query);
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
 
-        $data = $response;
-
-        return $data;
+        return $response == 1;
     }
 
     public function getUbicaciones($vueloId) {
@@ -81,6 +77,20 @@ class VuelosModel extends BaseModel{
 
         $data["ubicaciones"] = $this->database->executeQueryParams($params, $query);
         return $data;
+    }
+
+    public function getLocacion(int $id) {
+        $query = "SELECT * FROM dbgr.locacion WHERE codigo = ?";
+        $params = array($id);
+
+        return $this->database->executeQueryParams($params, $query);
+    }
+
+    public function getTipoDeTrayecto(int $id) {
+        $query = "SELECT * FROM dbgr.tipodetrayecto WHERE codigo = ?";
+        $params = array($id);
+
+        return $this->database->executeQueryParams($params, $query);
     }
 
     /* Ejemplo de utilizacion de sp con out
