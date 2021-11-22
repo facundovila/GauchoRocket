@@ -580,9 +580,50 @@ begin
 end//
 DELIMITER ;
 
-select * from login where clave = md5('DIO');
-select md5('DIO');
-select * from usuario;
+drop procedure if exists GR_verificarVueloConPasajesDisponibles;
+DELIMITER //
+create procedure GR_verificarVueloConPasajesDisponibles(in codigoVuelo int)
+begin
+
+    select codigoReserva from reservaPasaje as RP 
+	where fechaReserva is null and RP.fkCodigoVuelo=codigoVuelo;
+    
+end//
+DELIMITER ;
+
+
+drop procedure if exists GR_desalocarReserva;
+DELIMITER //
+create procedure GR_desalocarReserva(in codigoReserva varchar(8))
+begin
+
+	if ((select checkin from reservaPasaje) = false)
+    then
+	
+	update reservaUsuario as rU set rU.fkemailUsuario = null where rU.fkcodigoReserva = codigoReserva;
+    
+	update ubicacion set ocupado = false where fkCodigoReserva=codigoReserva;
+    
+    update reservaPasaje as rP set totalAPagar=null and checkin=false where rP.codigoReserva = codigoReserva;
+    
+    update reservaPasaje as rP set fkcodigoTipoDeServicio= null, fechaReserva = null where rP.codigoReserva = codigoReserva;
+    
+    else
+    
+    select false;
+    
+    end if;
+    
+end//
+DELIMITER ;
+
+
+call GR_desalocarReserva('25ee77c5');
+
+select * from reservaPasaje where codigoReserva = '25ee77c5';
+select * from ubicacion where ocupado is true;
+select * from reservaUsuario where fkemailUsuario is not null;
+
 /*
 
 select* from ubicacion;
