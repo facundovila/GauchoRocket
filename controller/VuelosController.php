@@ -65,12 +65,17 @@ require_once "BaseController.php";
 
      public function asignarReserva() {
          $usuarioId = $_SESSION["id"];
-         $codigoUbicacion =(int) $_POST["ubicacion_vuelo"];
+        // $codigoUbicacion =(int) $_POST["ubicacion_vuelo"];
+        // $codigoServicio = (int) $_POST["codigoS"];
 
-        
+         $_SESSION['codigoS']=(int) $_POST["servicios"];
+         $_SESSION['codigoC']=(int) $_POST["cabinas"];
 
-         $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion);
 
-         header("location: /reservar");
+         echo $this->printer->render("view/verAsientosView.html");
+
+        // $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion);
+
+        // header("location: /reservar");
      }
 }

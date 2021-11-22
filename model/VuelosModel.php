@@ -83,6 +83,14 @@ class VuelosModel extends BaseModel{
         return $data;
     }
 
+    public function getUbicacionesCabina($vueloId,$codigoCabina) {
+        $query = "call GR_listarUbicacionesSegunCabina(?,?)";
+        $params = array($vueloId,$codigoCabina);
+
+        $data["ubicaciones"] = $this->database->executeQueryParams($params, $query);
+        return $data;
+    }
+
     /* Ejemplo de utilizacion de sp con out
     public function validarNivelVueloUsuarioB($idUsuario,$codigo){
         
