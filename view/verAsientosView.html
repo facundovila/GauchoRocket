@@ -5,7 +5,8 @@
         <section class="d-flex contenedor" id="wrapper">
             <article  class="contenido2 " id="page-content-wrapper">
 
-                <form class="card padding mx-auto" style="width: 45rem;" action="/vuelos/asignarReserva" method="post">
+                <form class="card padding mx-auto" style="width: 45rem;"
+                 action="/vuelos/asignarReserva" method="post">
 
                     <div class=" card-body padding px-5 ">
                         <h3 class="card-title">Elija su Asiento</h3>
@@ -15,7 +16,8 @@
 
                         <div id="seats">
                             {{# ubicaciones}}
-                            <input id="seat-{{asiento}}" class="seat-select" type="radio" value="{{codigoUbicacion}}" name="ubicacion_vuelo"
+                            <input id="seat-{{asiento}}" class="seat-select" type="radio"
+                             value="{{codigoUbicacion}}" name="ubicacion_vuelo"
                                    {{# ocupado}}
                                    disabled
                                    {{/ ocupado}} />

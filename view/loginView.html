@@ -27,28 +27,15 @@
 <header>
     <nav class="navbar navbar-expand">
         <div class="container-md">
-            <a href="index.php ">
+            <a href="/home">
                 <h1>Gaucho Rocket</h1>
             </a>
             <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav">
-                    <a href="" class="nav-link">Mi reserva</a>
-                    <a href="" class="nav-link">Servicios</a>
-                    <a href="" class="nav-link">Información</a>
 
-                    {{#notLogged}}
-                    <a href="/login" class="nav-link">Login</a>
+                    
                     <a href="/register" class="nav-link">Registrarse</a>
-                    {{/notLogged}}
-
-                    {{#logged}}
-                    <a href="?logout=true" name="logout" class="nav-link">Logout</a>
-                    {{/logged}}
-
-                    {{#admin}}
-                    <a href=""  class="nav-link">Administrar</a>
-                    <a href="?logout=true" name="logout" class="nav-link">Logout</a>
-                    {{/admin}}
+                    
 
                 </div>
             </div>
@@ -69,15 +56,15 @@
                     <form class="box" action="/login/login" method="post" >
                         <h3>INICIAR SESI&Oacute;N</h3><br>
                         <p class="text-muted"> Ingrese su Usuario </p>
-                        {{^ error-email}}
-                        <input type="text" name="email" placeholder="Email" value="{{email}}">
-                        {{/ error-email}}
-                        {{# error-email}}
-                        <input type="text" name="email" placeholder="Email" class="is-invalid" value="{{email}}">
-                        <div id="validationEmail" class="invalid-feedback">
-                            {{error-email}}
+                        {{^ error-usuario}}
+                        <input type="text" name="usuario" placeholder="Usuario" value="{{usuario}}">
+                        {{/ error-usuario}}
+                        {{# error-usuario}}
+                        <input type="text" name="usuario" placeholder="Usuario" class="is-invalid" value="{{usuario}}">
+                        <div id="validationUsuario" class="invalid-feedback">
+                            {{error-usuario}}
                         </div>
-                        {{/ error-email}}
+                        {{/ error-usuario}}
 
                         <p class="text-muted"> Ingrese su contraseña </p>
                         {{^ error-password}}
@@ -127,6 +114,5 @@
 </script>
 {{/ error}}
 
-{{>footer}}
 
 

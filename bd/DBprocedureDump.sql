@@ -195,17 +195,36 @@ begin
                         inner join trayecto as t on v.codigoTrayecto=t.codigo
                         inner join locacion as l on t.codigoLocacionOrigen=l.codigo
                         inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
-                        where t.codigoLocacionOrigen= origenO and TT.codigo = tipoO and fecha = fechaO) as t1
+                        where t.codigoLocacionOrigen= origenO and TT.codigo = tipoO and substring(fecha,1,10) = fechaO) as t1
                         inner join
                         (select distinct t.codigo,v.descripcion as nombre,l.nombre as destino
                         from vuelo as v
                         inner join trayecto as t on v.codigoTrayecto=t.codigo
                         inner join locacion as l on t.codigoLocacionDestino=l.codigo
                         where t.codigoLocacionDestino= destinoO ) as t2
-                        on t1.nombre=t2.nombre;
+                        on t1.nombre=t2.nombre; 
     
 end//
 DELIMITER ;
+
+
+SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
+                        (select distinct v.descripcion as Nombre,l.nombre as origen, fecha, v.precio as precio,
+                        TT.nombre as nombreTrayecto, v.codigo as vueloId
+                        from vuelo as v
+                        inner join trayecto as t on v.codigoTrayecto=t.codigo
+                        inner join locacion as l on t.codigoLocacionOrigen=l.codigo
+                        inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
+                        where t.codigoLocacionOrigen= 2 and TT.codigo = 3 ) as t1
+                        inner join
+                        (select distinct t.codigo,v.descripcion as nombre,l.nombre as destino
+                        from vuelo as v
+                        inner join trayecto as t on v.codigoTrayecto=t.codigo
+                        inner join locacion as l on t.codigoLocacionDestino=l.codigo
+                        where t.codigoLocacionDestino= 12 ) as t2
+                        on t1.nombre=t2.nombre;
+
+select * from vuelo;
 
 
 drop procedure if exists GR_capacidadTotalXVueloSoloCantidadOUT;
@@ -228,9 +247,6 @@ end//
 DELIMITER ;
 
 
-
-
--- procedure para obtener matricula de el equipo que haga X vuelo--------------------------------------------
 drop procedure if exists GR_obtenerMatricula;
 DELIMITER //
 create procedure GR_obtenerMatricula(in codigoVuelo int, out Matricula varchar(15))
@@ -241,6 +257,7 @@ begin
 		where V.codigo = codigoVuelo;
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_traerCabinas;
 DELIMITER //
@@ -297,6 +314,7 @@ begin
 
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_capacidadDeUnVueloPorTipoDeCabinaOUT;
 DELIMITER //
@@ -394,11 +412,6 @@ end//
 DELIMITER ;
 
 
-  
-   select * from ubicacion;
- select * from reservaPasaje;
- select * from reservaUsuario;
-  
 drop procedure if exists GR_cantidadDeAsientosDisponiblesXVuelo;
 DELIMITER //
 create procedure GR_cantidadDeAsientosDisponiblesXVuelo(in codigoVuelo int,out asientosDisponibles int) 
@@ -413,11 +426,6 @@ end//
 DELIMITER ;
 
 	
--- select * from reservaPasaje;
--- select * from ubicacion where fkCodigoTipoDeCabina = 2;
-
--- select * from ubicacion;
-
 drop procedure if exists GR_listarUbicaciones;
 DELIMITER //
 create procedure GR_listarUbicaciones(in codigoVuelo int)
@@ -428,6 +436,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_listarUbicacionesSegunCabina;
 DELIMITER //
 create procedure GR_listarUbicacionesSegunCabina(in codigoVuelo int,in codigoC int)
@@ -437,8 +446,6 @@ begin
     where fkcodigoVuelo = codigoVuelo and fkCodigoTipoDeCabina = codigoC ORDER BY asiento;
 end//
 DELIMITER ;
-
--- call GR_listarUbicacionesSegunCabina(3,1);
 
 
 drop procedure if exists GR_getUsuarioEmailFromIdConNivel;
@@ -456,6 +463,7 @@ begin
     end if;
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_getUsuarioEmail;
 DELIMITER //
@@ -484,6 +492,7 @@ begin
 
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_ocuparPasajeYUbicacionOUT;
 DELIMITER //
@@ -514,6 +523,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_calcularPrecioPasaje;
 DELIMITER //
 create procedure GR_calcularPrecioPasaje(in codigoReserva varchar(8),out total double(10,2))
@@ -528,16 +538,6 @@ begin
     
 end//
 DELIMITER ;
-
-
-call GR_calcularPrecioPasaje('8ab2f3f9',@total);
-select @total;
-
-select * from ubicacion where ocupado is true;
-										
-									
-                                         
-select * from reservaPasaje;
 
 
 drop procedure if exists GR_validarPasajeUnicoPorUsuarioVuelo; -- Un usuario solo puede sacar un pasaje por vuelo
@@ -560,12 +560,6 @@ end//
 DELIMITER ;
 
 
-
--- call GR_getUsuarioEmailFromId(2,@emailUsuario);
--- set @emailUsuario=(select email from usuario where id = 2);
--- update reservaUsuario as rU set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null;
-
-
 drop procedure if exists GR_getReservasFromUserId;
 DELIMITER //
 create procedure GR_getReservasFromUserId(in idUsuario int)
@@ -586,14 +580,15 @@ begin
 end//
 DELIMITER ;
 
-call GR_getReservasFromUserId(1);
-
-
-
+select * from login where clave = md5('DIO');
+select md5('DIO');
+select * from usuario;
+/*
 
 select* from ubicacion;
 
-/*
+select * from reservaPasaje;
+select * from reservaUsuario;
 
 update reservaUsuario set fkEmailUsuario = emailUsuario where  fkEmailUsuario = '';
 
