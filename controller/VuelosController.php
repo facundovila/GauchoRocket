@@ -43,8 +43,9 @@ require_once "BaseController.php";
 
          if(isset($_GET['codigo'])) {
              $codigo = $_GET['codigo'];
+             $_SESSION['codigoV']=$codigo;
 
-             $result = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
+             $result = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo); //implementar
 
              /*if(1 != ($result[0]['@resultado'])){
                  // TODO pantalla de error
@@ -63,19 +64,37 @@ require_once "BaseController.php";
          echo $this->printer->render("view/reservarView.html", $data);
      }
 
-     public function asignarReserva() {
+     public function seleccionarServicioYCabina() {
          $usuarioId = $_SESSION["id"];
-        // $codigoUbicacion =(int) $_POST["ubicacion_vuelo"];
-        // $codigoServicio = (int) $_POST["codigoS"];
 
-         $_SESSION['codigoS']=(int) $_POST["servicios"];
-         $_SESSION['codigoC']=(int) $_POST["cabinas"];
+         $_SESSION['codigoS']=$_POST["servicios"];
+         $_SESSION['codigoC']=$_POST["cabinas"];
 
+         $data = $this->vuelosModel->getUbicacionesCabina($_SESSION['codigoV'],$_SESSION['codigoC']);
 
-         echo $this->printer->render("view/verAsientosView.html");
+         
+         echo $this->printer->render("view/verAsientosView.html", $data);
 
-        // $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion);
+        
+     }
 
-        // header("location: /reservar");
+     public function asignarReserva(){  
+
+        if(isset($_POST["ubicacion_vuelo"])) {
+
+        $usuarioId = $_SESSION["id"];
+        $codigoUbicacion =$_POST["ubicacion_vuelo"];
+        $codigoServicio = $_SESSION['codigoS'];
+
+        $result = $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion,$codigoServicio); 
+
+        header("location: /reservar");
+
+        }else{
+
+        header("location: /vuelos"); //manejar vuelo sin lugares aca
+
+        }
+
      }
 }

@@ -435,6 +435,8 @@ begin
 end//
 DELIMITER ;
 
+-- call GR_listarUbicacionesSegunCabina(3,1);
+
 
 drop procedure if exists GR_getUsuarioEmailFromIdConNivel;
 DELIMITER //
@@ -476,6 +478,31 @@ begin
     update ubicacion set ocupado = true where codigoUbicacion = codigoU and fkCodigoReserva=@codigoReserva;
     
     update reservaPasaje as rP set fkcodigoTipoDeServicio=codigoS where rP.codigoReserva = @codigoReserva;
+
+end//
+DELIMITER ;
+
+drop procedure if exists GR_ocuparPasajeYUbicacionOUT;
+DELIMITER //
+create procedure GR_ocuparPasajeYUbicacionOUT(in idUsuario int,in codigoU int,in codigoS int, out res boolean)
+begin
+
+    call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+    set @codigoReserva=(select fkcodigoReserva from ubicacion where codigoUbicacion=codigoU);
+
+    update reservaUsuario as rU set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null and
+            rU.fkcodigoReserva = @codigoReserva;
+
+    update ubicacion set ocupado = true where codigoUbicacion = codigoU and fkCodigoReserva=@codigoReserva;
+    
+    update reservaPasaje as rP set fkcodigoTipoDeServicio=codigoS where rP.codigoReserva = @codigoReserva;
+    
+     if exists (select * from reservaUsuario where fkemailUsuario=@emailUsuario) 
+     then 
+	 set res = true;
+     else
+     set res = false;
+     end if;
 
 end//
 DELIMITER ;
