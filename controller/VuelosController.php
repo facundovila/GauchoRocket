@@ -41,9 +41,14 @@ require_once "BaseController.php";
 
          $data[] = [];
 
+         
+
          if(isset($_GET['codigo'])) {
-             $codigo = $_GET['codigo'];
-             $_SESSION['codigoV']=$codigo;
+
+             $_SESSION['codigoV']=$_GET['codigo'];
+             
+             $codigo = $_SESSION['codigoV'];
+             
 
              $result = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo); //implementar
 
@@ -89,6 +94,10 @@ require_once "BaseController.php";
         $result = $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion,$codigoServicio); 
 
         header("location: /reservar");
+
+        session_unset('codigoS');
+        session_unset('codigoC');
+        session_unset('codigoV');
 
         }else{
 

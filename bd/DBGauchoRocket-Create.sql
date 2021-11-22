@@ -140,6 +140,7 @@ numero int,
 checkin boolean default false,
 codigoReserva varchar(8) primary key,
 totalAPagar double(10,2),
+fechaReserva datetime,
 fkCodigoVuelo int,
 fkcodigoTipoDeServicio int,
 foreign key (fkCodigoVuelo) references vuelo(codigo),
@@ -166,6 +167,7 @@ foreign key (fkemailUsuario) references usuario(email)
 create table pasaje(
 id int primary key auto_increment,
 fkCodigoReserva varchar(8),
+fechaCheckIn datetime,
 foreign key (fkCodigoReserva) references reservaPasaje(codigoReserva)
 );
 

@@ -17,6 +17,9 @@ USE dbgr;
 -- call GR_obtenerMatricula(3,@matricula);
 -- select @matricula;
 
+-- call GR_calcularPrecioPasaje('bffef4a7',@total);
+-- select @total;
+
 -- call GR_capacidadTotalXVueloSoloCantidadOUT(2,@cantidad);
 -- select @cantidad as a;
 
@@ -488,14 +491,18 @@ create procedure GR_ocuparPasajeYUbicacionOUT(in idUsuario int,in codigoU int,in
 begin
 
     call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+    
     set @codigoReserva=(select fkcodigoReserva from ubicacion where codigoUbicacion=codigoU);
-
-    update reservaUsuario as rU set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null and
-            rU.fkcodigoReserva = @codigoReserva;
+    
+    update reservaUsuario as rU set rU.fkemailUsuario = @emailUsuario where rU.fkemailUsuario is null and rU.fkcodigoReserva = @codigoReserva;
 
     update ubicacion set ocupado = true where codigoUbicacion = codigoU and fkCodigoReserva=@codigoReserva;
     
-    update reservaPasaje as rP set fkcodigoTipoDeServicio=codigoS where rP.codigoReserva = @codigoReserva;
+    update reservaPasaje as rP set fkcodigoTipoDeServicio=codigoS, fechaReserva = now() where rP.codigoReserva = @codigoReserva;
+    
+    call GR_calcularPrecioPasaje(@codigoReserva,@total);
+    
+	update reservaPasaje as rP set totalAPagar=@total where rP.codigoReserva = @codigoReserva;
     
      if exists (select * from reservaUsuario where fkemailUsuario=@emailUsuario) 
      then 
@@ -506,6 +513,31 @@ begin
 
 end//
 DELIMITER ;
+
+drop procedure if exists GR_calcularPrecioPasaje;
+DELIMITER //
+create procedure GR_calcularPrecioPasaje(in codigoReserva varchar(8),out total double(10,2))
+begin
+
+    select sum(V.precio+TS.precio+TC.precio)into total from reservaPasaje as RP 
+				inner join Vuelo as V on RP.fkCodigoVuelo=V.codigo
+				inner join Ubicacion as U on RP.codigoReserva=U.fkcodigoReserva
+				inner join TipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
+				inner join TipoDeServicio as TS on RP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
+				where RP.codigoReserva=codigoReserva;
+    
+end//
+DELIMITER ;
+
+
+call GR_calcularPrecioPasaje('8ab2f3f9',@total);
+select @total;
+
+select * from ubicacion where ocupado is true;
+										
+									
+                                         
+select * from reservaPasaje;
 
 
 drop procedure if exists GR_validarPasajeUnicoPorUsuarioVuelo; -- Un usuario solo puede sacar un pasaje por vuelo
@@ -541,7 +573,7 @@ begin
 
     call GR_getUsuarioEmail(idUsuario,@emailUsuario);
 
-    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio
+    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio, rP.fechaReserva as fechaDeReserva  
     from reservaPasaje as rP
              join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
              join vuelo v on v.codigo = rP.fkCodigoVuelo
@@ -553,6 +585,8 @@ begin
 
 end//
 DELIMITER ;
+
+call GR_getReservasFromUserId(1);
 
 
 
@@ -673,3 +707,5 @@ begin
 end//
 DELIMITER ;
 */
+
+
