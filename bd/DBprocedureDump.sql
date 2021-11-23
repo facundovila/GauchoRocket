@@ -166,7 +166,7 @@ DELIMITER ;
 
 drop procedure if exists GR_compararNivelUsuarioVuelo;  
 DELIMITER //
-create procedure GR_compararNivelUsuarioVuelo(in idUsuario int,in codigoVuelo int) -- Para validar que reservas se pueden hacer o no
+create procedure GR_compararNivelUsuarioVuelo(in idUsuario int,in codigoVuelo int) 
 begin
          call GR_validarNivelUsuario(idUsuario,@nivel);
          call GR_tipoDeTrayectoDeUnVuelo(codigoVuelo,@trayecto);
@@ -566,8 +566,15 @@ DELIMITER //
 create procedure GR_verificarVueloConPasajesDisponibles(in codigoVuelo int)
 begin
 
-    select codigoReserva from reservaPasaje as RP 
-	where fechaReserva is null and RP.fkCodigoVuelo=codigoVuelo;
+    if exists(select codigoReserva from reservaPasaje as RP 
+	          where fechaReserva is null and RP.fkCodigoVuelo=codigoVuelo and codigoReserva is not null)
+	then
+		set @resultado = true;
+	else
+		set @resultado = null;
+	end if;
+    
+    select @resultado;
     
 end//
 DELIMITER ;
@@ -578,9 +585,21 @@ DELIMITER //
 create procedure GR_desalocarReserva(in codigoReserva varchar(8))
 begin
 
-	if ((select checkin from reservaPasaje) = false)
-    then
-	
+ set @codigoVueloOld=(select fkCodigoVuelo from reservaPasaje where codigoReserva=codigoReserva);
+ 
+ call GR_obtenerEsperaMasReciente(@codigoVuelo,@email,@fecha);
+
+ if exists(select fkemailUsuario from reservaUsuario where fkcodigoReserva is null and fkemailUsuario is not null) and (@codigoVuelo=@codigoVueloOld)
+ then
+    
+    update reservaUsuario as rU set rU.fkcodigoReserva = codigoReserva where rU.fkemailUsuario = @email ;
+    
+    update reservaPasaje as rP set checkin=false where rP.codigoReserva = codigoReserva;
+    
+    update reservaPasaje as rP set fechaReserva = @fecha where rP.codigoReserva = codigoReserva;
+    
+ else
+
 	update reservaUsuario as rU set rU.fkemailUsuario = null where rU.fkcodigoReserva = codigoReserva;
     
 	update ubicacion set ocupado = false where fkCodigoReserva=codigoReserva;
@@ -589,14 +608,83 @@ begin
     
     update reservaPasaje as rP set fkcodigoTipoDeServicio= null, fechaReserva = null where rP.codigoReserva = codigoReserva;
     
-    else
-    
-    select false;
-    
-    end if;
+ end if;
     
 end//
 DELIMITER ;
+
+
+drop procedure if exists GR_obtenerEsperaMasReciente;
+DELIMITER //
+create procedure GR_obtenerEsperaMasReciente(out codigoVuelo int,out email varchar(70),out fecha datetime)
+begin
+
+    select  LS.fkemailUsuario into email from listaEspera as LS
+	inner join reservaUsuario as RU on LS.fkemailUsuario=RU.fkemailUsuario
+	where LS.fkemailUsuario=RU.fkemailUsuario order by LS.fecha asc limit 1;
+    
+    select LS.fkCodigoVuelo into codigoVuelo from listaEspera as LS
+	inner join reservaUsuario as RU on LS.fkemailUsuario=RU.fkemailUsuario
+	where LS.fkemailUsuario=RU.fkemailUsuario order by LS.fecha asc limit 1;
+    
+    select LS.fecha into fecha from listaEspera as LS
+	inner join reservaUsuario as RU on LS.fkemailUsuario=RU.fkemailUsuario
+	where LS.fkemailUsuario=RU.fkemailUsuario order by LS.fecha asc limit 1;
+    
+end//
+DELIMITER ;
+
+
+drop procedure if exists GR_crearReservaUsuarioDeEspera;
+DELIMITER //
+create procedure GR_crearReservaUsuarioDeEspera(in idUsuario int,in codigoVuelo int)
+begin
+
+    call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+    
+    insert into reservaUsuario(fkemailUsuario) values (@emailUsuario);
+    
+    insert into listaEspera(fecha,fkemailUsuario,fkCodigoVuelo) values (now(),@emailUsuario,codigoVuelo);
+    
+end//
+DELIMITER ;
+
+drop procedure if exists GR_realizarCheckIn;
+DELIMITER //
+create procedure GR_realizarCheckIn(in codigoReserva varchar(8))
+begin
+    
+    if not exists(select fkcodigoReserva from pasaje where fkcodigoReserva=codigoReserva) 
+    then
+    insert into pasaje(fkcodigoReserva,fechaCheckIn) values (codigoReserva,now());
+    update reservaPasaje as RP set checkin = true where RP.codigoReserva=codigoReserva;
+    set @res=1;
+    else
+    set @res=null ;
+    end if;
+    
+    select @res;
+    
+end//
+DELIMITER ;
+
+
+drop procedure if exists GR_getCheckIn;
+DELIMITER //
+create procedure GR_getCheckIn(in idUsuario int)
+begin
+
+	call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+    
+    select fecha from pasaje as P
+    inner join reservaPasaje as RP on P.fkcodigoReserva=RP.codigoReserva
+    inner join reservaUsuario as RU on RP.codigoReserva=RU.fkcodigoReserva
+    where fkemailUsuario=@emailUsuario;
+    
+end//
+DELIMITER ;
+
+
 
 
 /*

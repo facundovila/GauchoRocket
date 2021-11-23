@@ -73,6 +73,23 @@ class VuelosModel extends BaseModel{
         return $response == 1;
     }
 
+    public function validarAsientosDisponiblesEnVuelo($codigo){
+        $query ='call GR_verificarVueloConPasajesDisponibles(?)';
+        $params = array($codigo);
+
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
+
+
+        return $response == 1;
+    }
+
+    public function ingresarEnEspera($idUsuario,$codigo){
+        $query ='call GR_crearReservaUsuarioDeEspera(?,?)';
+        $params = array($idUsuario,$codigo);
+
+        return $this->database->executeQueryParams($params,$query);
+    }
+
   
     public function getUbicaciones($vueloId) {
         $query = "call GR_listarUbicaciones(?)";
@@ -99,7 +116,7 @@ class VuelosModel extends BaseModel{
 
     }
 
-    
+
     public function getUbicacionesCabina($vueloId, $codigoCabina) {
         $query = "call GR_listarUbicacionesSegunCabina(?,?)";
         $params = array($vueloId, $codigoCabina);

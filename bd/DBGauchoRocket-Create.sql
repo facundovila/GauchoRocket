@@ -163,13 +163,20 @@ foreign key (fkcodigoReserva) references reservaPasaje(codigoReserva),
 foreign key (fkemailUsuario) references usuario(email)
 );
 
+create table listaEspera(
+fecha datetime,
+fkemailUsuario varchar (70),
+fkCodigoVuelo int,
+foreign key (fkemailUsuario) references usuario(email),
+foreign key (fkCodigoVuelo) references vuelo(codigo)
+);
+
 create table pasaje(
 id int primary key auto_increment,
 fkCodigoReserva varchar(8),
 fechaCheckIn datetime,
 foreign key (fkCodigoReserva) references reservaPasaje(codigoReserva)
 );
-
 
 
 /*
