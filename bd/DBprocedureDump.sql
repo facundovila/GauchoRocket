@@ -649,6 +649,43 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_realizarCheckIn;
+DELIMITER //
+create procedure GR_realizarCheckIn(in codigoReserva varchar(8))
+begin
+    
+    if not exists(select fkcodigoReserva from pasaje where fkcodigoReserva=codigoReserva) 
+    then
+    insert into pasaje(fkcodigoReserva,fechaCheckIn) values (codigoReserva,now());
+    update reservaPasaje as RP set checkin = true where RP.codigoReserva=codigoReserva;
+    set @res=1;
+    else
+    set @res=null ;
+    end if;
+    
+    select @res;
+    
+end//
+DELIMITER ;
+
+
+drop procedure if exists GR_getCheckIn;
+DELIMITER //
+create procedure GR_getCheckIn(in idUsuario int)
+begin
+
+	call GR_getUsuarioEmail(idUsuario,@emailUsuario);
+    
+    select fecha from pasaje as P
+    inner join reservaPasaje as RP on P.fkcodigoReserva=RP.codigoReserva
+    inner join reservaUsuario as RU on RP.codigoReserva=RU.fkcodigoReserva
+    where fkemailUsuario=@emailUsuario;
+    
+end//
+DELIMITER ;
+
+
+
 
 /*
 

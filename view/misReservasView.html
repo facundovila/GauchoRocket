@@ -25,8 +25,12 @@
                         <td><p>{{fecha}}</p></td>
                         <td><p>{{fechaDeReserva}}</p></td>
                         <td><p>$ {{precio}}</p></td>
+
+                        {{^checkin}}    
                         <td><a href="/MisReservas/eliminarReserva?codigoReserva={{codigoReserva}}">Eliminar Reserva</a></td>
                         <td><a href="/MisReservas/checkin?codigoReserva={{codigoReserva}}">Check In</a></td>
+                        {{/checkin}}
+
                     </tr>
                     {{/ reservas}}</tbody>
                 </table>
