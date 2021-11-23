@@ -16,4 +16,20 @@ class MisReservasController extends BaseController {
 
         echo $this->printer->render("view/misReservasView.html", $data);
     }
+
+    public function eliminarReserva(){
+
+        if(isset($_GET['codigoReserva'])){
+
+            $codigoReserva = $_GET['codigoReserva'];
+
+            $this->model->deleteReserva($codigoReserva);
+
+        }
+
+        echo $this->printer->render("view/misReservasView.html");
+
+        
+
+    }
 }

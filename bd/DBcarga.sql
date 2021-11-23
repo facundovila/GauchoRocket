@@ -163,7 +163,7 @@ insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTra
 (6,7,2);
 
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
-('Vuelo del BEBOP entre Marte y Europa',42000,'2021-12-25 23:00:00',8,'BEBOP',3);
+('Vuelo del BEBOP entre Marte y Europa',42000,'2021-11-24 09:00:00',8,'BEBOP',3);
                     
                     
  -- ----------------------------------------------------------------

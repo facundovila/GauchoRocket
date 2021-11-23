@@ -578,9 +578,6 @@ DELIMITER //
 create procedure GR_desalocarReserva(in codigoReserva varchar(8))
 begin
 
-	if ((select checkin from reservaPasaje) = false)
-    then
-	
 	update reservaUsuario as rU set rU.fkemailUsuario = null where rU.fkcodigoReserva = codigoReserva;
     
 	update ubicacion set ocupado = false where fkCodigoReserva=codigoReserva;
@@ -589,11 +586,6 @@ begin
     
     update reservaPasaje as rP set fkcodigoTipoDeServicio= null, fechaReserva = null where rP.codigoReserva = codigoReserva;
     
-    else
-    
-    select false;
-    
-    end if;
     
 end//
 DELIMITER ;
