@@ -27,28 +27,14 @@
 <header>
     <nav class="navbar navbar-expand">
         <div class="container-md">
-            <a href="index.php ">
+            <a href="/home ">
                 <h1>Gaucho Rocket</h1>
             </a>
             <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav">
-                    <a href="" class="nav-link">Mi reserva</a>
-                    <a href="" class="nav-link">Servicios</a>
-                    <a href="" class="nav-link">Información</a>
 
-                    {{#notLogged}}
+                  
                     <a href="/login" class="nav-link">Login</a>
-                    <a href="/register" class="nav-link">Registrarse</a>
-                    {{/notLogged}}
-
-                    {{#logged}}
-                    <a href="?logout=true" name="logout" class="nav-link">Logout</a>
-                    {{/logged}}
-
-                    {{#admin}}
-                    <a href=""  class="nav-link">Administrar</a>
-                    <a href="?logout=true" name="logout" class="nav-link">Logout</a>
-                    {{/admin}}
 
                 </div>
             </div>
@@ -105,7 +91,7 @@
 </main>
 
 
-{{>footer}}
+
 
 
 

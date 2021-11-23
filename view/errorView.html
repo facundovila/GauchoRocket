@@ -1,0 +1,23 @@
+{{>header}}
+<title>Error</title>
+<main class="usuario">
+    <section class="d-flex contenedor" id="wrapper">
+        <article  class="contenido2" id="page-content-wrapper">
+            {{# title}}
+            <h3>{{title}}</h3>
+            {{/ title}}
+            {{^ title}}
+            <h3>Error</h3>
+            {{/ title}}
+
+            <div class="padding">
+                {{# error}}
+                <p>{{error}}</p>
+                {{/ error}}
+            </div>
+            <br>
+        </article>
+    </section>
+</main>
+
+{{>footer}}

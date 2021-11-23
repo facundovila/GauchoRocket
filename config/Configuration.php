@@ -43,14 +43,19 @@ class Configuration{
         return new VuelosController($this->createVuelosModel(),$this->createPrinter());
     }
 
-    public function createReservarController(): ReservarController {
-        require_once 'controller/ReservarController.php';
-        return new ReservarController($this->createReservaModel(), $this->createPrinter());
+    public function createMisReservasController(): MisReservasController {
+        require_once 'controller/MisReservasController.php';
+        return new MisReservasController($this->createMisReservasModel(), $this->createPrinter());
     }
 
     public function createAdminController(): AdminController {
         require_once 'controller/AdminController.php';
         return new AdminController($this->createAdminModel(), $this->createPrinter());
+    }
+
+    public function createErrorController(): ErrorController {
+        require_once "controller/ErrorController.php";
+        return new ErrorController($this->createPrinter());
     }
 
     private function createLoginModel(): LoginModel {
@@ -102,10 +107,10 @@ class Configuration{
         return new VuelosModel($database);
     }
 
-    private function createReservaModel(): ReservarModel {
-        require_once 'model/ReservarModel.php';
+    private function createMisReservasModel(): MisReservasModel {
+        require_once 'model/MisReservasModel.php';
         $database= $this->getDatabase();
-        return new ReservarModel($database);
+        return new MisReservasModel($database);
     }
 
     private function createAdminModel(): AdminModel {

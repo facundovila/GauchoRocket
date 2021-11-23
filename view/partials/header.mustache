@@ -7,7 +7,6 @@
     <!-- ESTILOS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
     <link rel="stylesheet" href="../public/css/home.css" type="text/css">
     <link rel="stylesheet" href="../public/css/simple-sidebar.css" type="text/css" >
     <link rel="stylesheet" href="../public/css/perfilUser.css">
@@ -16,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/styles.css" type="text/css">
     <!-- SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -40,11 +40,7 @@
                     {{/logged}}
                     {{#admin}}
                         <a href="/user" name="perfil"  class="nav-link">Mi Perfil</a>
-
                     {{/admin}}
-                        <a href="" class="nav-link">Mi reserva</a>
-                        <a href="" class="nav-link">Servicios</a>
-                        <a href="" class="nav-link">Información</a>
                         <a href="/vuelos" class="nav-link">Vuelos</a>
 
                     {{#notLogged}}
@@ -53,10 +49,12 @@
                     {{/notLogged}}
 
                     {{#logged}}
+                        <a href="/MisReservas" class="nav-link">Mis Reservas</a>
                         <a href="?logout=true" name="logout" class="nav-link">Logout</a>
                     {{/logged}}
 
                     {{#admin}}
+                        <a href="/MisReservas" class="nav-link">Mis Reservas</a>
                         <a href="/admin"  class="nav-link">Administrar</a>
                         <a href="?logout=true" name="logout" class="nav-link">Logout</a>
                     {{/admin}}

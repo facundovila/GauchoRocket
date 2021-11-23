@@ -17,7 +17,9 @@ insert into usuario(email,rol,usuario,clave)values
 													("vuelo","cliente","vuelo",md5("vuelo"));
                                                     
 insert into nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values
-								(3,3);
+								(3,3),
+                                (5,3),
+                                (1,3);
     
 insert into login(fkemailusuario,clave)values
 										("admin",md5("admin")),
@@ -130,12 +132,12 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					('BA3',10); 
                     
  insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
-					 (1,3,3),
-					 (2,13,2);
+					 (1,3,1),
+					 (2,12,3);
                      
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
-				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-11-08',3,'AA1',1),
-                 ('Viaje Orbital desde Anakara hasta Shanghai',6000,'2021-11-08',8,'O5',2);
+				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-12-25 23:00:00',3,'AA1',1),
+                 ('Viaje Orbital desde Ankara hasta Neptuno',6000,'2021-12-25 23:00:00',8,'O5',2);
                  
 insert into tipoDeCabina (descripcion, precio) values
 									('General', 350),
@@ -161,9 +163,23 @@ insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTra
 (6,7,2);
 
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
-('Vuelo del BEBOP entre Marte y Europa',42000,'2021-11-08',8,'BEBOP',3);
+('Vuelo del BEBOP entre Marte y Europa',42000,'2021-12-25 09:00:00',8,'BEBOP',3);
                     
+
+
+insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
+('TestModel',1, 1, 0, 0);
+ 
+insert into Equipo (matricula,fkCodigoModeloEquipo) values
+('TEST',12); 
+  
+insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
+(6,7,1);
+
+insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
+('Vuelo Para Testear, solo una cabina',92000,'2021-11-24 09:00:00',8,'TEST',4);
                     
+
  -- ----------------------------------------------------------------
 /*insert into ubicacion(ocupada,nroUbicacion) values
 						(false,20),

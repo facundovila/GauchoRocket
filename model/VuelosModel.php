@@ -20,7 +20,7 @@ class VuelosModel extends BaseModel{
         $query = 'call GR_todosLosVuelosTodosLosParametros(?,?,?,?)';
         $params = array($origen, $destino, $fecha_partida, $tipo);
 
-        $response = $this->database->executeQueryParams($params,$query);
+        $response = $this->database->executeQueryParams($params, $query);
         
         $data["vuelos"] = $response;
 
@@ -34,7 +34,7 @@ class VuelosModel extends BaseModel{
              WHERE id = ? ";
 
 
-        $response= $this->database->executeQueryParams(array($id),$query);
+        $response= $this->database->executeQueryParams(array($id), $query);
 
         $data["datosUsuario"]=$response;
 
@@ -45,7 +45,7 @@ class VuelosModel extends BaseModel{
         $query ='call GR_vuelosPorId(?)';
         $params = array($codigo);
 
-        $response = $this->database->executeQueryParams($params,$query);
+        $response = $this->database->executeQueryParams($params, $query);
 
         $data["vueloSeleccionado"] = $response;
 
@@ -62,17 +62,82 @@ class VuelosModel extends BaseModel{
         return $data;
     }
 
+  
     public function validarNivelVueloUsuario($idUsuario,$codigo){
-        
-
         $query ='call GR_compararNivelUsuarioVuelo(?,?)';
         $params = array($idUsuario, $codigo);
 
-        $response = $this->database->executeQueryParams($params,$query);
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
+
+
+        return $response == 1;
+    }
+
+    public function validarAsientosDisponiblesEnVuelo($codigo){
+        $query ='call GR_verificarVueloConPasajesDisponibles(?)';
+        $params = array($codigo);
+
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
+
+
+        return $response == 1;
+    }
+
+    public function ingresarEnEspera($idUsuario,$codigo){
+        $query ='call GR_crearReservaUsuarioDeEspera(?,?)';
+        $params = array($idUsuario,$codigo);
+
+        return $this->database->executeQueryParams($params,$query);
+    }
+
+  
+    public function getUbicaciones($vueloId) {
+        $query = "call GR_listarUbicaciones(?)";
+        $params = array($vueloId);
+
+        $data["ubicaciones"] = $this->database->executeQueryParams($params, $query);
+        return $data;
+    }
+
+
+    public function getLocacion(int $id) {
+        $query = "SELECT * FROM dbgr.locacion WHERE codigo = ?";
+        $params = array($id);
+
+        return $this->database->executeQueryParams($params, $query);
+    }
+
+  
+    public function getTipoDeTrayecto(int $id) {
+        $query = "SELECT * FROM dbgr.tipodetrayecto WHERE codigo = ?";
+        $params = array($id);
+
+        return $this->database->executeQueryParams($params, $query);
+
+    }
+
+
+    public function getUbicacionesCabina($vueloId, $codigoCabina) {
+        $query = "call GR_listarUbicacionesSegunCabina(?,?)";
+        $params = array($vueloId, $codigoCabina);
+
+        $data["ubicaciones"] = $this->database->executeQueryParams($params, $query);
+        return $data;
+    }
+
+
+    public function asignarReserva($usuarioId,$codigoUbicacion, $codigoServicio) {
+        
+        $bool=5;
+        $query = "call GR_ocuparPasajeYUbicacionOUT(?,?,?,?)";
+        $params = array($usuarioId, $codigoUbicacion, $codigoServicio,$bool);
+
+        $response=$this->database->executeQueryParams($params, $query);
 
         $data = $response;
 
         return $data;
+
     }
 
     /* Ejemplo de utilizacion de sp con out
@@ -89,36 +154,7 @@ class VuelosModel extends BaseModel{
 
         return $data;
     }
-    /*
+    */
 
-
-    /*
-    public function getReserva($codigo):array{
-
-        $query= "SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
-        (select distinct v.descripcion as Nombre,l.nombre as Origen,fecha, v.precio as precio
-        from vuelo as v
-        inner join trayecto as t on v.codigoTrayecto=t.codigo
-        inner join locacion as l on t.codigoLocacionOrigen=l.codigo) as t1
-        inner join
-        (select distinct t.codigo,v.descripcion as nombre,l.nombre as Destino
-        from vuelo as v
-        inner join trayecto as t on v.codigoTrayecto=t.codigo
-        inner join locacion as l on t.codigoLocacionDestino=l.codigo) as t2
-        on t1.nombre=t2.nombre where codigo = ?";
-
-
-        $response= $this->database->executeQueryParams(array($codigo),$query);
-
-        $data["reserva"]=$response;
-
-        return $data; 
-
-
-
-
-
-
-
-    } */
+   
 }

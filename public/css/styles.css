@@ -165,3 +165,28 @@ body {
 }
 
 /* Fin Registrar */
+
+/* Selector de Ubicaciones */
+
+.seat {
+    float: left;
+    display: block;
+    margin: 5px;
+    background: #4CAF50;
+    width: 35px;
+    height: 35px;
+}
+
+.seat-select {
+    display: none;
+}
+
+.seat-select:checked+.seat {
+    background: #F44336;
+}
+
+.seat-select:disabled+.seat {
+    background: #999999;
+}
+
+/* Selector de Ubicaciones */
