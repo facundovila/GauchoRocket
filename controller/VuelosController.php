@@ -72,7 +72,8 @@ require_once 'ErrorController.php';
              die();
          }
 
-         if($id='admin'){
+        
+         if($id==0){
 
             $data[] = [];
             $data += $this->vuelosModel->selectVuelo($codigo);
@@ -83,8 +84,7 @@ require_once 'ErrorController.php';
             echo $this->printer->render("view/reservarView.html", $data);
 
          }
-       
-        
+
          $esNivelVueloValido = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
 
          if (!$esNivelVueloValido) {
@@ -92,6 +92,15 @@ require_once 'ErrorController.php';
              die();
          }
 
+         $asientosOcupados = $this->vuelosModel->validarAsientosDisponiblesEnVuelo($codigo);
+
+         
+         if (!$asientosOcupados) {
+             $this->vuelosModel->ingresarEnEspera($id,$codigo);
+             ErrorController::showError("Este vuelo no tiene asientos disponibles, en caso de liberarse uno, se le asignara este, revise sus reservas con frecuencia."); //por algun motivo esto tiene que ir todo en una linea
+             die();
+         } 
+         
 
          $data[] = [];
 
