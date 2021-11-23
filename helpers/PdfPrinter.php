@@ -12,6 +12,7 @@ class PdfPrinter {
 
     private function setup() {
         $this->dompdf = new Dompdf();
+        $this->dompdf->getOptions()->setIsRemoteEnabled(true);
 
         // (Optional) Setup the paper size and orientation
         $this->dompdf->setPaper('A4', 'landscape');
@@ -25,5 +26,6 @@ class PdfPrinter {
 
         // Output the generated PDF to Browser
         $this->dompdf->stream();
+
     }
 }

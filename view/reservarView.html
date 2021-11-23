@@ -11,9 +11,6 @@
                     <div class=" card-body padding px-5 ">
                         <h3 class="card-title">Reserva</h3>
                         <div class=" padding px-2 ">
-
-                            <input hidden value="{{codigo_vuelo}}" name="codigo_vuelo">
-
                             {{#datosUsuario}}
                             <h4 class="card-subtitle mb-2 text-muted">datos del pasajero</h4>
                             <div class=" px-2 ">
@@ -25,6 +22,7 @@
                             <h4 class="card-subtitle mb-2 text-muted">datos del vuelo </h4>
                             <div class=" px-2 ">
                                 {{#vueloSeleccionado}}
+                                <input hidden value="{{codigo}}" name="codigo_vuelo">
                                 <p>Partida:{{origen}}</p>
                                 <p>Destino: {{destino}}</p>
                                 <p>tipo de vuelo: {{nombre}}</p>

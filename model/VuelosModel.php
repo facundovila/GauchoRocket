@@ -62,19 +62,18 @@ class VuelosModel extends BaseModel{
         return $data;
     }
 
-    public function validarNivelVueloUsuario($idUsuario, $codigo){
-        
-
+  
+    public function validarNivelVueloUsuario($idUsuario,$codigo){
         $query ='call GR_compararNivelUsuarioVuelo(?,?)';
         $params = array($idUsuario, $codigo);
 
-        $response = $this->database->executeQueryParams($params, $query);
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
 
-        $data = $response;
 
-        return $data;
+        return $response == 1;
     }
 
+  
     public function getUbicaciones($vueloId) {
         $query = "call GR_listarUbicaciones(?)";
         $params = array($vueloId);
@@ -83,6 +82,24 @@ class VuelosModel extends BaseModel{
         return $data;
     }
 
+
+    public function getLocacion(int $id) {
+        $query = "SELECT * FROM dbgr.locacion WHERE codigo = ?";
+        $params = array($id);
+
+        return $this->database->executeQueryParams($params, $query);
+    }
+
+  
+    public function getTipoDeTrayecto(int $id) {
+        $query = "SELECT * FROM dbgr.tipodetrayecto WHERE codigo = ?";
+        $params = array($id);
+
+        return $this->database->executeQueryParams($params, $query);
+
+    }
+
+    
     public function getUbicacionesCabina($vueloId, $codigoCabina) {
         $query = "call GR_listarUbicacionesSegunCabina(?,?)";
         $params = array($vueloId, $codigoCabina);
@@ -103,6 +120,7 @@ class VuelosModel extends BaseModel{
         $data = $response;
 
         return $data;
+
     }
 
     /* Ejemplo de utilizacion de sp con out

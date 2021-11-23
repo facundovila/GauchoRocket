@@ -53,6 +53,11 @@ class Configuration{
         return new AdminController($this->createAdminModel(), $this->createPrinter());
     }
 
+    public function createErrorController(): ErrorController {
+        require_once "controller/ErrorController.php";
+        return new ErrorController($this->createPrinter());
+    }
+
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();

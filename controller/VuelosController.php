@@ -1,6 +1,7 @@
 <?php
 
 require_once "BaseController.php";
+require_once 'ErrorController.php';
 
  class VuelosController extends BaseController {
      private VuelosModel $vuelosModel;
@@ -17,17 +18,38 @@ require_once "BaseController.php";
     }
 
     public function showFlights() {
-        $origen = (int) $_POST["origen"];
-        $destino = (int) $_POST["destino"];
+        $origen = (int) $_POST["origen"] ?? -1;
+        $destino = (int) $_POST["destino"] ?? -1;
         $fecha_partida = $_POST["fecha_partida"];
-        $clase = (int) $_POST["tipo"];
-        
+        $tipo = (int) $_POST["tipo"] ?? -1;
 
-        var_dump($origen,$destino,$fecha_partida,$clase);
+        if (empty($this->vuelosModel->getLocacion((int) null))) {
+            ErrorController::showError("La ubicación de partida no existe");
+        }
 
-        $data = $this->vuelosModel->getVuelosDisponibles($origen, $destino, $fecha_partida, $clase);
+        if (empty($this->vuelosModel->getLocacion($destino))) {
+            ErrorController::showError("La ubicación de destino no existe");
+        }
+
+        if (!$this->isValidDateVuelo($fecha_partida)) {
+            ErrorController::showError("La fecha de partida no es válida");
+        }
+
+        if (empty($this->vuelosModel->getTipoDeTrayecto($tipo))) {
+            ErrorController::showError("El tipo de trayecto no existe");
+        }
+
+        $data = $this->vuelosModel->getVuelosDisponibles($origen, $destino, $fecha_partida, $tipo);
 
         echo $this->printer->render("view/vuelosView.html", $data);
+    }
+
+    private function isValidDateVuelo($date): bool {
+        $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
+        $currentMillis = strtotime($dateTime->format("d-m-Y"));
+        $millis = strtotime($date);
+
+        return $millis >= $currentMillis;
     }
 
     public function controlBrowser(){
@@ -38,38 +60,58 @@ require_once "BaseController.php";
 
      public function datosReserva() {  // logout sigue roto desde este punto
          $id = $_SESSION["id"];
-
-         $data[] = [];
-
-         
-
+       
          if(isset($_GET['codigo'])) {
 
              $_SESSION['codigoV']=$_GET['codigo'];
              
              $codigo = $_SESSION['codigoV'];
-             
+           
+         if ($codigo == null) {
+             ErrorController::showError("El código es inválido");
+         }
+       
+        
+         $esNivelVueloValido = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
 
-             $result = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo); //implementar
-
-             /*if(1 != ($result[0]['@resultado'])){
-                 // TODO pantalla de error
-                die("No podés reservar un pasaje para este vuelo");
-             }*/
-
-             $data["codigo_vuelo"] = $codigo;
-             $data += $this->vuelosModel->getdatosUsuario($id);
-
-             $data += $this->vuelosModel->getUbicaciones($codigo);
-
-             $data += $this->vuelosModel->selectVuelo($codigo);
-             $data += $this->vuelosModel->getCabinasYServicios();
+         if (!$esNivelVueloValido) {
+             ErrorController::showError("Este vuelo no está disponible para tu nivel de vuelo");
          }
 
+
+         $data[] = [];
+
+         $data += $this->vuelosModel->selectVuelo($codigo);
+
+         if (empty($data["vueloSeleccionado"])) {
+             ErrorController::showError("Algo salió mal");
+         }
+
+         $fecha = $data["vueloSeleccionado"][0]["fecha"];
+
+         if (!$this->isValidDateReserva($fecha)) {
+             ErrorController::showError("Las reservas sólo pueden realizarse hasta 24 horas antes del vuelo");
+         }
+
+         $data += $this->vuelosModel->getdatosUsuario($id);
+         $data += $this->vuelosModel->getUbicaciones($codigo);
+         $data += $this->vuelosModel->getCabinasYServicios();
+
          echo $this->printer->render("view/reservarView.html", $data);
+        }
      }
 
+     private function isValidDateReserva($date) {
+         $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
+         $currentMillis = strtotime($dateTime->format("d-m-Y H:i:s"));
+         $reservaMillis = strtotime('-1 day',strtotime($date));
+
+         return $currentMillis <= $reservaMillis;
+     }
+
+     
      public function seleccionarServicioYCabina() {
+
          $usuarioId = $_SESSION["id"];
 
          $_SESSION['codigoS']=$_POST["servicios"];
