@@ -97,7 +97,9 @@ class VuelosModel extends BaseModel{
 
         return $this->database->executeQueryParams($params, $query);
 
-  
+    }
+
+    
     public function getUbicacionesCabina($vueloId, $codigoCabina) {
         $query = "call GR_listarUbicacionesSegunCabina(?,?)";
         $params = array($vueloId, $codigoCabina);

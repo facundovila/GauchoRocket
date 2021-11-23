@@ -208,25 +208,6 @@ end//
 DELIMITER ;
 
 
-SELECT codigo,origen,destino,t1.Nombre as nombre,fecha,precio from
-                        (select distinct v.descripcion as Nombre,l.nombre as origen, fecha, v.precio as precio,
-                        TT.nombre as nombreTrayecto, v.codigo as vueloId
-                        from vuelo as v
-                        inner join trayecto as t on v.codigoTrayecto=t.codigo
-                        inner join locacion as l on t.codigoLocacionOrigen=l.codigo
-                        inner join tipoDeTrayecto as TT on TT.codigo=t.codigoTipoDeTrayecto
-                        where t.codigoLocacionOrigen= 2 and TT.codigo = 3 ) as t1
-                        inner join
-                        (select distinct t.codigo,v.descripcion as nombre,l.nombre as destino
-                        from vuelo as v
-                        inner join trayecto as t on v.codigoTrayecto=t.codigo
-                        inner join locacion as l on t.codigoLocacionDestino=l.codigo
-                        where t.codigoLocacionDestino= 12 ) as t2
-                        on t1.nombre=t2.nombre;
-
-select * from vuelo;
-
-
 drop procedure if exists GR_capacidadTotalXVueloSoloCantidadOUT;
 DELIMITER //
 create procedure GR_capacidadTotalXVueloSoloCantidadOUT(in codigoVuelo int,out cantidad int)
@@ -617,12 +598,6 @@ begin
 end//
 DELIMITER ;
 
-
-call GR_desalocarReserva('25ee77c5');
-
-select * from reservaPasaje where codigoReserva = '25ee77c5';
-select * from ubicacion where ocupado is true;
-select * from reservaUsuario where fkemailUsuario is not null;
 
 /*
 

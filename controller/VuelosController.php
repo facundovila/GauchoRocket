@@ -98,8 +98,8 @@ require_once 'ErrorController.php';
          $data += $this->vuelosModel->getCabinasYServicios();
 
          echo $this->printer->render("view/reservarView.html", $data);
+        }
      }
-
 
      private function isValidDateReserva($date) {
          $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
