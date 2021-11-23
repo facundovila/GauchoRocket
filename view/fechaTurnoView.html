@@ -10,7 +10,7 @@
                 <div class="list-group list-group-flush p-2   ">
                     <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
                     <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Vuelos</a>
+                    <a href="/MisReservas" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Reservas</a>
                 </div>
             </div>
 
@@ -19,9 +19,13 @@
             {{# turnosacado}}
             <div class="p-3">
                 <h2>Tu Turno medico es : {{fechaTurnoMedico}}</h2>
-
             </div>
             {{/ turnosacado}}
+            {{# Nivel}}
+            <div class="p-3">
+                <h2>Tu nivel de vuelo es : {{nivel}}-{{descripcion}}</h2>
+            </div>
+            {{/ Nivel}}
 
         </article>
     </section>

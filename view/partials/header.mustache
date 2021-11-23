@@ -40,11 +40,7 @@
                     {{/logged}}
                     {{#admin}}
                         <a href="/user" name="perfil"  class="nav-link">Mi Perfil</a>
-
                     {{/admin}}
-                        <a href="/reservar" class="nav-link">Mi reserva</a>
-                        <a href="" class="nav-link">Servicios</a>
-                        <a href="" class="nav-link">Información</a>
                         <a href="/vuelos" class="nav-link">Vuelos</a>
 
                     {{#notLogged}}
@@ -53,10 +49,12 @@
                     {{/notLogged}}
 
                     {{#logged}}
+                        <a href="/MisReservas" class="nav-link">Mis Reservas</a>
                         <a href="?logout=true" name="logout" class="nav-link">Logout</a>
                     {{/logged}}
 
                     {{#admin}}
+                        <a href="/MisReservas" class="nav-link">Mis Reservas</a>
                         <a href="/admin"  class="nav-link">Administrar</a>
                         <a href="?logout=true" name="logout" class="nav-link">Logout</a>
                     {{/admin}}

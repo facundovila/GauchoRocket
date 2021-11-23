@@ -17,7 +17,7 @@ class AdminModel extends BaseModel{
 
     public function createReservasYUbicacionesParaUnVuelo($codigoVuelo){
        
-          $query = 'call GR_crearReservasVaciasParaUnVueloFinal(?)';
+          $query = 'call GR_ejecutarReservas(?)';
           $params = array($codigoVuelo);
 
           $response = $this->database->executeQueryParams($params,$query);

@@ -60,18 +60,24 @@ require_once 'ErrorController.php';
 
      public function datosReserva() {  // logout sigue roto desde este punto
          $id = $_SESSION["id"];
+       
+         if(isset($_GET['codigo'])) {
 
-         $codigo = $_GET["codigo"];
-
+             $_SESSION['codigoV']=$_GET['codigo'];
+             
+             $codigo = $_SESSION['codigoV'];
+           
          if ($codigo == null) {
              ErrorController::showError("El código es inválido");
          }
-
+       
+        
          $esNivelVueloValido = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
 
          if (!$esNivelVueloValido) {
              ErrorController::showError("Este vuelo no está disponible para tu nivel de vuelo");
          }
+
 
          $data[] = [];
 
@@ -94,6 +100,7 @@ require_once 'ErrorController.php';
          echo $this->printer->render("view/reservarView.html", $data);
      }
 
+
      private function isValidDateReserva($date) {
          $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
          $currentMillis = strtotime($dateTime->format("d-m-Y H:i:s"));
@@ -102,14 +109,43 @@ require_once 'ErrorController.php';
          return $currentMillis <= $reservaMillis;
      }
 
-     public function asignarReserva() {
+     
+     public function seleccionarServicioYCabina() {
+
          $usuarioId = $_SESSION["id"];
-         $codigoUbicacion =(int) $_POST["ubicacion_vuelo"];
+
+         $_SESSION['codigoS']=$_POST["servicios"];
+         $_SESSION['codigoC']=$_POST["cabinas"];
+
+         $data = $this->vuelosModel->getUbicacionesCabina($_SESSION['codigoV'],$_SESSION['codigoC']);
+
+         
+         echo $this->printer->render("view/verAsientosView.html", $data);
 
         
+     }
 
-         $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion);
+     public function asignarReserva(){  
 
-         header("location: /reservar");
+        if(isset($_POST["ubicacion_vuelo"])) {
+
+        $usuarioId = $_SESSION["id"];
+        $codigoUbicacion =$_POST["ubicacion_vuelo"];
+        $codigoServicio = $_SESSION['codigoS'];
+
+        $result = $this->vuelosModel->asignarReserva($usuarioId,$codigoUbicacion,$codigoServicio); 
+
+        header("location: /reservar");
+
+        session_unset('codigoS');
+        session_unset('codigoC');
+        session_unset('codigoV');
+
+        }else{
+
+        header("location: /vuelos"); //manejar vuelo sin lugares aca
+
+        }
+
      }
 }

@@ -11,8 +11,9 @@
                         <th scope="col">Código</th>
                         <th scope="col">Origen</th>
                         <th scope="col">Destino</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Precio</th>
+                        <th scope="col">Fecha del Vuelo</th>
+                        <th scope="col">Fecha de Reserva</th>
+                        <th scope="col">Precio</th>           
                     </tr>
                     </thead>
                     <tbody>
@@ -22,8 +23,9 @@
                         <td><p>{{origen}}</p></td>
                         <td><p>{{destino}}</p></td>
                         <td><p>{{fecha}}</p></td>
-                        <td><p>{{precio}}</p></td>
-                        <td><a href="/vuelos/datosReserva?codigo={{codigo}}">reservar</a></td>
+                        <td><p>{{fechaDeReserva}}</p></td>
+                        <td><p>$ {{precio}}</p></td>
+                        <td><a href="/vuelos/datosReserva?codigo={{codigo}}">Check In</a></td>
                     </tr>
                     {{/ reservas}}</tbody>
                 </table>

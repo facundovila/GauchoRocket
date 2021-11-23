@@ -13,7 +13,8 @@ class FechaTurnoController extends BaseController{
     public function show(){
         $id = $_SESSION["id"];
 
-        $data = $this->fechaTurnoModel->GetFechaMedica($id);
+        $data = $this->fechaTurnoModel->getFechaMedica($id);
+        $data+= $this->fechaTurnoModel->getNivelVuelo($id);
 
         echo $this->printer->render("view/fechaTurnoView.html",$data);
 

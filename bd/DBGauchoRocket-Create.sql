@@ -11,7 +11,6 @@ nombre varchar(40),
 apellido varchar(40),
 dni varchar(40),
 telefono varchar(40),
-
 id int unique auto_increment
 );
 
@@ -98,7 +97,7 @@ create table vuelo(
 codigo int primary key auto_increment,
 descripcion varchar(100),
 precio double(10,2), -- hacer que dependa del equipo que hace el viaje AA mayor costo, BA menor costo igual que orbital
-fecha date,
+fecha datetime,
 duracion int, -- determina el costo del viaje, mas dias implican mas costos de alojamiento, tambien depende del equipo que haga el viaje
 matriculaEquipo varchar(15),
 codigoTrayecto int,
@@ -140,6 +139,7 @@ numero int,
 checkin boolean default false,
 codigoReserva varchar(8) primary key,
 totalAPagar double(10,2),
+fechaReserva datetime,
 fkCodigoVuelo int,
 fkcodigoTipoDeServicio int,
 foreign key (fkCodigoVuelo) references vuelo(codigo),
@@ -166,6 +166,7 @@ foreign key (fkemailUsuario) references usuario(email)
 create table pasaje(
 id int primary key auto_increment,
 fkCodigoReserva varchar(8),
+fechaCheckIn datetime,
 foreign key (fkCodigoReserva) references reservaPasaje(codigoReserva)
 );
 
