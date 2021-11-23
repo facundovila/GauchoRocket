@@ -18,12 +18,12 @@ require_once 'ErrorController.php';
     }
 
     public function showFlights() {
-        $origen = (int) $_POST["origen"];
-        $destino = (int) $_POST["destino"];
+        $origen = (int) $_POST["origen"] ?? -1;
+        $destino = (int) $_POST["destino"] ?? -1;
         $fecha_partida = $_POST["fecha_partida"];
-        $tipo = (int) $_POST["tipo"];
+        $tipo = (int) $_POST["tipo"] ?? -1;
 
-        if (empty($this->vuelosModel->getLocacion($origen))) {
+        if (empty($this->vuelosModel->getLocacion((int) null))) {
             ErrorController::showError("La ubicación de partida no existe");
         }
 
@@ -31,11 +31,11 @@ require_once 'ErrorController.php';
             ErrorController::showError("La ubicación de destino no existe");
         }
 
-        if (!$this->isValidDate($fecha_partida)) {
+        if (!$this->isValidDateVuelo($fecha_partida)) {
             ErrorController::showError("La fecha de partida no es válida");
         }
 
-        if (!$this->$this->vuelosModel->getTipoDeTrayecto($tipo)) {
+        if (empty($this->vuelosModel->getTipoDeTrayecto($tipo))) {
             ErrorController::showError("El tipo de trayecto no existe");
         }
 
@@ -44,7 +44,7 @@ require_once 'ErrorController.php';
         echo $this->printer->render("view/vuelosView.html", $data);
     }
 
-    private function isValidDate($date): bool {
+    private function isValidDateVuelo($date): bool {
         $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
         $currentMillis = strtotime($dateTime->format("d-m-Y"));
         $millis = strtotime($date);
@@ -61,8 +61,6 @@ require_once 'ErrorController.php';
      public function datosReserva() {  // logout sigue roto desde este punto
          $id = $_SESSION["id"];
 
-         $data[] = [];
-
          $codigo = $_GET["codigo"];
 
          if ($codigo == null) {
@@ -75,15 +73,33 @@ require_once 'ErrorController.php';
              ErrorController::showError("Este vuelo no está disponible para tu nivel de vuelo");
          }
 
-         $data["codigo_vuelo"] = $codigo;
-         $data += $this->vuelosModel->getdatosUsuario($id);
-
-         $data += $this->vuelosModel->getUbicaciones($codigo);
+         $data[] = [];
 
          $data += $this->vuelosModel->selectVuelo($codigo);
+
+         if (empty($data["vueloSeleccionado"])) {
+             ErrorController::showError("Algo salió mal");
+         }
+
+         $fecha = $data["vueloSeleccionado"][0]["fecha"];
+
+         if (!$this->isValidDateReserva($fecha)) {
+             ErrorController::showError("Las reservas sólo pueden realizarse hasta 24 horas antes del vuelo");
+         }
+
+         $data += $this->vuelosModel->getdatosUsuario($id);
+         $data += $this->vuelosModel->getUbicaciones($codigo);
          $data += $this->vuelosModel->getCabinasYServicios();
 
          echo $this->printer->render("view/reservarView.html", $data);
+     }
+
+     private function isValidDateReserva($date) {
+         $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
+         $currentMillis = strtotime($dateTime->format("d-m-Y H:i:s"));
+         $reservaMillis = strtotime('-1 day',strtotime($date));
+
+         return $currentMillis <= $reservaMillis;
      }
 
      public function asignarReserva() {
