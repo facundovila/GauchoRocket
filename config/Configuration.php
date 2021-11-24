@@ -58,6 +58,11 @@ class Configuration{
         return new ErrorController($this->createPrinter());
     }
 
+    public function createLogoutController(): LogoutController {
+        require_once 'controller/LogoutController.php';
+        return new LogoutController();
+    }
+
     private function createLoginModel(): LoginModel {
         require_once "model/LoginModel.php";
         $database = $this->getDatabase();

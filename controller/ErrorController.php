@@ -14,5 +14,6 @@ class ErrorController extends BaseController {
 
     public static function showError(string $error, string $title = "Error") {
         header("location: /error?title=" .$title ."&error=" .$error);
+        exit();
     }
 }
