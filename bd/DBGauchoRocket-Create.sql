@@ -172,7 +172,7 @@ foreign key (fkCodigoVuelo) references vuelo(codigo)
 );
 
 create table pasaje(
-id int primary key auto_increment,
+codigo varchar(8) primary key,
 fkCodigoReserva varchar(8),
 fechaCheckIn datetime,
 foreign key (fkCodigoReserva) references reservaPasaje(codigoReserva)

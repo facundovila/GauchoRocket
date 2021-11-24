@@ -115,7 +115,8 @@ class Configuration{
     private function createMisReservasModel(): MisReservasModel {
         require_once 'model/MisReservasModel.php';
         $database= $this->getDatabase();
-        return new MisReservasModel($database);
+        $sendmail = $this->getSendMailHelper();
+        return new MisReservasModel($database, $sendmail);
     }
 
     private function createAdminModel(): AdminModel {

@@ -564,6 +564,23 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_getReserva;
+DELIMITER //
+create procedure GR_getReserva(in codigoReservo varchar(8))
+begin
+
+    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio
+    from reservaPasaje as rP
+             join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
+             join vuelo v on v.codigo = rP.fkCodigoVuelo
+             join trayecto t on v.codigoTrayecto = t.codigo
+             join locacion l on l.codigo = t.codigoLocacionDestino
+             join locacion l2 on l2.codigo = t.codigoLocacionOrigen
+    where rP.codigoReserva=codigoReserva;
+
+end//
+DELIMITER ;
+
 drop procedure if exists GR_verificarVueloConPasajesDisponibles;
 DELIMITER //
 create procedure GR_verificarVueloConPasajesDisponibles(in codigoVuelo int)
@@ -658,14 +675,11 @@ begin
     
     if not exists(select fkcodigoReserva from pasaje where fkcodigoReserva=codigoReserva) 
     then
-    insert into pasaje(fkcodigoReserva,fechaCheckIn) values (codigoReserva,now());
+    insert into pasaje(codigo, fkcodigoReserva,fechaCheckIn) values (substring(md5(rand()),1,8), codigoReserva,now());
     update reservaPasaje as RP set checkin = true where RP.codigoReserva=codigoReserva;
-    set @res=1;
-    else
-    set @res=null ;
     end if;
-    
-    select @res;
+
+    select codigo from pasaje where fkCodigoReserva = codigoReserva;
     
 end//
 DELIMITER ;
@@ -681,6 +695,7 @@ begin
     select fecha from pasaje as P
     inner join reservaPasaje as RP on P.fkcodigoReserva=RP.codigoReserva
     inner join reservaUsuario as RU on RP.codigoReserva=RU.fkcodigoReserva
+    join tipodeservicio t on t.codigoTipoDeServicio = RP.fkcodigoTipoDeServicio
     where fkemailUsuario=@emailUsuario;
     
 end//

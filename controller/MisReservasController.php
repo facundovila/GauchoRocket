@@ -1,6 +1,7 @@
 <?php
 
 require_once 'BaseController.php';
+require_once 'ErrorController.php';
 
 class MisReservasController extends BaseController {
     private MisReservasModel $model;
@@ -45,8 +46,19 @@ class MisReservasController extends BaseController {
 
             $codigoReserva = $_GET['codigoReserva'];
 
-            $this->model->doCheckin($codigoReserva);
+            $codigoCheckIn = $this->model->doCheckin($codigoReserva);
+            if (!empty($codigoCheckIn)) {
+                $reserva = $this->model->getReservaFromId($codigoReserva);
+                $origen = $reserva['origen'];
+                $destino = $reserva['destino'];
+                $fecha = $reserva['fecha'];
+                $precio = $reserva['precio'];
 
+                $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $precio);
+            } else {
+                ErrorController::showError("Algo salió mal");
+                die();
+            }
         }
 
         header("location: /MisReservas");
