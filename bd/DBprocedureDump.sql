@@ -620,7 +620,7 @@ begin
     
     update reservaPasaje as rP set fechaReserva = @fecha where rP.codigoReserva = codigoReserva;
     
-    delete from listaEspera where fkemailUsuario = @email;
+    delete from listaEspera where fkemailUsuario = @email and fkCodigoVuelo=@codigoVuelo;
     
  else
 
@@ -702,8 +702,6 @@ end//
 DELIMITER ;
 
 
-select * from reservaPasaje;
-select * from reservaUsuario;
 
 /*
 
@@ -824,5 +822,6 @@ begin
 end//
 DELIMITER ;
 */
+
 
 
