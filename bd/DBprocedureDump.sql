@@ -228,6 +228,9 @@ end//
 DELIMITER ;
 
 
+select * from reservaUsuario;
+select * from listaEspera;
+
 drop procedure if exists GR_obtenerMatricula;
 DELIMITER //
 create procedure GR_obtenerMatricula(in codigoVuelo int, out Matricula varchar(15))
@@ -561,6 +564,23 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_getReserva;
+DELIMITER //
+create procedure GR_getReserva(in codigoReservo varchar(8))
+begin
+
+    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio
+    from reservaPasaje as rP
+             join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
+             join vuelo v on v.codigo = rP.fkCodigoVuelo
+             join trayecto t on v.codigoTrayecto = t.codigo
+             join locacion l on l.codigo = t.codigoLocacionDestino
+             join locacion l2 on l2.codigo = t.codigoLocacionOrigen
+    where rP.codigoReserva=codigoReserva;
+
+end//
+DELIMITER ;
+
 drop procedure if exists GR_verificarVueloConPasajesDisponibles;
 DELIMITER //
 create procedure GR_verificarVueloConPasajesDisponibles(in codigoVuelo int)
@@ -588,15 +608,19 @@ begin
  set @codigoVueloOld=(select fkCodigoVuelo from reservaPasaje where codigoReserva=codigoReserva);
  
  call GR_obtenerEsperaMasReciente(@codigoVuelo,@email,@fecha);
+ 
+ select @codigoVuelo;
 
- if exists(select fkemailUsuario from reservaUsuario where fkcodigoReserva is null and fkemailUsuario is not null) and (@codigoVuelo=@codigoVueloOld)
+ if exists(select fkemailUsuario from listaEspera) and (@codigoVuelo=@codigoVueloOld)
  then
-    
-    update reservaUsuario as rU set rU.fkcodigoReserva = codigoReserva where rU.fkemailUsuario = @email ;
+ 
+    update reservaUsuario as rU set rU.fkemailUsuario = @email where rU.fkcodigoReserva = codigoReserva;
     
     update reservaPasaje as rP set checkin=false where rP.codigoReserva = codigoReserva;
     
     update reservaPasaje as rP set fechaReserva = @fecha where rP.codigoReserva = codigoReserva;
+    
+    delete from listaEspera where fkemailUsuario = @email and fkCodigoVuelo=@codigoVuelo;
     
  else
 
@@ -620,16 +644,13 @@ create procedure GR_obtenerEsperaMasReciente(out codigoVuelo int,out email varch
 begin
 
     select  LS.fkemailUsuario into email from listaEspera as LS
-	inner join reservaUsuario as RU on LS.fkemailUsuario=RU.fkemailUsuario
-	where LS.fkemailUsuario=RU.fkemailUsuario order by LS.fecha asc limit 1;
+	 order by LS.fecha asc limit 1;
     
     select LS.fkCodigoVuelo into codigoVuelo from listaEspera as LS
-	inner join reservaUsuario as RU on LS.fkemailUsuario=RU.fkemailUsuario
-	where LS.fkemailUsuario=RU.fkemailUsuario order by LS.fecha asc limit 1;
+	order by LS.fecha asc limit 1;
     
     select LS.fecha into fecha from listaEspera as LS
-	inner join reservaUsuario as RU on LS.fkemailUsuario=RU.fkemailUsuario
-	where LS.fkemailUsuario=RU.fkemailUsuario order by LS.fecha asc limit 1;
+	order by LS.fecha asc limit 1;
     
 end//
 DELIMITER ;
@@ -641,8 +662,6 @@ create procedure GR_crearReservaUsuarioDeEspera(in idUsuario int,in codigoVuelo 
 begin
 
     call GR_getUsuarioEmail(idUsuario,@emailUsuario);
-    
-    insert into reservaUsuario(fkemailUsuario) values (@emailUsuario);
     
     insert into listaEspera(fecha,fkemailUsuario,fkCodigoVuelo) values (now(),@emailUsuario,codigoVuelo);
     
@@ -656,14 +675,11 @@ begin
     
     if not exists(select fkcodigoReserva from pasaje where fkcodigoReserva=codigoReserva) 
     then
-    insert into pasaje(fkcodigoReserva,fechaCheckIn) values (codigoReserva,now());
+    insert into pasaje(codigo, fkcodigoReserva,fechaCheckIn) values (substring(md5(rand()),1,8), codigoReserva,now());
     update reservaPasaje as RP set checkin = true where RP.codigoReserva=codigoReserva;
-    set @res=1;
-    else
-    set @res=null ;
     end if;
-    
-    select @res;
+
+    select codigo from pasaje where fkCodigoReserva = codigoReserva;
     
 end//
 DELIMITER ;
@@ -679,11 +695,11 @@ begin
     select fecha from pasaje as P
     inner join reservaPasaje as RP on P.fkcodigoReserva=RP.codigoReserva
     inner join reservaUsuario as RU on RP.codigoReserva=RU.fkcodigoReserva
+    join tipodeservicio t on t.codigoTipoDeServicio = RP.fkcodigoTipoDeServicio
     where fkemailUsuario=@emailUsuario;
     
 end//
 DELIMITER ;
-
 
 
 
@@ -806,5 +822,6 @@ begin
 end//
 DELIMITER ;
 */
+
 
 

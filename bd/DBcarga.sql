@@ -177,7 +177,7 @@ insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTra
 (6,7,1);
 
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
-('Vuelo Para Testear, solo una cabina',92000,'2021-11-24 09:00:00',8,'TEST',4);
+('Vuelo Para Testear, solo una cabina',92000,'2021-11-25 09:00:00',8,'TEST',4);
                     
 
  -- ----------------------------------------------------------------

@@ -23,7 +23,7 @@ require_once 'ErrorController.php';
         $fecha_partida = $_POST["fecha_partida"];
         $tipo = (int) $_POST["tipo"] ?? -1;
 
-        if (empty($this->vuelosModel->getLocacion((int) null))) {
+        if (empty($this->vuelosModel->getLocacion((int) $origen))) {
             ErrorController::showError("La ubicación de partida no existe");
         }
 
