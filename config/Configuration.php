@@ -45,7 +45,8 @@ class Configuration{
 
     public function createMisReservasController(): MisReservasController {
         require_once 'controller/MisReservasController.php';
-        return new MisReservasController($this->createMisReservasModel(), $this->createPrinter());
+        $PdfPrinter = $this->getPdfPrinterHelper();
+        return new MisReservasController($this->createMisReservasModel(), $this->createPrinter(),$PdfPrinter);
     }
 
     public function createAdminController(): AdminController {
@@ -135,6 +136,11 @@ class Configuration{
         require_once "helpers/SendMail.php";
         $config = $this->getConfig();
         return new SendMail($this->getLogger(), $config["email"], $config["email_password"]);
+    }
+
+    private function getPdfPrinterHelper(): PdfPrinter {
+        require_once "helpers/PdfPrinter.php";
+        return new PdfPrinter();
     }
 
     private function getBaseUrl(): string {
