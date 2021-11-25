@@ -28,8 +28,6 @@ USE dbgr;
 
 -- ---------------------------------------------------------------
 
-
-
 drop procedure if exists GR_todosLosVuelos;
 DELIMITER //
 create procedure GR_todosLosVuelos()
@@ -566,7 +564,7 @@ DELIMITER ;
 
 drop procedure if exists GR_getReserva;
 DELIMITER //
-create procedure GR_getReserva(in codigoReservo varchar(8))
+create procedure GR_getReserva(in codigoReserva varchar(8))
 begin
 
     select codigoReserva, l.nombre as origen, v.descripcion as descripcion, l2.nombre as destino, fecha, totalAPagar as precio,
