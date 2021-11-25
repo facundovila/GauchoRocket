@@ -2,7 +2,7 @@
 
 class CheckingHTMLGenerator {
     
-    public static function generateHTML($qr, $codigoReserva, $origen, $destino, $fecha, $nombre, $apellido, $cabina, $servicio, $descripcion): string {
+    public static function generateHTML($qr, $codigoReserva, $origen, $destino, $fecha, $nombre, $apellido, $cabina, $servicio, $descripcion, $asiento): string {
         return '
             <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
                 <div style="border: 2px black solid; padding: 1em">
@@ -13,6 +13,7 @@ class CheckingHTMLGenerator {
                     <p><b>Tipo de Servicio:</b> ' .$servicio. '</p> 
                     <p><b>Tipo de Cabina:</b> ' .$cabina. '</p> 
                     <p><b>Trayecto:</b> ' .$descripcion. '</p> 
+                    <p><b>Nro de Asiento:</b> ' .$asiento. '</p> 
                     <p><b>Origen:</b> ' .$origen. '</p> 
                     <p><b>Destino:</b> ' .$destino. '</p> 
                     <p><b>Fecha:</b> ' .$fecha. '</p> 

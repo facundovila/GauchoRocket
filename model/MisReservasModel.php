@@ -47,7 +47,7 @@ class MisReservasModel extends BaseModel {
         }
     }
 
-    public function sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion) {
+    public function sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion, $asiento) {
         $id = $_SESSION['id'];
 
         $query = 'SELECT email, nombre, apellido FROM usuario where id = ?';
@@ -62,7 +62,7 @@ class MisReservasModel extends BaseModel {
 
             $qrGenerator = new QRGenerator();
             $qr = $qrGenerator->getQRUrl($codigoCheckIn);
-            $html = CheckingHTMLGenerator::generateHTML($qr, $codigoReserva, $origen, $destino, $fecha, $nombre, $apellido, $cabina, $servicio, $descripcion);
+            $html = CheckingHTMLGenerator::generateHTML($qr, $codigoReserva, $origen, $destino, $fecha, $nombre, $apellido, $cabina, $servicio, $descripcion, $asiento);
 
             $this->sendMail->sendMail($email, $nombre .' ' .$apellido, 'CheckIn: ' . $origen . '-' . $destino, $html);
         } else {

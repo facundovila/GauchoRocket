@@ -137,8 +137,8 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					 (2,12,3);
                      
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
-				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-11-26 23:00:00',3,'AA1',1),
-                 ('Viaje Orbital desde Ankara hasta Neptuno',6000,'2021-11-26 23:00:00',8,'O5',2);
+				 ('Viaje De Alta Aceleracion desde Buenos Aires hasta la Estacion Espacial Internacional',23000,'2021-11-26 8:00:00',3,'AA1',1),
+                 ('Viaje Orbital desde Ankara hasta Neptuno',6000,'2021-11-26 7:30:00',8,'O5',2);
                  
 insert into tipoDeCabina (descripcion, precio) values
 									('General', 350),

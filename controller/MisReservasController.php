@@ -55,8 +55,9 @@ class MisReservasController extends BaseController {
                 $servicio = $reserva['servicio'];
                 $cabina = $reserva['cabina'];
                 $descripcion = $reserva['descripcion'];
+                $asiento = $reserva['asiento'];
 
-                $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion);
+                $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion, $asiento);
             } else {
                 ErrorController::showError("Algo salió mal");
                 die();
@@ -66,4 +67,28 @@ class MisReservasController extends BaseController {
         header("location: /MisReservas");
 
     }
+
+    public function verReservaPDF(){  
+
+        if(isset($_GET['codigoReserva'])){
+
+        $codigoReserva = $_GET['codigoReserva'];
+
+        $reserva = $this->model->getReservaFromId($codigoReserva);
+        $estadoPago = $reserva['pago'];
+        $origen = $reserva['origen'];
+        $destino = $reserva['destino'];
+        $fecha = $reserva['fecha'];
+        $servicio = $reserva['servicio'];
+        $cabina = $reserva['cabina'];
+        $descripcion = $reserva['descripcion'];
+        $asiento = $reserva['asiento'];
+
+        }
+
+        header("location: /vuelos"); 
+
+        }
+
+     
 }

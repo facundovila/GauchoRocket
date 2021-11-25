@@ -13,7 +13,8 @@
                         <th scope="col">Destino</th>
                         <th scope="col">Fecha del Vuelo</th>
                         <th scope="col">Fecha de Reserva</th>
-                        <th scope="col">Precio</th>           
+                        <th scope="col">Precio</th> 
+                        <th scope="col">Estado de Pago</th>            
                     </tr>
                     </thead>
                     <tbody>
@@ -25,11 +26,12 @@
                         <td><p>{{fecha}}</p></td>
                         <td><p>{{fechaDeReserva}}</p></td>
                         <td><p>$ {{precio}}</p></td>
+                        <td><p>{{pago}}</p></td>
 
-                        {{^checkin}}    
+                        <td><a href="/MisReservas/verReservaPDF?codigoReserva={{codigoReserva}}">Ver Reserva</a></td>  
                         <td><a href="/MisReservas/eliminarReserva?codigoReserva={{codigoReserva}}">Eliminar Reserva</a></td>
                         <td><a href="/MisReservas/checkin?codigoReserva={{codigoReserva}}">Check In</a></td>
-                        {{/checkin}}
+                        
 
                     </tr>
                     {{/ reservas}}</tbody>
