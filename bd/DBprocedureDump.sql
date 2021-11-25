@@ -545,7 +545,7 @@ begin
 
     call GR_getUsuarioEmail(idUsuario,@emailUsuario);
 
-    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio, rP.fechaReserva as fechaDeReserva,
+    select codigoReserva, l.nombre as destino, l2.nombre as origen, fecha, totalAPagar as precio, rP.fechaReserva as fechaDeReserva,
     case when rp.checkin = 1 then 'Confirmado' else 'Pendiente' end as pago
     from reservaPasaje as rP
              join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
@@ -565,7 +565,7 @@ DELIMITER //
 create procedure GR_getReserva(in codigoReserva varchar(8))
 begin
 
-    select codigoReserva, l.nombre as origen, v.descripcion as descripcion, l2.nombre as destino, fecha, totalAPagar as precio,
+    select codigoReserva, l.nombre as destino, v.descripcion as descripcion, l2.nombre as origen, fecha, totalAPagar as precio,
              TS.descripcion as servicio,U.asiento as asiento,case when rp.checkin = 1 then 'Confirmado' else 'Pendiente' end as pago, TC.descripcion as cabina
              from reservaPasaje as rP
              join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
