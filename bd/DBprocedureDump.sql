@@ -569,18 +569,23 @@ DELIMITER //
 create procedure GR_getReserva(in codigoReservo varchar(8))
 begin
 
-    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio
-    from reservaPasaje as rP
+    select codigoReserva, l.nombre as origen, v.descripcion as descripcion, l2.nombre as destino, fecha, totalAPagar as precio,
+             TS.descripcion as servicio, TC.descripcion as cabina
+             from reservaPasaje as rP
              join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
              join vuelo v on v.codigo = rP.fkCodigoVuelo
              join trayecto t on v.codigoTrayecto = t.codigo
              join locacion l on l.codigo = t.codigoLocacionDestino
              join locacion l2 on l2.codigo = t.codigoLocacionOrigen
-    where rP.codigoReserva=codigoReserva;
+             join ubicacion as U on U.fkcodigoReserva=rP.codigoReserva
+             join tipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
+             join tipoDeServicio as TS on rP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
+	  where rP.codigoReserva=codigoReserva;
 
 end//
 DELIMITER ;
 
+      
 drop procedure if exists GR_verificarVueloConPasajesDisponibles;
 DELIMITER //
 create procedure GR_verificarVueloConPasajesDisponibles(in codigoVuelo int)

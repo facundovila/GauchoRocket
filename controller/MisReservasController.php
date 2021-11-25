@@ -52,9 +52,11 @@ class MisReservasController extends BaseController {
                 $origen = $reserva['origen'];
                 $destino = $reserva['destino'];
                 $fecha = $reserva['fecha'];
-                $precio = $reserva['precio'];
+                $servicio = $reserva['servicio'];
+                $cabina = $reserva['cabina'];
+                $descripcion = $reserva['descripcion'];
 
-                $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $precio);
+                $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion);
             } else {
                 ErrorController::showError("Algo salió mal");
                 die();
