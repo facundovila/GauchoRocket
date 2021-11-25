@@ -1,7 +1,7 @@
 <?php
 
 class CheckingHTMLGenerator {
-    // Ingresar más datos si es necesario
+    
     public static function generateHTML($qr, $codigoReserva, $origen, $destino, $fecha, $nombre, $apellido, $cabina, $servicio, $descripcion): string {
         return '
             <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">

@@ -615,6 +615,8 @@ begin
  call GR_obtenerEsperaMasReciente(@codigoVuelo,@email,@fecha);
  
  select @codigoVuelo;
+ 
+start transaction;
 
  if exists(select fkemailUsuario from listaEspera) and (@codigoVuelo=@codigoVueloOld)
  then
@@ -638,6 +640,13 @@ begin
     update reservaPasaje as rP set fkcodigoTipoDeServicio= null, fechaReserva = null where rP.codigoReserva = codigoReserva;
     
  end if;
+ 
+  if exists(select fkcodigoReserva from pasaje where fkcodigoReserva=codigoReserva)
+	then
+	rollback; 
+    else
+    commit;
+	end if;
     
 end//
 DELIMITER ;
