@@ -61,7 +61,7 @@ class MisReservasController extends BaseController {
             }
         }
 
-        header("location: /MisReservas");
+        header("location: /pagoReserva");
 
     }
 }
