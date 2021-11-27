@@ -66,7 +66,7 @@ class MisReservasModel extends BaseModel {
 
             $this->sendMail->sendMail($email, $nombre .' ' .$apellido, 'CheckIn: ' . $origen . '-' . $destino, $html);
         } else {
-            ErrorController::showError("Algo salió mal");
+            ErrorController::showError("Algo salió mall");
         }
     }
 

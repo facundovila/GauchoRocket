@@ -63,12 +63,13 @@ class MisReservasController extends BaseController {
 
                 $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion, $asiento);
             } else {
+
                 ErrorController::showError("Algo salió mal");
                 die();
             }
         }
 
-        header("location: /pagoReserva");
+        header("location: /MisReservas");
 
     }
 

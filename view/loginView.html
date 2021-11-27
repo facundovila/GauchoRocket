@@ -50,37 +50,36 @@
 <main class="container">
     <section>
 
-        <div class="row">
-            <div class="col-md-6">
+        <div >
+            <div >
 
                 <div class="iniciosesion">
 
                     <form class="box" action="/login/login" method="post" >
                         <h3>INICIAR SESI&Oacute;N</h3><br>
-                        <p class="text-muted"> Ingrese su Usuario </p>
+
                         {{^ error-usuario}}
-                        <input type="text" name="usuario" placeholder="Usuario" value="{{usuario}}">
+                        <input type="text" name="usuario" placeholder="ingrese su Usuario" value="{{usuario}}">
                         {{/ error-usuario}}
                         {{# error-usuario}}
-                        <input type="text" name="usuario" placeholder="Usuario" class="is-invalid" value="{{usuario}}">
+                        <input type="text" name="usuario" placeholder="ingrese su Usuario" class="is-invalid" value="{{usuario}}">
                         <div id="validationUsuario" class="invalid-feedback">
                             {{error-usuario}}
                         </div>
                         {{/ error-usuario}}
 
-                        <p class="text-muted"> Ingrese su contraseña </p>
+
                         {{^ error-password}}
-                        <input type="password" name="password" placeholder="Contraseña" value="{{password}}">
+                        <input type="password" name="password" placeholder="ingrese su Contraseña" value="{{password}}">
                         {{/ error-password}}
 
                         {{# error-password}}
-                        <input type="password" name="password" placeholder="Contraseña" value="{{password}}" class="is-invalid">
+                        <input type="password" name="password" placeholder="ingrese su Contraseña" value="{{password}}" class="is-invalid">
                         <div id="validationPassword" class="invalid-feedback">
                             {{error-password}}
                         </div>
                         {{/ error-password}}
 
-                        <a class="olvid text-muted" href="#">¿Olvidaste tu Contraseña?</a>
                         <a class="olvid text-muted d-block" href="/register">Registrarte</a>
                         <input type="submit" name="login" value="Login" href="#">
 

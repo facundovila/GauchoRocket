@@ -5,21 +5,15 @@
 {{/datosUsuario}}
 
 <main class="usuario">
-    <nav>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-    <section class="d-flex contenedor" id="wrapper">
 
-      <article class="contenido1" id="sidebar-wrapper">
+    <section class="d-flex contenedor contenedoruser" id="wrapper">
+
+      <article class="contenido1 " id="sidebar-wrapper">
           <div >
-
               <div class="list-group list-group-flush p-2   ">
-                  <a href="/user" class="list-group-item list-group-item-action bg-gris menu-lateral margin2 "> Mis datos</a>
-                  <a href="/turn" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Turno Medico</a>
-                  <a href="/MisReservas" class="list-group-item list-group-item-action bg-gris menu-lateral margin2"> Mis Reservas</a>
-
+                  <a href="/user" class="list-group-item list-group-item-action bg-gris   "> Mis datos</a>
+                  <a href="/turn" class="list-group-item list-group-item-action bg-gris  "> Turno Medico</a>
+                  <a href="/MisReservas" class="list-group-item list-group-item-action bg-gris  "> Mis Reservas</a>
 
               </div>
           </div>
@@ -28,7 +22,7 @@
 
       </article >
         {{#datosUsuario}}
-        <article  class="contenido2" id="page-content-wrapper">
+        <article  class="contenido2 contenido3" id="page-content-wrapper">
 
             <h3>Mis datos</h3>
             <div class="padding">
