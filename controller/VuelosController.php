@@ -52,11 +52,6 @@ require_once 'ErrorController.php';
         return $millis >= $currentMillis;
     }
 
-    public function controlBrowser(){
-
-        
-
-    }
 
      public function datosReserva() {  // logout sigue roto desde este punto
          $id = $_SESSION["id"];
@@ -175,4 +170,6 @@ require_once 'ErrorController.php';
         }
 
      }
+
+     
 }
