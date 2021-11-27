@@ -12,7 +12,6 @@ class MisReservasController extends BaseController {
         parent::__construct($printer);
         $this->model = $model;
         $this->pdfPrinter = $pdfPrinter;
-
     }
 
     public function show() {
@@ -38,34 +37,6 @@ class MisReservasController extends BaseController {
 
             $this->model->deleteReserva($codigoReserva);
 
-        }
-
-        header("location: /MisReservas");
-
-    }
-
-    public function checkin(){
-
-        if(isset($_GET['codigoReserva'])){
-
-            $codigoReserva = $_GET['codigoReserva'];
-
-            $codigoCheckIn = $this->model->doCheckin($codigoReserva);
-            if (!empty($codigoCheckIn)) {
-                $reserva = $this->model->getReservaFromId($codigoReserva);
-                $origen = $reserva['origen'];
-                $destino = $reserva['destino'];
-                $fecha = $reserva['fecha'];
-                $servicio = $reserva['servicio'];
-                $cabina = $reserva['cabina'];
-                $descripcion = $reserva['descripcion'];
-                $asiento = $reserva['asiento'];
-
-                $this->model->sendCheckIn($codigoCheckIn, $codigoReserva, $origen, $destino, $fecha, $cabina, $servicio, $descripcion, $asiento);
-            } else {
-                ErrorController::showError("Algo salió mal");
-                die();
-            }
         }
 
         header("location: /MisReservas");

@@ -565,18 +565,17 @@ DELIMITER //
 create procedure GR_getReserva(in codigoReserva varchar(8))
 begin
 
-    select codigoReserva, l.nombre as destino, v.descripcion as descripcion, l2.nombre as origen, fecha, totalAPagar as precio,
-             TS.descripcion as servicio,U.asiento as asiento,case when rp.checkin = 1 then 'Confirmado' else 'Pendiente' end as pago, TC.descripcion as cabina
-             from reservaPasaje as rP
+    select codigoReserva, l.nombre as origen, l2.nombre as destino, fecha, totalAPagar as precio,
+           rP.fechaReserva as fechaDeReserva, tipo_trayecto.nombre as tipo_trayecto, tipo_servicio.descripcion as tipo_servicio
+    from reservaPasaje as rP
              join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
              join vuelo v on v.codigo = rP.fkCodigoVuelo
              join trayecto t on v.codigoTrayecto = t.codigo
              join locacion l on l.codigo = t.codigoLocacionDestino
              join locacion l2 on l2.codigo = t.codigoLocacionOrigen
-             join ubicacion as U on U.fkcodigoReserva=rP.codigoReserva
-             join tipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
-             join tipoDeServicio as TS on rP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
-	  where rP.codigoReserva=codigoReserva;
+             join tipodeservicio tipo_servicio on rP.fkcodigoTipoDeServicio = tipo_servicio.codigoTipoDeServicio
+             join tipodetrayecto tipo_trayecto on t.codigoTipoDeTrayecto = tipo_trayecto.codigo
+    where rP.codigoReserva=codigoReserva;
 
 end//
 DELIMITER ;
