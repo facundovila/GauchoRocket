@@ -12,7 +12,7 @@ class ErrorController extends BaseController {
         echo $this->printer->render("view/errorView.html", $data);
     }
 
-    public static function showError(string $error, string $title = "Error") {
+    public static function showError(string $error = "Algo salió mal", string $title = "Error") {
         header("location: /error?title=" .$title ."&error=" .$error);
         exit();
     }

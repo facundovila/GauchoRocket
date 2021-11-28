@@ -1,0 +1,69 @@
+{{>header}}
+
+<title>Reservas-GauchoRocket</title>
+<main>
+    <main class="usuario">
+        <section class="d-flex contenedor" id="wrapper">
+            <article  class="contenido2 " id="page-content-wrapper">
+
+                <div class="card padding mx-auto" style="width: 45rem;">
+
+                    <div class=" card-body padding px-5 ">
+                        <h3 class="card-title">Reserva</h3>
+                        <div class=" padding px-2 ">
+                            {{#usuario}}
+                            <h4 class="card-subtitle mb-2 text-muted">datos del pasajero</h4>
+                            <div class=" px-2 ">
+                                <p> nombre y apellido : {{nombre}} {{apellido}} </p>
+                                <p> email: {{email}}</p>
+                            </div>
+                            {{/usuario}}
+
+                            <h4 class="card-subtitle mb-2 text-muted">datos del vuelo </h4>
+                            <div class=" px-2 ">
+                                {{#reserva}}
+                                <input hidden value="{{codigo}}" name="codigo_vuelo">
+                                <p>Partida:{{origen}}</p>
+                                <p>Destino: {{destino}}</p>
+                                <p>Trayecto: {{tipo_trayecto}}</p>
+                                <p>Servicio: {{tipo_servicio}}</p>
+                                <p>fecha de partida: {{fecha}}</p>
+                                {{/reserva}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Esto es el botón de Mercado Pago que se renderiza desde el script -->
+                    <div id="mp-button" style="margin-top: 2em">
+
+                    </div>
+
+                </div>
+
+                <br>
+            </article>
+        </section>
+    </main>
+</main>
+
+<script src='https://sdk.mercadopago.com/js/v2'></script>
+<script>
+    // Agrega credenciales de SDK
+    const mp = new MercadoPago('{{ public_key }}', {
+        locale: 'es-AR'
+    });
+
+    // Inicializa el checkout
+    mp.checkout({
+        preference: {
+            id: '{{ preference_id }}'
+        },
+        render: {
+            container: '#mp-button', // Indica el nombre de la clase donde se mostrará el botón de pago
+            label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+        }
+    });
+</script>
+
+{{>footer}}
