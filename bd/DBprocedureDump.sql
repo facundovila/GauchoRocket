@@ -520,19 +520,21 @@ DELIMITER ;
 
 drop procedure if exists GR_validarPasajeUnicoPorUsuarioVuelo; -- Un usuario solo puede sacar un pasaje por vuelo
 DELIMITER //
-create procedure GR_validarPasajeUnicoPorUsuarioVuelo(in usuarioId int, in codigoVuelo int,out esValido boolean)
+create procedure GR_validarPasajeUnicoPorUsuarioVuelo(in idUsuario int, in codigoVuelo int)
 begin
       call GR_getUsuarioEmail(idUsuario,@emailUsuario);
       
-      if exists(select * from reservaUsuario
+      if not exists(select * from reservaUsuario
 				left join reservaPasaje on fkcodigoReserva=codigoReserva
 				where fkcodigoVuelo = codigoVuelo and fkemailUsuario=@emailUsuario)
 	  
       then
-	  set esValido=false;
+	  set @resultado= true;
       else
-	  set esValido = true;
+	  set @resultado = null;
       end if;
+      
+      select @resultado;
 
 end//
 DELIMITER ;
@@ -580,7 +582,28 @@ begin
 end//
 DELIMITER ;
 
-      
+drop procedure if exists GR_getReservaPDFedition;
+DELIMITER //
+create procedure GR_getReservaPDFedition(in codigoReserva varchar(8))
+begin
+
+    select codigoReserva, l.nombre as destino, v.descripcion as descripcion, l2.nombre as origen, fecha, totalAPagar as precio,
+             TS.descripcion as servicio,U.asiento as asiento,case when rp.checkin = 1 then 'Confirmado' else 'Pendiente' end as pago, TC.descripcion as cabina
+             from reservaPasaje as rP
+             join reservaUsuario as rU on rP.codigoReserva=rU.fkcodigoReserva
+             join vuelo v on v.codigo = rP.fkCodigoVuelo
+             join trayecto t on v.codigoTrayecto = t.codigo
+             join locacion l on l.codigo = t.codigoLocacionDestino
+             join locacion l2 on l2.codigo = t.codigoLocacionOrigen
+             join ubicacion as U on U.fkcodigoReserva=rP.codigoReserva
+             join tipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
+             join tipoDeServicio as TS on rP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
+	  where rP.codigoReserva=codigoReserva;
+
+end//
+DELIMITER ;
+
+
 drop procedure if exists GR_verificarVueloConPasajesDisponibles;
 DELIMITER //
 create procedure GR_verificarVueloConPasajesDisponibles(in codigoVuelo int)
@@ -688,14 +711,29 @@ end//
 DELIMITER ;
 
 
-drop procedure if exists GR_getCheckIn;
+drop procedure if exists GR_validacionCheckinExistente; 
+DELIMITER //
+create procedure GR_validacionCheckinExistente(in codigoReserva varchar(8))
+begin
+
+	select codigo from pasaje where fkcodigoReserva=codigoReserva;
+    
+end//
+DELIMITER ;
+
+select codigo from pasaje where fkcodigoReserva='fc9835d1';
+
+select * from pasaje;
+
+
+drop procedure if exists GR_getCheckIn; -- esto no hace nada
 DELIMITER //
 create procedure GR_getCheckIn(in idUsuario int)
 begin
 
 	call GR_getUsuarioEmail(idUsuario,@emailUsuario);
     
-    select fecha from pasaje as P
+    select fechaCheckIn from pasaje as P
     inner join reservaPasaje as RP on P.fkcodigoReserva=RP.codigoReserva
     inner join reservaUsuario as RU on RP.codigoReserva=RU.fkcodigoReserva
     join tipodeservicio t on t.codigoTipoDeServicio = RP.fkcodigoTipoDeServicio
@@ -703,6 +741,7 @@ begin
     
 end//
 DELIMITER ;
+
 
 
 

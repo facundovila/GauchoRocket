@@ -140,6 +140,17 @@ class VuelosModel extends BaseModel{
 
     }
 
+    public function validarReservaUnicaPorUsuarioVuelo($usuarioId,$codigoVuelo){
+
+        $query ='call GR_validarPasajeUnicoPorUsuarioVuelo(?, ?)';
+        $params = array($usuarioId,$codigoVuelo);
+
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
+
+
+        return $response == 1;
+    }
+
     /* Ejemplo de utilizacion de sp con out
     public function validarNivelVueloUsuarioB($idUsuario,$codigo){
         

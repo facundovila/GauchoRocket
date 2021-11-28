@@ -30,7 +30,7 @@ class CheckinModel extends BaseModel {
             $qr = $qrGenerator->getQRUrl($codigoCheckIn);
             $html = CheckingHTMLGenerator::generateHTML($qr, $codigoReserva, $origen, $destino, $fecha, $nombre, $apellido, $cabina, $servicio, $descripcion, $asiento);
 
-            $this->sendMail->sendMail(/*$email*/"sebastianruedaolarte@gmail.com", $nombre .' ' .$apellido, 'CheckIn: ' . $origen . '-' . $destino, $html);
+            $this->sendMail->sendMail($email, $nombre .' ' .$apellido, 'CheckIn: ' . $origen . '-' . $destino, $html);
         } else {
             ErrorController::showError("Algo salió mal");
         }

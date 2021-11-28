@@ -18,6 +18,15 @@ class PaymentModel extends BaseModel {
         }
     }
 
+    public function getCheckinValidacion(string $reserva_id): array {
+        $query = 'call GR_validacionCheckinExistente(?)';
+        $param = array($reserva_id);
+
+        $response = $this->database->executeQueryParams($param, $query);
+
+        return $response;
+    }
+
     public function getUserFromId(string $usuario_id): array {
         $query= "SELECT nombre, apellido, email FROM usuario 
              WHERE id = ? ";

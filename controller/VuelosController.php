@@ -53,7 +53,7 @@ require_once 'ErrorController.php';
     }
 
 
-     public function datosReserva() {  // logout sigue roto desde este punto
+     public function datosReserva() {  
          $id = $_SESSION["id"];
        
          if(isset($_GET['codigo'])) {
@@ -79,6 +79,13 @@ require_once 'ErrorController.php';
             echo $this->printer->render("view/reservarView.html", $data);
 
          }
+
+         $reservaExistente = $this->vuelosModel->validarReservaUnicaPorUsuarioVuelo($id,$codigo);
+
+         if (!$reservaExistente) {
+             ErrorController::showError("Ya registra un pasaje para este vuelo.");
+             die();
+         } 
 
          $esNivelVueloValido = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
 
@@ -126,9 +133,9 @@ require_once 'ErrorController.php';
          $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
          $currentMillis = strtotime($dateTime->format("Y-m-d H:i:s"));
          $reservaMillis = strtotime('-1 day',strtotime($date));
-         //die($dateTime->format("Y-m-d H:i:s") . '<br>' . $date);
+         
 
-         return $currentMillis <= $reservaMillis;
+         return $currentMillis >= $reservaMillis;
      }
 
      

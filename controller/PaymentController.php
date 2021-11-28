@@ -1,6 +1,7 @@
 <?php
 
 require_once 'BaseController.php';
+require_once 'controller/ErrorController.php';
 
 class PaymentController extends BaseController {
     private PaymentModel $model;
@@ -42,6 +43,13 @@ class PaymentController extends BaseController {
             ErrorController::showError('Algo salió mal');
         }
 
+        $checkin = $this->model->getCheckinValidacion($reserva_id);
+
+        if (!empty($checkin)) {
+            ErrorController::showError('Ya Realizo el Checkin, se le reenviaran los datos.'); // hacer
+            
+        }
+
         require_once 'third-party/mercado-pago-sdk/vendor/autoload.php';
         MercadoPago\SDK::setAccessToken($this->mpAccessToken);
 
@@ -70,4 +78,5 @@ class PaymentController extends BaseController {
 
         echo $this->printer->render("view/paymentView.html", $data);
     }
+    
 }
