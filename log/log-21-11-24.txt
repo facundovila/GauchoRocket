@@ -1,0 +1,12 @@
+[21-11-24 01:51:57][INFO] correo enviado con éxito
+[21-11-24 01:53:43][INFO] correo enviado con éxito
+[21-11-24 01:55:27][INFO] correo enviado con éxito
+[21-11-24 02:00:01][INFO] correo enviado con éxito
+[21-11-24 02:03:03][INFO] correo enviado con éxito
+[21-11-24 02:03:56][INFO] correo enviado con éxito
+[21-11-24 02:06:11][INFO] correo enviado con éxito
+[21-11-24 02:36:36][INFO] correo enviado con éxito
+[21-11-24 02:38:16][INFO] correo enviado con éxito
+[21-11-24 02:41:22][INFO] correo enviado con éxito
+[21-11-24 02:45:05][INFO] correo enviado con éxito
+[21-11-24 02:45:07][INFO] correo enviado con éxito

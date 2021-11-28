@@ -18,9 +18,11 @@ class SendMail {
     }
 
     private function setup($mail, $password) {
+        // setea el tiempo límite que puede tardar en enviar el email
+        set_time_limit(120);
 
         $this->mailer->IsSMTP(); // enable SMTP
-        $this->mailer->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+        $this->mailer->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only - 0 remove echos
         $this->mailer->SMTPAuth = true; // authentication enabled
 
         $this->mailer->Host = "smtp.gmail.com";
@@ -30,6 +32,7 @@ class SendMail {
         $this->mailer->IsHTML(true);
         $this->mailer->Username = $mail;
         $this->mailer->Password = $password;
+
         try {
             $this->mailer->SetFrom($mail, "Gaucho Rocket");
         } catch (Exception $e) {
@@ -45,9 +48,22 @@ class SendMail {
             $this->mailer->Body = $message;
 
             if ($this->mailer->send()) {
-                $this->logger->info("correo enviado con éxito");
+                $this->logger->info(
+                    "correo enviado con éxito \n"
+                    ."to: " .$to ."\n"
+                    ."name: " .$name ."\n"
+                    ."subject: " .$subject ."\n"
+                    ."message: " .$message ."\n"
+                );
             } else {
-                $this->logger->error("error al intentar enviar el correo");
+                $this->logger->error(
+                    "error al intentar enviar el correo \n"
+                    ."to: " .$to ."\n"
+                    ."name: " .$name ."\n"
+                    ."subject: " .$subject ."\n"
+                    ."message: " .$message ."\n"
+                );
+
                 die("No se pudo enviar el correo");
             }
         } catch (Exception $e) {

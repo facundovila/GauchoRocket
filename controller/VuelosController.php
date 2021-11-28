@@ -126,9 +126,9 @@ require_once 'ErrorController.php';
          $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
          $currentMillis = strtotime($dateTime->format("Y-m-d H:i:s"));
          $reservaMillis = strtotime('-1 day',strtotime($date));
+         //die($dateTime->format("Y-m-d H:i:s") . '<br>' . $date);
 
-
-         return $currentMillis >= $reservaMillis;
+         return $currentMillis <= $reservaMillis;
      }
 
      
