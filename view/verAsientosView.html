@@ -12,7 +12,7 @@
                         <h3 class="card-title">Elija su Asiento</h3>
                         <div class=" padding px-2 ">
 
-                           
+
 
                         <div id="seats">
                             {{# ubicaciones}}
@@ -21,10 +21,12 @@
                                    {{# ocupado}}
                                    disabled
                                    {{/ ocupado}} />
+
                             <label for="seat-{{asiento}}" class="seat">{{asiento}}</label>
                             {{/ ubicaciones}}
                         </div>
 
+                        </div>
                     </div>
 
                     <input type="submit" class="btn btn-primary m-3" value="Confirmar Reserva" />

@@ -1,0 +1,73 @@
+[21-11-27 07:54:54][ERROR] error al intentar enviar el correo
+[21-11-27 08:19:26][INFO] correo enviado con éxito
+[21-11-27 08:21:39][INFO] correo enviado con éxito
+[21-11-27 08:29:56][INFO] correo enviado con éxito
+[21-11-27 08:34:20][INFO] correo enviado con éxito
+[21-11-27 08:39:07][INFO] correo enviado con éxito
+[21-11-27 08:39:58][INFO] correo enviado con éxito
+[21-11-27 08:51:12][INFO] correo enviado con éxito
+[21-11-27 09:09:45][INFO] correo enviado con éxito
+[21-11-27 09:14:28][INFO] correo enviado con éxito
+[21-11-27 09:14:37][INFO] correo enviado con éxito
+[21-11-27 09:14:51][INFO] correo enviado con éxito
+[21-11-27 09:15:23][INFO] correo enviado con éxito
+[21-11-27 09:19:33][INFO] correo enviado con éxito
+[21-11-27 09:19:42][INFO] correo enviado con éxito
+[21-11-27 09:19:47][INFO] correo enviado con éxito
+[21-11-27 09:19:51][INFO] correo enviado con éxito
+[21-11-27 09:20:05][INFO] correo enviado con éxito
+[21-11-27 09:23:11][INFO] correo enviado con éxito
+[21-11-27 09:25:25][INFO] correo enviado con éxito
+[21-11-27 09:25:30][INFO] correo enviado con éxito
+[21-11-27 09:25:35][INFO] correo enviado con éxito
+[21-11-27 09:25:39][INFO] correo enviado con éxito
+[21-11-27 09:25:45][INFO] correo enviado con éxito
+[21-11-27 09:27:12][INFO] correo enviado con éxito
+[21-11-27 09:27:18][INFO] correo enviado con éxito
+[21-11-27 09:28:02][INFO] correo enviado con éxito
+[21-11-27 09:28:06][INFO] correo enviado con éxito
+[21-11-27 09:33:01][INFO] correo enviado con éxito
+to: sebastianruedaolarte@gmail.com
+name:
+subject: CheckIn: EEI-Buenos Aires
+message:
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=ec7f08ce&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />
+                    <p><b>C&oacute;digo de reserva:</b> 8347944f</p>
+                    <p><b>Pasaje de:</b>  </p>
+                    <p><b>Tipo de Servicio:</b> </p>
+                    <p><b>Tipo de Cabina:</b> </p>
+                    <p><b>Trayecto:</b> </p>
+                    <p><b>Nro de Asiento:</b> </p>
+                    <p><b>Origen:</b> EEI</p>
+                    <p><b>Destino:</b> Buenos Aires</p>
+                    <p><b>Fecha:</b> 2021-12-25 23:00:00</p>
+                </div>
+            </div>
+
+
+[21-11-27 09:36:43][INFO] correo enviado con éxito
+to: sebastianruedaolarte@gmail.com
+name:
+subject: CheckIn: EEI-Buenos Aires
+message:
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=ec7f08ce&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />
+                    <p><b>C&oacute;digo de reserva:</b> 8347944f</p>
+                    <p><b>Pasaje de:</b>  </p>
+                    <p><b>Tipo de Servicio:</b> </p>
+                    <p><b>Tipo de Cabina:</b> </p>
+                    <p><b>Trayecto:</b> </p>
+                    <p><b>Nro de Asiento:</b> </p>
+                    <p><b>Origen:</b> EEI</p>
+                    <p><b>Destino:</b> Buenos Aires</p>
+                    <p><b>Fecha:</b> 2021-12-25 23:00:00</p>
+                </div>
+            </div>
+
+
+[21-11-27 01:44:03][INFO] correo enviado con éxito

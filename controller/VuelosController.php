@@ -23,7 +23,7 @@ require_once 'ErrorController.php';
         $fecha_partida = $_POST["fecha_partida"];
         $tipo = (int) $_POST["tipo"] ?? -1;
 
-        if (empty($this->vuelosModel->getLocacion((int) null))) {
+        if (empty($this->vuelosModel->getLocacion((int) $origen))) {
             ErrorController::showError("La ubicación de partida no existe");
         }
 
@@ -52,13 +52,8 @@ require_once 'ErrorController.php';
         return $millis >= $currentMillis;
     }
 
-    public function controlBrowser(){
 
-        
-
-    }
-
-     public function datosReserva() {  // logout sigue roto desde este punto
+     public function datosReserva() {  
          $id = $_SESSION["id"];
        
          if(isset($_GET['codigo'])) {
@@ -84,6 +79,13 @@ require_once 'ErrorController.php';
             echo $this->printer->render("view/reservarView.html", $data);
 
          }
+
+         $reservaExistente = $this->vuelosModel->validarReservaUnicaPorUsuarioVuelo($id,$codigo);
+
+         if (!$reservaExistente) {
+             ErrorController::showError("Ya registra un pasaje para este vuelo.");
+             die();
+         } 
 
          $esNivelVueloValido = $this->vuelosModel->validarNivelVueloUsuario($id, $codigo);
 
@@ -131,7 +133,7 @@ require_once 'ErrorController.php';
          $dateTime = new DateTime('now', new DateTimeZone('America/Argentina/Buenos_Aires'));
          $currentMillis = strtotime($dateTime->format("Y-m-d H:i:s"));
          $reservaMillis = strtotime('-1 day',strtotime($date));
-
+         
 
          return $currentMillis >= $reservaMillis;
      }
@@ -175,4 +177,6 @@ require_once 'ErrorController.php';
         }
 
      }
+
+     
 }

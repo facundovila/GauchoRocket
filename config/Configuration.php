@@ -2,6 +2,7 @@
 class Configuration{
 
     private $config;
+    private $mpCredentials;
 
     public function createLoginController(): LoginController {
         require_once "controller/LoginController.php";
@@ -45,7 +46,8 @@ class Configuration{
 
     public function createMisReservasController(): MisReservasController {
         require_once 'controller/MisReservasController.php';
-        return new MisReservasController($this->createMisReservasModel(), $this->createPrinter());
+        $PdfPrinter = $this->getPdfPrinterHelper();
+        return new MisReservasController($this->createMisReservasModel(), $this->createPrinter(),$PdfPrinter);
     }
 
     public function createAdminController(): AdminController {
@@ -56,6 +58,24 @@ class Configuration{
     public function createErrorController(): ErrorController {
         require_once "controller/ErrorController.php";
         return new ErrorController($this->createPrinter());
+    }
+
+    public function createLogoutController(): LogoutController {
+        require_once 'controller/LogoutController.php';
+        return new LogoutController();
+    }
+
+    public function createPaymentController(): PaymentController {
+        require_once 'controller/PaymentController.php';
+        $mpCredentials = $this->getMPCredentials();
+        $config = $this->getConfig();
+        return new PaymentController($this->createPrinter(), $this->createPaymentModel(),
+            $mpCredentials["public-key-test"], $mpCredentials["access-token-test"], $config["base_url"]);
+    }
+
+    public function createCheckinController(): CheckinController {
+        require_once 'controller/CheckinController.php';
+        return new CheckinController($this->createPrinter(), $this->createCheckinModel());
     }
 
     private function createLoginModel(): LoginModel {
@@ -119,6 +139,19 @@ class Configuration{
         return new AdminModel($database);
     }
 
+    private function createPaymentModel(): PaymentModel {
+        require_once 'model/PaymentModel.php';
+        $database = $this->getDatabase();
+        return new PaymentModel($database);
+    }
+
+    private function createCheckinModel(): CheckinModel {
+        require_once 'model/CheckinModel.php';
+        $database = $this->getDatabase();
+        $sendmail = $this->getSendMailHelper();
+        return new CheckinModel($database, $sendmail);
+    }
+
     private function getDatabase(): MyDatabase {
         require_once("helpers/MyDatabase.php");
         $config = $this->getConfig();
@@ -131,6 +164,11 @@ class Configuration{
         return new SendMail($this->getLogger(), $config["email"], $config["email_password"]);
     }
 
+    private function getPdfPrinterHelper(): PdfPrinter {
+        require_once "helpers/PdfPrinter.php";
+        return new PdfPrinter();
+    }
+
     private function getBaseUrl(): string {
         $config = $this->getConfig();
         return $config["base_url"];
@@ -141,6 +179,13 @@ class Configuration{
             $this->config = parse_ini_file("config/config.ini");
 
         return  $this->config;
+    }
+
+    private function getMPCredentials(): bool|array {
+        if( is_null( $this->mpCredentials ))
+            $this->mpCredentials = parse_ini_file("config/mp-credentials.ini");
+
+        return  $this->mpCredentials;
     }
 
     private function getLoginCheck(){

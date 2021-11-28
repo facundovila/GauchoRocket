@@ -42,4 +42,15 @@
     #wrapper.toggled #sidebar-wrapper {
         margin-left: -15rem;
     }
+    #sidebar-wrapper .list-group {
+        width: 8rem;
+    }
+
+}
+
+@media screen and (min-width:60em){
+    #sidebar-wrapper .list-group {
+        width: 15rem;
+    }
+
 }

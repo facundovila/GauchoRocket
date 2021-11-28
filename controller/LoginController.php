@@ -33,7 +33,7 @@ class LoginController extends BaseController
         }
 
         if ($password == null) {
-            $this->showError($email, $password, "error-password", "La contraseña ingresada no es válida");
+            $this->showError($usuario, $password, "error-password", "La contraseña ingresada no es válida");
             exit();
         }
 

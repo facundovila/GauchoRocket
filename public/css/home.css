@@ -1,23 +1,19 @@
+
+
 .banner-buscador {
-    height: 45em;
+    height: 29em;
     position: relative;
 
-}
-
-
-
-
-
-
-
-.main-slider {
-    position: absolute;
-    top: 0;
 
 }
-
 .carousel-inner {
     height: 35em;
+}
+
+.cartascentradas{
+    align-items: center;
+    align-content: center;
+
 }
 
 .carousel-inner img {
@@ -25,44 +21,40 @@
 
 }
 
+.main-slider {
+    position: absolute;
+    top: 0;
+
+}
+
 .center{
     text-align: center;
     align-items: center;
+    margin :auto;
+}
+
+.widthcard{
+    width: 20em ;
 }
 
 
-
-
-@media screen and (max-width:60em){
+@media screen and (min-width:47em){
     .banner-buscador {
 
         height: 35em;
 
     }
-    .carousel-inner {
-
-    }
-    .cartascentradas{
-        align-items: center;
-        align-content: center;
-
-    }
 }
 
-@media screen and (max-width:47em){
+@media screen and (min-width:60em){
     .banner-buscador {
-        height: 29em;
-
-
-    }
-    .carousel-inner {
+        height: 45em;
+        position: relative;
 
     }
 
-    .cartascentradas{
-        align-items: center;
-        align-content: center;
-        margin-left: 5em;
+    .widthcard{
+        width: 18em ;
     }
 
 
