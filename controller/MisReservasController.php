@@ -31,9 +31,18 @@ class MisReservasController extends BaseController {
 
     public function eliminarReserva(){
 
+        $id = $_SESSION["id"];
+
         if(isset($_GET['codigoReserva'])){
 
             $codigoReserva = $_GET['codigoReserva'];
+
+            $checkinRealizado = $this->model->getCheckin($id,$codigoReserva);
+
+            if(!$checkinRealizado){
+            ErrorController::showError("No puedes borrar una reserva a la que ya hiciste Checkin");
+            die();
+            }
 
             $this->model->deleteReserva($codigoReserva);
 

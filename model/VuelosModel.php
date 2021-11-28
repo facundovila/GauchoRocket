@@ -147,7 +147,7 @@ class VuelosModel extends BaseModel{
 
         $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
 
-
+       
         return $response == 1;
     }
 

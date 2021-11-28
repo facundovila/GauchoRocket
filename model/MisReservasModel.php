@@ -12,11 +12,14 @@ class MisReservasModel extends BaseModel {
         return $this->database->executeQueryParams($param, $query);
     }
 
-    public function getCheckin(string $usuarioId){
-        $query = "call GR_getCheckIn(?)";
-        $param = array($usuarioId);
+    public function getCheckin(string $usuarioId,string $codigoReserva){
+        $query = "call GR_getCheckIn(?, ?)";
+        $params = array($usuarioId, $codigoReserva);
 
-        return $this->database->executeQueryParams($param, $query);
+        $response = $this->database->executeQueryParams($params,$query)[0]["@resultado"];
+
+
+        return $response == 1;
     }
 
     public function deleteReserva(string $codigoReserva) {

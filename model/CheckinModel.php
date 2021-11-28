@@ -50,7 +50,7 @@ class CheckinModel extends BaseModel {
     }
 
     public function getReservaFromId(string $codigoReserva) {
-        $query = 'call GR_getReserva(?)';
+        $query = 'call GR_getReservaPDFedition(?)';
         $param = array($codigoReserva);
 
         $response = $this->database->executeQueryParams($param, $query);
