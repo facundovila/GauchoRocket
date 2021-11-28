@@ -606,20 +606,16 @@ DELIMITER //
 create procedure GR_desalocarReserva(in codigoReserva varchar(8))
 begin
 
- set @codigoVueloOld=(select fkCodigoVuelo from reservaPasaje where codigoReserva=codigoReserva);
+ set @codigoVueloOld=(select fkCodigoVuelo from reservaPasaje as RP where RP.codigoReserva=codigoReserva);
  
  call GR_obtenerEsperaMasReciente(@codigoVuelo,@email,@fecha);
  
- select @codigoVuelo;
- 
 start transaction;
 
- if exists(select fkemailUsuario from listaEspera) and (@codigoVuelo=@codigoVueloOld)
+ if @codigoVueloOld in (select fkemailUsuario from listaEspera)
  then
  
     update reservaUsuario as rU set rU.fkemailUsuario = @email where rU.fkcodigoReserva = codigoReserva;
-    
-    update reservaPasaje as rP set checkin=false where rP.codigoReserva = codigoReserva;
     
     update reservaPasaje as rP set fechaReserva = @fecha where rP.codigoReserva = codigoReserva;
     
@@ -631,13 +627,11 @@ start transaction;
     
 	update ubicacion set ocupado = false where fkCodigoReserva=codigoReserva;
     
-    update reservaPasaje as rP set totalAPagar=null and checkin=false where rP.codigoReserva = codigoReserva;
-    
-    update reservaPasaje as rP set fkcodigoTipoDeServicio= null, fechaReserva = null where rP.codigoReserva = codigoReserva;
+    update reservaPasaje as rP set fkcodigoTipoDeServicio= null, fechaReserva = null , totalAPagar=null where rP.codigoReserva = codigoReserva;
     
  end if;
  
-  if exists(select fkcodigoReserva from pasaje where fkcodigoReserva=codigoReserva)
+  if codigoReserva in (select fkcodigoReserva from pasaje)
 	then
 	rollback; 
     else
@@ -646,7 +640,6 @@ start transaction;
     
 end//
 DELIMITER ;
-
 
 drop procedure if exists GR_obtenerEsperaMasReciente;
 DELIMITER //
@@ -664,6 +657,7 @@ begin
     
 end//
 DELIMITER ;
+
 
 
 drop procedure if exists GR_crearReservaUsuarioDeEspera;

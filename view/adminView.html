@@ -18,6 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{#admin}}
                     {{#vuelos}}
                     <tr>
                         <td><p>{{origen}}</p></td>
@@ -27,7 +28,7 @@
                         <td><p>{{precio}}</p></td>
                         <td><a href="/admin/createReservas/codigoVuelo={{codigo}}">Generar Reservas</a></td>
                     </tr>
-                    {{/vuelos}}</tbody>
+                    {{/vuelos}}{{/admin}}</tbody>
                 </table>
             </div>
             <br>
