@@ -19,7 +19,6 @@ insert into usuario(email,rol,usuario,clave)values
 insert into nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values
 								(3,3),
                                 (5,3),
-                                (4,3),
                                 (1,3);
     
 insert into login(fkemailusuario,clave)values

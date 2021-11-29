@@ -26,7 +26,8 @@ class Configuration{
 
     public function createTurnController(): TurnController {
         require_once "controller/TurnController.php";
-        return new TurnController($this->createTurnModel(), $this->createPrinter());
+        $sendmail = $this->getSendMailHelper();
+        return new TurnController($this->createTurnModel(), $this->createPrinter(),$sendmail);
     }
 
     public function createUserController(): UserController{

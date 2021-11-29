@@ -1,13 +1,16 @@
 <?php
 
 require_once "BaseController.php";
+require_once 'helpers/TurnHTMLGenerator.php';
 
 class TurnController extends BaseController {
     private TurnModel $model;
+    private SendMail $sendMail;
 
-    public function __construct($model, $printer) {
+    public function __construct($model, $printer, $sendMail) {
         parent::__construct($printer);
         $this->model = $model;
+        $this->sendMail = $sendMail;
     }
 
     public function show() {
@@ -74,7 +77,28 @@ class TurnController extends BaseController {
 
         $data["nivel"] = $nivel;
 
+        $this->enviarTurnoMail();
+
         echo $this->printer->render("view/nivelVueloView.html", $data);
         }
+    }
+
+    public function enviarTurnoMail(){
+
+        $id = $_SESSION["id"];
+
+        $datosTurno = $this->model->getDatosMail($id);
+        $fechaTurno = $datosTurno['fechaTurno'];
+        $locacion = $datosTurno['locacion'];
+        $descripcion = $datosTurno['descripcion'];  
+        $nivel = $datosTurno['nivel'];
+        $nombre = $datosTurno['nombre'];
+        $apellido = $datosTurno['apellido'];
+        $email= $datosTurno['email'];
+
+        $html = TurnHTMLGenerator::generateHTML($fechaTurno, $locacion, $descripcion, $nivel, $nombre, $apellido);
+
+        $this->sendMail->sendMail($email, $nombre .' ' .$apellido, 'Su Turno Medico', $html);
+
     }
 }

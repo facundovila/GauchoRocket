@@ -747,6 +747,42 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_checkFechaTurno; 
+DELIMITER //
+create procedure GR_checkFechaTurno(in codigoCentro int,in fecha date)
+begin
+
+	if(codigoCentro not in (select codigoLocacion from centroMedico))
+    then
+    select null;
+	else
+	select distinct codigo from centroMedico as CM
+                   where CM.codigoLocacion = codigoCentro
+                   and CM.turnos > (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = fecha );
+                   
+	end if;
+        
+end//
+DELIMITER ;
+
+drop procedure if exists GR_fechaYNivelMail; 
+DELIMITER //
+create procedure GR_fechaYNivelMail(in idUsuario int)
+begin
+
+ select TM.fechaTurnoMedico as fechaTurno, L.nombre as locacion, NV.descripcion as descripcion, NV.nivel as nivel, U.nombre as nombre, U.apellido as apellido, U.email as email
+    from usuario as U 
+    inner join nivelVueloUsuario as NVU on NVU.fkIdUsuario = U.id
+    inner join nivelVuelo as NV on NV.codigo = NVU.fkNivelVuelo
+    inner join turnoMedico as TM on TM.fkIdUsuario = U.id
+    inner join centroMedico as CM on CM.codigoLocacion=TM.codigoLocacion
+    inner join locacion as L on L.codigo=CM.codigoLocacion
+    where U.id=idUsuario;
+    
+end//
+DELIMITER ;
+
+
 call GR_ejecutarReservas(3);
 call GR_ejecutarReservas(4);
 /*

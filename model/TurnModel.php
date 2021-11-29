@@ -32,26 +32,32 @@ class TurnModel extends BaseModel {
     }
 
     public function checkFechaTurno($centroId,$date){
-        if($centroId=13){
-            $centroId=3;
-        }
-
-        $query = "SELECT distinct codigo as id, turnos,codigoLocacion as Locacion
-        from centroMedico as CM where CM.codigo = ? and CM.turnos > 
-        (select distinct count(fechaTurnoMedico) from turnoMedico where fechaTurnoMedico = ? )";
+        
+        $query = "call GR_checkFechaTurno(?, ?)";
 
         return $this->database->executeQueryParams(array($centroId,$date), $query);
     }
 
     public function GetFechaMedica($id): array {
-    $query = "SELECT fechaTurnoMedico FROM turnomedico WHERE fkIdUsuario = ?";
+        $query = "SELECT fechaTurnoMedico FROM turnomedico WHERE fkIdUsuario = ?";
 
-    $response= $this->database->executeQueryParams(array($id), $query);
-    $data["fechaturno"]=$response;
+        $response= $this->database->executeQueryParams(array($id), $query);
+        $data["fechaturno"]=$response;
 
-    return $data;
+        return $data;
 
     }
+
+    public function getDatosMail($userId){
+        
+        $query = "call GR_fechaYNivelMail(?)";
+
+        $response=$this->database->executeQueryParams(array($userId), $query);
+
+        return $response[0];
+    }
+
+    
 
 
 }
