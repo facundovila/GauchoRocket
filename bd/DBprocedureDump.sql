@@ -838,6 +838,44 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_cabinaMasVendida; 
+DELIMITER //
+create procedure GR_cabinasMasVendida()
+begin
+
+		 select distinct count(ocupado) as vendidas ,TC.descripcion as tipoCabina from ubicacion as U
+		  inner join reservaPasaje as RP on U.fkcodigoReserva = RP.codigoReserva
+		  inner join pasaje as P on P.fkcodigoReserva = RP.codigoReserva
+		  inner join tipoDeCabina as TC on U.fkCodigoTipoDeCabina = TC.codigoTipoDeCabina
+		  where P.fkcodigoReserva is not null and U.ocupado is true
+          group by tipoCabina;
+        
+end//
+DELIMITER ;
+
+         
+          
+                               
+                               
+	
+
+select * from pasaje;
+
+drop procedure if exists GR_facturacionTotalMes; 
+DELIMITER //
+create procedure GR_facturacionTotalMes(out total double(10,2))
+begin
+
+	select sum(V.precio+TS.precio+TC.precio)into total from reservaPasaje as RP 
+				inner join Vuelo as V on RP.fkCodigoVuelo=V.codigo
+				inner join Ubicacion as U on RP.codigoReserva=U.fkcodigoReserva
+				inner join TipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
+				inner join TipoDeServicio as TS on RP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
+                inner join pasaje as P on P.fkCodigoReserva=RP.codigoReserva
+				where P.fkcodigoReserva is not null;
+    
+end//
+DELIMITER ;
 
 
 call GR_ejecutarReservas(3);

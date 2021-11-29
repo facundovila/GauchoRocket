@@ -1,87 +1,21 @@
-[21-11-29 06:27:58][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: facundo
-subject: Autentificación
-message: <a href="gauchorocket.localhost/validator/validate/hash=fbf3f2f7402b39d7e3400b5c38ab7665">Validar</a>
-
-[21-11-29 06:52:59][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: joan vila
-subject: Su Turno Medico
-message: 
-            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
-                <div style="border: 2px black solid; padding: 1em">
-                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos de su Turno Medico</h2>
-                    <h3>joan vila</h3> 
-                    <p><b>Lugar del Turno:</b> Buenos Aires</p> 
-                    <p><b>Nivel Obtenido:</b> Nivel Tres-3</p> 
-                    <p><b>Fecha:</b> 2021-11-25</p> 
-                </div>
-            </div>        
-        
-
-[21-11-29 06:53:02][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: joan vila
-subject: Su Turno Medico
-message: 
-            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
-                <div style="border: 2px black solid; padding: 1em">
-                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos de su Turno Medico</h2>
-                    <h3>joan vila</h3> 
-                    <p><b>Lugar del Turno:</b> Buenos Aires</p> 
-                    <p><b>Nivel Obtenido:</b> Nivel Tres-3</p> 
-                    <p><b>Fecha:</b> 2021-11-25</p> 
-                </div>
-            </div>        
-        
-
-[21-11-29 06:55:09][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: facundo
-subject: Autentificación
-message: <a href="gauchorocket.localhost/validator/validate/hash=8f5685087975ff0674e3ce561012ec5a">Validar</a>
-
-[21-11-29 06:57:25][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: facu
-subject: Autentificación
-message: <a href="gauchorocket.localhost/validator/validate/hash=a95df22fadb1889175174dc9194618b9">Validar</a>
-
-[21-11-29 07:00:47][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: quinla
-subject: Autentificación
-message: <a href="gauchorocket.localhost/validator/validate/hash=5f8c7ab258abd62a48dc35f82b1b95e0">Validar</a>
-
-[21-11-29 07:01:29][INFO] correo enviado con éxito 
-to: facundo.vila94@gmail.com
-name: joan vila
-subject: Su Turno Medico
-message: 
-            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
-                <div style="border: 2px black solid; padding: 1em">
-                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos de su Turno Medico</h2>
-                    <h3>joan vila</h3> 
-                    <p><b>Lugar del Turno:</b> Buenos Aires</p> 
-                    <p><b>Nivel Obtenido:</b> Nivel Uno-1</p> 
-                    <p><b>Fecha:</b> 2021-12-02</p> 
-                </div>
-            </div>        
-        
-
-[21-11-29 10:30:03][ERROR] error al intentar enviar el correo 
+[21-11-29 05:47:00][ERROR] error al intentar enviar el correo 
 to: vuelo
 name:  
-subject: Su Turno Medico
+subject: CheckIn: Marte-Europa
 message: 
             <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
                 <div style="border: 2px black solid; padding: 1em">
-                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos de su Turno Medico</h2>
-                    <h3> </h3> 
-                    <p><b>Lugar del Turno:</b> Shanghai</p> 
-                    <p><b>Nivel Obtenido:</b> Nivel Dos-2</p> 
-                    <p><b>Fecha:</b> 2021-11-18</p> 
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=069d8b02&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />   
+                    <p><b>C&oacute;digo de reserva:</b> 570c0273</p> 
+                    <p><b>Pasaje de:</b>  </p> 
+                    <p><b>Tipo de Servicio:</b> Spa</p> 
+                    <p><b>Tipo de Cabina:</b> Familiar</p> 
+                    <p><b>Trayecto:</b> Vuelo del BEBOP entre Marte y Europa</p> 
+                    <p><b>Nro de Asiento:</b> 2</p> 
+                    <p><b>Origen:</b> Marte</p> 
+                    <p><b>Destino:</b> Europa</p> 
+                    <p><b>Fecha:</b> 2021-11-26 09:00:00</p> 
                 </div>
             </div>        
         
