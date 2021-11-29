@@ -4,7 +4,7 @@ require_once "BaseModel.php";
 class FechaTurnoModel extends BaseModel
 {
     public function getFechaMedica($id): array {
-        $query = "SELECT fechaTurnoMedico FROM turnomedico WHERE fkIdUsuario = ?";
+        $query = "SELECT fechaTurnoMedico FROM turnoMedico WHERE fkIdUsuario = ?";
 
         $response= $this->database->executeQueryParams(array($id), $query);
         $data["turnosacado"]=$response;

@@ -10,7 +10,7 @@ class TurnModel extends BaseModel {
     }
 
     public function registrarTurno($id, $date, $centroId) {
-        $query = "INSERT INTO turnomedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) VALUES (?, ?, ?)";
+        $query = "INSERT INTO turnoMedico (fkIdUsuario, fechaTurnoMedico, codigoLocacion) VALUES (?, ?, ?)";
 
         $this->database->executeQueryParams(array($id, $date, $centroId), $query);
     }
@@ -23,7 +23,7 @@ class TurnModel extends BaseModel {
 
     public function checkNivelVuelo($id): array {
 
-        $query = "SELECT * from Usuario as U
+        $query = "SELECT * from usuario as U
          join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario 
          join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= ?";
 
@@ -44,7 +44,7 @@ class TurnModel extends BaseModel {
     }
 
     public function GetFechaMedica($id): array {
-    $query = "SELECT fechaTurnoMedico FROM turnomedico WHERE fkIdUsuario = ?";
+    $query = "SELECT fechaTurnoMedico FROM turnoMedico WHERE fkIdUsuario = ?";
 
     $response= $this->database->executeQueryParams(array($id), $query);
     $data["fechaturno"]=$response;

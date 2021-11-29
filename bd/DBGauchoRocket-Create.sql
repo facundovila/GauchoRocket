@@ -4,7 +4,7 @@ use dbgr;
 
 create table usuario(
 email varchar(70) primary key,
-rol varchar(10) DEFAULT "cliente",
+rol varchar(10) DEFAULT 'cliente',
 usuario varchar(50),
 clave varchar(40),
 nombre varchar(40),
@@ -101,7 +101,7 @@ fecha datetime,
 duracion int, -- determina el costo del viaje, mas dias implican mas costos de alojamiento, tambien depende del equipo que haga el viaje
 matriculaEquipo varchar(15),
 codigoTrayecto int,
-foreign key (codigoTrayecto) references Trayecto(codigo),
+foreign key (codigoTrayecto) references trayecto(codigo),
 foreign key (matriculaEquipo) references equipo(matricula)
 );
 

@@ -16,7 +16,6 @@ class TurnController extends BaseController {
         $nivelVuelo = $this->model->checkNivelVuelo($id);
 
 
-
         if (!empty($nivelVuelo)) {
 
             header("location: /fechaTurno/");

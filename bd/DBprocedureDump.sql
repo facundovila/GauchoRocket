@@ -125,11 +125,11 @@ DELIMITER //
 create procedure GR_validarNivelUsuario(in idUsuario int,out result int)
 begin
          
-		if exists(SELECT NV.nivel from Usuario as U
+		if exists(SELECT NV.nivel from usuario as U
 				  join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario 
 				  join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= idUsuario)
 		then
-		set result=(SELECT NV.nivel from Usuario as U
+		set result=(SELECT NV.nivel from usuario as U
 				    join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario 
 				    join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= idUsuario);
         
@@ -242,7 +242,7 @@ DELIMITER //
 create procedure GR_traerCabinas()
 begin
 		select codigoTipoDeCabina as codigoC,descripcion,precio
-		from TipoDeCabina;
+		from tipoDeCabina;
 end//
 DELIMITER ;
 
@@ -253,7 +253,7 @@ create procedure GR_traerServiciosYCabinas() -- esto solo funciona asi, esta har
 begin
 		select distinct codigoTipoDeServicio as codigoS,TS.descripcion as descripcionS,TS.precio as precioS,
         codigoTipoDeCabina as codigoC,TC.descripcion as descripcionC,TC.precio as precioC
-		from TipoDeServicio as TS cross join TipoDeCabina as TC
+		from tipoDeServicio as TS cross join tipoDeCabina as TC
         where codigoTipoDeServicio=codigoTipoDeCabina;
 end//
 DELIMITER ;
@@ -275,7 +275,7 @@ begin
 			
 			insert into ubicacion(asiento) values (i);
 
-			set @cU=(select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1);
+			set @cU=(select codigoUbicacion from ubicacion order by codigoUbicacion desc limit 1);
             
 			insert into reservaPasaje (codigoReserva,numero,fkcodigoVuelo)
 					values (substring(md5(rand()),1,8),@cU,codigoVuelo); 
@@ -371,7 +371,7 @@ begin
 			
 			insert into ubicacion(asiento) values (@asiento+1);
 
-			set @cU=(select codigoUbicacion from Ubicacion order by codigoUbicacion desc limit 1);
+			set @cU=(select codigoUbicacion from ubicacion order by codigoUbicacion desc limit 1);
             
 			insert into reservaPasaje (codigoReserva,numero,fkcodigoVuelo)
 					values (substring(md5(rand()),1,8),@cU,codigoVuelo); 
@@ -392,12 +392,12 @@ DELIMITER ;
 
 drop procedure if exists GR_cantidadDeAsientosDisponiblesXVuelo;
 DELIMITER //
-create procedure GR_cantidadDeAsientosDisponiblesXVuelo(in codigoVuelo int,out asientosDisponibles int) 
+create procedure GR_cantidadDeAsientosDisponiblesXVuelo(in codigoVuelo int,out _asientosDisponibles int)
  begin
  
-		select count(ocupado) as asientosDisponibles into asientosDisponibles
+		select count(ocupado) as asientosDisponibles into _asientosDisponibles
         from ubicacion as U inner join reservaPasaje as RP on U.fkcodigoReserva=RP.codigoReserva
-        inner join Vuelo on fkCodigoVuelo=codigo
+        inner join vuelo on fkCodigoVuelo=codigo
         where U.ocupado is false and codigo=codigoVuelo;
 
 end//
@@ -408,7 +408,7 @@ drop procedure if exists GR_listarUbicaciones;
 DELIMITER //
 create procedure GR_listarUbicaciones(in codigoVuelo int)
 begin
-    SELECT asiento, ocupado, codigoUbicacion from Ubicacion as U left join reservaPasaje as rP on U.fkcodigoReserva=rP.codigoReserva
+    SELECT asiento, ocupado, codigoUbicacion from ubicacion as U left join reservaPasaje as rP on U.fkcodigoReserva=rP.codigoReserva
                                                left join vuelo as v on rP.fkcodigoVuelo=v.codigo
     where fkcodigoVuelo = codigoVuelo ORDER BY asiento;
 end//
@@ -419,7 +419,7 @@ drop procedure if exists GR_listarUbicacionesSegunCabina;
 DELIMITER //
 create procedure GR_listarUbicacionesSegunCabina(in codigoVuelo int,in codigoC int)
 begin
-    SELECT asiento, ocupado, codigoUbicacion from Ubicacion as U left join reservaPasaje as rP on U.fkcodigoReserva=rP.codigoReserva
+    SELECT asiento, ocupado, codigoUbicacion from ubicacion as U left join reservaPasaje as rP on U.fkcodigoReserva=rP.codigoReserva
                                                left join vuelo as v on rP.fkcodigoVuelo=v.codigo
     where fkcodigoVuelo = codigoVuelo and fkCodigoTipoDeCabina = codigoC ORDER BY asiento;
 end//
@@ -430,11 +430,11 @@ drop procedure if exists GR_getUsuarioEmailFromIdConNivel;
 DELIMITER //
 create procedure GR_getUsuarioEmailFromIdConNivel(in idUsuario int,out email varchar(70))
 begin
-    if exists(SELECT NV.nivel from Usuario as U
+    if exists(SELECT NV.nivel from usuario as U
                                        join nivelVueloUsuario as NVU on U.id=NVU.fkIdUsuario
                                        join nivelVuelo as NV on NVU.fkNivelVuelo=NV.nivel WHERE U.id= idUsuario)
     then
-        set email=(SELECT U.email from Usuario as U
+        set email=(SELECT U.email from usuario as U
                    WHERE U.id= idUsuario);
     else
         set email='';
@@ -447,7 +447,7 @@ drop procedure if exists GR_getUsuarioEmail;
 DELIMITER //
 create procedure GR_getUsuarioEmail(in idUsuario int,out email varchar(70))
 begin
-        set email=(SELECT U.email from Usuario as U
+        set email=(SELECT U.email from usuario as U
                    WHERE U.id= idUsuario);
 end//
 DELIMITER ;
@@ -508,10 +508,10 @@ create procedure GR_calcularPrecioPasaje(in codigoReserva varchar(8),out total d
 begin
 
     select sum(V.precio+TS.precio+TC.precio)into total from reservaPasaje as RP 
-				inner join Vuelo as V on RP.fkCodigoVuelo=V.codigo
-				inner join Ubicacion as U on RP.codigoReserva=U.fkcodigoReserva
-				inner join TipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
-				inner join TipoDeServicio as TS on RP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
+				inner join vuelo as V on RP.fkCodigoVuelo=V.codigo
+				inner join ubicacion as U on RP.codigoReserva=U.fkcodigoReserva
+				inner join tipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
+				inner join tipoDeServicio as TS on RP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
 				where RP.codigoReserva=codigoReserva;
     
 end//
@@ -575,8 +575,8 @@ begin
              join trayecto t on v.codigoTrayecto = t.codigo
              join locacion l on l.codigo = t.codigoLocacionDestino
              join locacion l2 on l2.codigo = t.codigoLocacionOrigen
-             join tipodeservicio tipo_servicio on rP.fkcodigoTipoDeServicio = tipo_servicio.codigoTipoDeServicio
-             join tipodetrayecto tipo_trayecto on t.codigoTipoDeTrayecto = tipo_trayecto.codigo
+             join tipoDeServicio tipo_servicio on rP.fkcodigoTipoDeServicio = tipo_servicio.codigoTipoDeServicio
+             join tipoDeTrayecto tipo_trayecto on t.codigoTipoDeTrayecto = tipo_trayecto.codigo
     where rP.codigoReserva=codigoReserva;
 
 end//
