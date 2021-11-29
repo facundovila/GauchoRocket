@@ -783,6 +783,38 @@ end//
 DELIMITER ;
 
 
+drop procedure if exists GR_facturacionTotal; 
+DELIMITER //
+create procedure GR_facturacionTotal(out total double(10,2))
+begin
+
+	select sum(V.precio+TS.precio+TC.precio)into total from reservaPasaje as RP 
+				inner join Vuelo as V on RP.fkCodigoVuelo=V.codigo
+				inner join Ubicacion as U on RP.codigoReserva=U.fkcodigoReserva
+				inner join TipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
+				inner join TipoDeServicio as TS on RP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
+                inner join pasaje as P on P.fkCodigoReserva=RP.codigoReserva
+				where P.fkcodigoReserva is not null;
+    
+end//
+DELIMITER ;
+
+drop procedure if exists GR_facturacionPorCliente; 
+DELIMITER //
+create procedure GR_facturacionPorCliente()
+begin
+
+	call GR_facturacionTotal(@total);
+    
+    set @clientes = (select count(codigo) from pasaje);
+    
+    select sum(@total/@clientes) as facturacionPorCliente;
+    
+end//
+DELIMITER ;
+
+
+
 call GR_ejecutarReservas(3);
 call GR_ejecutarReservas(4);
 /*
