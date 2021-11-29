@@ -44,6 +44,10 @@
         height: 35em;
 
     }
+
+    .card-47em{
+        margin-top: 21px ;
+    }
 }
 
 @media screen and (min-width:60em){
@@ -56,6 +60,8 @@
     .widthcard{
         width: 18em ;
     }
-
+    .card-47em{
+        margin-top: 0px ;
+    }
 
 }

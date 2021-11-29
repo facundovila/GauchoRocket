@@ -2,6 +2,12 @@
 <title>Turnos Medicos-Gaucho Rocket</title>
 <main class="usuario">
 
+    <div class="bg-verde">
+        <nav class="  d-block d-sm-block d-md-none">
+            <a class="btn btn-success bg-verde rounded-0 border-0 link-menu pr-3" id="menu-toggle"  href="#"><img class="home-img" src="../public/img/perfil.png" alt="">menu de usuario</a>
+        </nav>
+    </div>
+
     <section class="d-flex contenedor" id="wrapper">
 
         <article class="contenido1 " id="sidebar-wrapper">
@@ -48,5 +54,12 @@
 
      </article>
     </section>
+    <script src="../public/css/jquery.min.js"></script>
+    <script>
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+    </script>
 </main>
 {{> footer}}

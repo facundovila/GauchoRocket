@@ -6,6 +6,9 @@
 
 }
 
+.bg-verde{
+    background-color: rgba(21,115,71,255);}
+
 .contenedor{
     background-color:#f3ffe6;
 
@@ -27,14 +30,12 @@
 
 
 }
-
 .contenido3{
 
 }
-
 .contenido2{
 
-    padding: 2em;
+    padding-top: 2em;
 }
 
 .card-reserva{
@@ -52,7 +53,11 @@
 
 }
 
+.margin1{
 
+    align-content: center;
+    align-items: center;
+}
 
 .margin2{
     margin-right: 4em;
@@ -127,5 +132,9 @@
 
     .contenido3{
         width: calc(75% - 2em);
+    }
+
+    .botonderecha{
+        float: right;
     }
 }

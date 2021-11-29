@@ -33,50 +33,53 @@
             <div class="w-100  d-flex justify-content-center" style="position: absolute; bottom: 0;">
                 <div class="p-3 card bg-primary container">
                     <div class="card p-3 container">
-                        <form method="post" enctype="multipart/form-data" action="/vuelos/showFlights">
-                            
-                            <div class="row mt-3">
-                                
-                                <div class="col-lg col-3">
-                                    <label for="origen" class="form-label">origen</label>
+                        <div class="card-body" >
+                            <form method="post" enctype="multipart/form-data" action="/vuelos/showFlights">
 
-                                    <select name="origen" id="origen" class="form-select">
-                                        <option selected>seleccione un origen</option>
-                                        {{#Locaciones}}
-                                        <option value="{{codigo}}">{{nombre}}</option>
-                                        {{/Locaciones}}
-                                    </select>
+                                <div class="row mt-3">
+
+                                    <div class="col-lg col-6">
+                                        <label for="origen" class="form-label">origen</label>
+
+                                        <select name="origen" id="origen" class="form-select">
+                                            <option selected>seleccione un origen</option>
+                                            {{#Locaciones}}
+                                            <option value="{{codigo}}">{{nombre}}</option>
+                                            {{/Locaciones}}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-lg col-6">
+                                        <label for="destino" class="form-label">destino</label>
+                                        <select name="destino" id="destino" class="form-select">
+                                            <option selected>seleccione un destino</option>
+                                            {{#Locaciones}}
+                                            <option value="{{codigo}}">{{nombre}}</option>
+                                            {{/Locaciones}}
+
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-lg col-6">
+                                        <label for="fecha_partida" class="form-label">Partida</label>
+                                        <input type="date" name="fecha_partida" class="form-control" id="fecha_partida">
+                                    </div>
+                                    <div class="col-lg col-6">
+                                        <label for="tipo" class="form-label">Tipo de Trayecto</label>
+                                        <select name="tipo" id="tipo" class="form-select">
+                                            <option selected>Selecione un opción</option>
+                                            {{#TiposT}}
+                                            <option value="{{codigo}}">{{nombre}}</option>
+                                            {{/TiposT}}
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="col-lg col-6">
-                                    <label for="destino" class="form-label">destino</label>
-                                    <select name="destino" id="destino" class="form-select">
-                                        <option selected>seleccione un destino</option>
-                                        {{#Locaciones}}
-                                        <option value="{{codigo}}">{{nombre}}</option>
-                                        {{/Locaciones}}
+                                <button class="btn btn-primary mt-3" type="submit">Buscar vuelos</button>
+                            </form>
+                        </div>
 
-                                    </select>
-
-                                </div>
-
-                                <div class="col-lg col-3">
-                                    <label for="fecha_partida" class="form-label">Partida</label>
-                                    <input type="date" name="fecha_partida" class="form-control" id="fecha_partida">
-                                </div>
-                                <div class="col-lg col-4">
-                                    <label for="tipo" class="form-label">Tipo de Trayecto</label>
-                                    <select name="tipo" id="tipo" class="form-select">
-                                        <option selected>Selecione un opción</option>
-                                        {{#TiposT}}
-                                        <option value="{{codigo}}">{{nombre}}</option>
-                                        {{/TiposT}}
-                                    </select>
-                                </div>
-                            </div>
-    
-                            <button class="btn btn-primary mt-3" type="submit">Buscar vuelos</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -92,8 +95,8 @@
                         <img src="/public/img/luna2.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">luna</h5>
-                            <p class="card-text">La Luna es el único satélite natural de la Tierra. Con un diámetro ecuatorial de 3476 km, es el quinto satélite más grande del sistema solar.</p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
+                            <p class="card-text ">La Luna es el único satélite natural de la Tierra. Con un diámetro ecuatorial de 3476 km, es el quinto satélite más grande del sistema solar.</p>
+                            <a href="/Vuelos" class="btn btn-primary card-47em">ir a vuelos</a>
                         </div>
                     </div>
                 </div>
@@ -105,7 +108,7 @@
                             <h5 class="card-title">marte</h5>
                             <p class="card-text">Marte es el cuarto planeta en orden de distancia al Sol y el segundo más pequeño del sistema solar, después de Mercurio.</p>
                             <br>
-                            <a href="#" class="btn btn-primary">Reservar</a>
+                            <a href="/Vuelos" class="btn btn-primary">ir a vuelos</a>
                         </div>
                     </div>
                 </div>
@@ -116,7 +119,7 @@
                         <div class="card-body">
                             <h5 class="card-title">titan</h5>
                             <p class="card-text">Titán es el mayor de los satélites de Saturno y el segundo del sistema solar tras Ganimedes y es el único satélite que posee una atmósfera importante.</p>
-                            <a href="#" class="btn btn-primary">Reservar</a>
+                            <a href="/Vuelos" class="btn btn-primary card-47em">ir a vuelos</a>
                         </div>
                     </div>
                 </div>
@@ -128,7 +131,8 @@
                             <h5 class="card-title">Estacion espacial internacional</h5>
                             <p class="card-text">La Estación Espacial Internacional es una estación espacial modular ubicada en la órbita terrestre baja.</p>
                             <br>
-                            <a href="#" class="btn btn-primary">Reservar</a>
+                            <br>
+                            <a href="/Vuelos" class="btn btn-primary">ir a vuelos</a>
                         </div>
                     </div>
                 </div>
