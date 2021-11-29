@@ -782,6 +782,7 @@ begin
 end//
 DELIMITER ;
 
+-- ------ Estadisticas 
 
 drop procedure if exists GR_facturacionTotal; 
 DELIMITER //
@@ -813,12 +814,36 @@ begin
 end//
 DELIMITER ;
 
+drop procedure if exists GR_tasaDeOcupacionPorViaje; 
+DELIMITER //
+create procedure GR_tasaDeOcupacionPorViaje(in codigoVuelo int)
+begin
+		set @asientosOcupados=(select count(ocupado) from ubicacion as U
+							   inner join reservaPasaje as RP on U.fkcodigoReserva=RP.codigoReserva
+							   inner join pasaje as P on P.fkcodigoReserva=RP.codigoReserva
+							   where P.fkcodigoReserva is not null and U.ocupado is true and RP.fkCodigoVuelo = codigoVuelo);
+        
+        set @asientosTotales=(select distinct sum(capacidadSuit+capacidadFamiliar+capacidadGeneral)
+								from modeloDeEquipo as ME
+								inner join equipo as E on ME.codigo=E.fkCodigoModeloEquipo
+								inner join vuelo as V on V.matriculaEquipo=E.matricula
+								inner join reservaPasaje as RP on RP.fkCodigoVuelo=V.codigo
+								inner join pasaje as P on P.fkcodigoReserva=RP.codigoReserva
+								where P.fkcodigoReserva is not null and RP.fkCodigoVuelo = codigoVuelo);
+                                
+		set @descripcionVuelo=(select descripcion from vuelo where codigo = codigoVuelo);
+                        
+		select @asientosOcupados as AsientosOcupados,@asientosTotales as AsientosTotales,@descripcionVuelo as descripcion;
+        
+end//
+DELIMITER ;
+
 
 
 call GR_ejecutarReservas(3);
 call GR_ejecutarReservas(4);
-/*
 
+/*
 select* from ubicacion;
 
 select * from reservaPasaje;
