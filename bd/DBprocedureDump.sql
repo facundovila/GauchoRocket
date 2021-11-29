@@ -1,32 +1,5 @@
 USE dbgr;
 
--- CALLS ----------------------------------------------------
--- call GR_obtenerMatricula(1,@Matricula);
--- call GR_todosLosVuelos;
--- call GR_CapacidadTotalXVuelo(4);
--- call GR_todosLosVuelosTodosLosParametros(1,3,NOW(),2);
--- call GR_validarNivelUsuario(2,@res);
--- call GR_crearReservasVaciasParaUnVueloFinal (3);
--- call GR_vuelosPorId(2);
--- call GR_tipoDeTrayectoDeUnVuelo(2,@trayecto);
--- call GR_compararNivelUsuarioVuelo(2,1,@res);
--- call GR_ocuparPasajeYUbicacionalt(2,2);
---  call GR_ejecutarReservas (2);
---  call GR_vaciarReservasXVuelo(3);
-
--- call GR_obtenerMatricula(3,@matricula);
--- select @matricula;
-
--- call GR_calcularPrecioPasaje('bffef4a7',@total);
--- select @total;
-
--- call GR_capacidadTotalXVueloSoloCantidadOUT(2,@cantidad);
--- select @cantidad as a;
-
--- call GR_getUsuarioEmailFromId(1,@email);
--- select @email;
-
--- ---------------------------------------------------------------
 
 drop procedure if exists GR_todosLosVuelos;
 DELIMITER //
@@ -747,6 +720,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_checkFechaTurno; 
 DELIMITER //
 create procedure GR_checkFechaTurno(in codigoCentro int,in fecha date)
@@ -765,6 +739,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_fechaYNivelMail; 
 DELIMITER //
 create procedure GR_fechaYNivelMail(in idUsuario int)
@@ -782,7 +757,9 @@ begin
 end//
 DELIMITER ;
 
+
 -- ------ Estadisticas 
+
 
 drop procedure if exists GR_facturacionTotal; 
 DELIMITER //
@@ -800,6 +777,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_facturacionPorCliente; 
 DELIMITER //
 create procedure GR_facturacionPorCliente()
@@ -813,6 +791,7 @@ begin
     
 end//
 DELIMITER ;
+
 
 drop procedure if exists GR_tasaDeOcupacionPorViaje; 
 DELIMITER //
@@ -838,6 +817,7 @@ begin
 end//
 DELIMITER ;
 
+
 drop procedure if exists GR_cabinaMasVendida; 
 DELIMITER //
 create procedure GR_cabinasMasVendida()
@@ -853,35 +833,39 @@ begin
 end//
 DELIMITER ;
 
-         
-          
-                               
-                               
-	
-
-select * from pasaje;
-
-drop procedure if exists GR_facturacionTotalMes; 
-DELIMITER //
-create procedure GR_facturacionTotalMes(out total double(10,2))
-begin
-
-	select sum(V.precio+TS.precio+TC.precio)into total from reservaPasaje as RP 
-				inner join Vuelo as V on RP.fkCodigoVuelo=V.codigo
-				inner join Ubicacion as U on RP.codigoReserva=U.fkcodigoReserva
-				inner join TipoDeCabina as TC on U.fkCodigoTipoDeCabina=TC.codigoTipoDeCabina
-				inner join TipoDeServicio as TS on RP.fkcodigoTipoDeServicio=TS.codigoTipoDeServicio
-                inner join pasaje as P on P.fkCodigoReserva=RP.codigoReserva
-				where P.fkcodigoReserva is not null;
-    
-end//
-DELIMITER ;
-
 
 call GR_ejecutarReservas(3);
 call GR_ejecutarReservas(4);
 
 /*
+-- CALLS ----------------------------------------------------
+-- call GR_obtenerMatricula(1,@Matricula);
+-- call GR_todosLosVuelos;
+-- call GR_CapacidadTotalXVuelo(4);
+-- call GR_todosLosVuelosTodosLosParametros(1,3,NOW(),2);
+-- call GR_validarNivelUsuario(2,@res);
+-- call GR_crearReservasVaciasParaUnVueloFinal (3);
+-- call GR_vuelosPorId(2);
+-- call GR_tipoDeTrayectoDeUnVuelo(2,@trayecto);
+-- call GR_compararNivelUsuarioVuelo(2,1,@res);
+-- call GR_ocuparPasajeYUbicacionalt(2,2);
+--  call GR_ejecutarReservas (2);
+--  call GR_vaciarReservasXVuelo(3);
+
+-- call GR_obtenerMatricula(3,@matricula);
+-- select @matricula;
+
+-- call GR_calcularPrecioPasaje('bffef4a7',@total);
+-- select @total;
+
+-- call GR_capacidadTotalXVueloSoloCantidadOUT(2,@cantidad);
+-- select @cantidad as a;
+
+-- call GR_getUsuarioEmailFromId(1,@email);
+-- select @email;
+
+-- ---------------------------------------------------------------
+
 select* from ubicacion;
 
 select * from reservaPasaje;
