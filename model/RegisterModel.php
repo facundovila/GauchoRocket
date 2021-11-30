@@ -16,8 +16,6 @@ class RegisterModel extends BaseModel {
     function registerUser($usuario, $email, $password, $nombre, $apellido, $dni, $telefono) {
         $request = "INSERT INTO usuario (usuario, email, clave, nombre, apellido, dni, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $params = array($usuario, $email, $password , $nombre, $apellido, $dni, $telefono);
-        
-
 
         return $this->database->executeQueryParams($params, $request);
     }
@@ -30,7 +28,7 @@ class RegisterModel extends BaseModel {
     }
 
     function sendAuthentication($usuario, $email, $hash) {
-        $message = '<a href="' .$this->baseurl .'/validator/validate/hash='. $hash . '">Validar</a>';
+        $message = '<a href="' .$this->baseurl .'/validator/validate?hash='. $hash . '">Validar</a>';
         $this->sendmail->sendMail($email, $usuario, "Autentificación", $message);
     }
 }

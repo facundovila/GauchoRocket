@@ -7,6 +7,7 @@ require_once 'helpers/PDF_ReservaGenerator.php';
 
 class MisReservasController extends BaseController {
     private MisReservasModel $model;
+    private PdfPrinter $pdfPrinter;
 
     public function __construct($model, $printer, $pdfPrinter) {
         parent::__construct($printer);
@@ -82,7 +83,7 @@ class MisReservasController extends BaseController {
 
         header("location: /vuelos"); 
 
-        }
+    }
 
      
 }

@@ -37,6 +37,7 @@ class PaymentModel extends BaseModel {
             return $response[0];
         } else {
             ErrorController::showError();
+            exit();
         }
     }
 }

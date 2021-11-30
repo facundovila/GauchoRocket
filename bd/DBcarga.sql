@@ -1,20 +1,20 @@
 use dbgr;
 
 insert into nivelVuelo(nivel,descripcion)values
-						(1,"Nivel Uno"),
-                        (2,"Nivel Dos"),
-                        (3,"Nivel Tres");
+						(1,'Nivel Uno'),
+                        (2,'Nivel Dos'),
+                        (3,'Nivel Tres');
 
 insert into usuario(email,rol,usuario,clave)values			
-										("admin","admin","admin",md5("admin")),
-										("cliente","cliente","cliente",md5("cliente"));
+										('admin','admin','admin',md5('admin')),
+										('cliente','cliente','cliente',md5('cliente'));
                                         
 insert into usuario(email,usuario,clave,nombre,apellido,dni,telefono)values	
-										("jucampana@alumno.unlam.edu.ar","Spike",md5("swordfish1"),"Spike","Spiegel",'44444444','111111111'),
-                                        ("juanfrancocamp@gmail.com","Jet",md5("swordfish2"),"Jet","Black",'333333333','2222222222');
+										('jucampana@alumno.unlam.edu.ar','Spike',md5('swordfish1'),'Spike','Spiegel','44444444','111111111'),
+                                        ('juanfrancocamp@gmail.com','Jet',md5('swordfish2'),'Jet','Black','333333333','2222222222');
 	
 insert into usuario(email,rol,usuario,clave)values	
-													("vuelo","cliente","vuelo",md5("vuelo"));
+													('vuelo','cliente','vuelo',md5('vuelo'));
                                                     
 insert into nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values
 								(3,3),
@@ -22,14 +22,14 @@ insert into nivelVueloUsuario(fkIdUsuario,fkNivelVuelo)values
                                 (1,3);
     
 insert into login(fkemailusuario,clave)values
-										("admin",md5("admin")),
-                                        ("vuelo",md5("vuelo")),
-										("cliente",md5("cliente"));
+										('admin',md5('admin')),
+                                        ('vuelo',md5('vuelo')),
+										('cliente',md5('cliente'));
     
     
 insert into login(fkemailusuario,clave)values
-											("jucampana@alumno.unlam.edu.ar",md5("swordfish1")),
-											("juanfrancocamp@gmail.com",md5("swordfish2"));
+											('jucampana@alumno.unlam.edu.ar',md5('swordfish1')),
+											('juanfrancocamp@gmail.com',md5('swordfish2'));
                                         
 insert into locacion (nombre) values
 								('Buenos Aires'),
@@ -84,7 +84,7 @@ insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGen
 							('Halcon',2, 25, 150, 25),
 							('Zorzal',1, 0, 50, 50);
 
-insert into Equipo (matricula,fkCodigoModeloEquipo) values
+insert into equipo (matricula,fkCodigoModeloEquipo) values
 					('AA1',1),
 					('AA5',1),
 					('AA9',1),
@@ -131,7 +131,7 @@ insert into Equipo (matricula,fkCodigoModeloEquipo) values
 					('BA2',10),
 					('BA3',10); 
                     
- insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
+ insert into trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
 					 (1,3,1),
 					 (2,12,3);
                      
@@ -156,10 +156,10 @@ insert into tipoDeServicio (descripcion, precio) values
 insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
 ('BepBop',3, 1, 1, 1);
  
-insert into Equipo (matricula,fkCodigoModeloEquipo) values
+insert into equipo (matricula,fkCodigoModeloEquipo) values
 ('BEBOP',11); 
   
-insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
+insert into trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
 (6,7,2);
 
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
@@ -170,10 +170,10 @@ insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayec
 insert into modeloDeEquipo (nombre,fkCodigoTipoEquipo,capacidadSuit,capacidadGeneral,capacidadFamiliar) values
 ('TestModel',1, 1, 0, 0);
  
-insert into Equipo (matricula,fkCodigoModeloEquipo) values
+insert into equipo (matricula,fkCodigoModeloEquipo) values
 ('TEST',12); 
   
-insert into Trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
+insert into trayecto (codigoLocacionOrigen,codigoLocacionDestino,codigoTipoDeTrayecto) values
 (1,10,1);
 
 insert into vuelo(descripcion,precio,fecha,duracion,matriculaEquipo,codigoTrayecto) values
