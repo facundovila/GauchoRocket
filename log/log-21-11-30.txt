@@ -1,0 +1,110 @@
+[21-11-30 01:10:15][INFO] correo enviado con éxito 
+to: facundo.vila94@gmail.com
+name: facundo
+subject: Autentificación
+message: <a href="gauchorocket.localhost/validator/validate?hash=6d3d4281dedb2b19021465ead5e1e6f3">Validar</a>
+
+[21-11-30 01:31:26][INFO] correo enviado con éxito 
+to: facundo.vila94@gmail.com
+name: joan vila
+subject: Su Turno Medico
+message: 
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos de su Turno Medico</h2>
+                    <h3>joan vila</h3> 
+                    <p><b>Lugar del Turno:</b> Buenos Aires</p> 
+                    <p><b>Nivel Obtenido:</b> Nivel Dos-2</p> 
+                    <p><b>Fecha:</b> 2021-11-18</p> 
+                </div>
+            </div>        
+        
+
+[21-11-30 01:36:27][INFO] correo enviado con éxito 
+to: facundo.vila94@gmail.com
+name: joan vila
+subject: CheckIn: Marte-Europa
+message: 
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=97119402&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />   
+                    <p><b>C&oacute;digo de reserva:</b> 4f7fef7a</p> 
+                    <p><b>Pasaje de:</b> joan vila</p> 
+                    <p><b>Tipo de Servicio:</b> Standard</p> 
+                    <p><b>Tipo de Cabina:</b> Familiar</p> 
+                    <p><b>Trayecto:</b> Vuelo del BEBOP entre Marte y Europa</p> 
+                    <p><b>Nro de Asiento:</b> 2</p> 
+                    <p><b>Origen:</b> Marte</p> 
+                    <p><b>Destino:</b> Europa</p> 
+                    <p><b>Fecha:</b> 2021-11-26 09:00:00</p> 
+                </div>
+            </div>        
+        
+
+[21-11-30 01:37:15][INFO] correo enviado con éxito 
+to: facundo.vila94@gmail.com
+name: joan vila
+subject: CheckIn: Buenos Aires-Titan
+message: 
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=d3384d1b&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />   
+                    <p><b>C&oacute;digo de reserva:</b> 8d3f7180</p> 
+                    <p><b>Pasaje de:</b> joan vila</p> 
+                    <p><b>Tipo de Servicio:</b> Gourmet</p> 
+                    <p><b>Tipo de Cabina:</b> Suite</p> 
+                    <p><b>Trayecto:</b> Vuelo Para Testear, solo una cabina</p> 
+                    <p><b>Nro de Asiento:</b> 1</p> 
+                    <p><b>Origen:</b> Buenos Aires</p> 
+                    <p><b>Destino:</b> Titan</p> 
+                    <p><b>Fecha:</b> 2021-11-26 09:00:00</p> 
+                </div>
+            </div>        
+        
+
+[21-11-30 01:37:17][INFO] correo enviado con éxito 
+to: facundo.vila94@gmail.com
+name: joan vila
+subject: CheckIn: Buenos Aires-Titan
+message: 
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=d3384d1b&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />   
+                    <p><b>C&oacute;digo de reserva:</b> 8d3f7180</p> 
+                    <p><b>Pasaje de:</b> joan vila</p> 
+                    <p><b>Tipo de Servicio:</b> Gourmet</p> 
+                    <p><b>Tipo de Cabina:</b> Suite</p> 
+                    <p><b>Trayecto:</b> Vuelo Para Testear, solo una cabina</p> 
+                    <p><b>Nro de Asiento:</b> 1</p> 
+                    <p><b>Origen:</b> Buenos Aires</p> 
+                    <p><b>Destino:</b> Titan</p> 
+                    <p><b>Fecha:</b> 2021-11-26 09:00:00</p> 
+                </div>
+            </div>        
+        
+
+[21-11-30 01:37:20][INFO] correo enviado con éxito 
+to: facundo.vila94@gmail.com
+name: joan vila
+subject: CheckIn: Buenos Aires-Titan
+message: 
+            <div style="padding: 1em" xmlns="http://www.w3.org/1999/html">
+                <div style="border: 2px black solid; padding: 1em">
+                    <h2 style="margin-top: 1em; margin-bottom: 2em">Datos del Pase de Abordaje</h2>
+                    <img src="https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=d3384d1b&choe=UTF-8" alt="" title="Link to Google.com" style="text-align: center" />   
+                    <p><b>C&oacute;digo de reserva:</b> 8d3f7180</p> 
+                    <p><b>Pasaje de:</b> joan vila</p> 
+                    <p><b>Tipo de Servicio:</b> Gourmet</p> 
+                    <p><b>Tipo de Cabina:</b> Suite</p> 
+                    <p><b>Trayecto:</b> Vuelo Para Testear, solo una cabina</p> 
+                    <p><b>Nro de Asiento:</b> 1</p> 
+                    <p><b>Origen:</b> Buenos Aires</p> 
+                    <p><b>Destino:</b> Titan</p> 
+                    <p><b>Fecha:</b> 2021-11-26 09:00:00</p> 
+                </div>
+            </div>        
+        
+
