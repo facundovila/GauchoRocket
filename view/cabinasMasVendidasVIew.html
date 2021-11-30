@@ -1,0 +1,47 @@
+{{> header}}
+<title>Administracion-GauchoRocket</title>
+
+<main class="usuario">
+    <section class="d-flex contenedor" id="wrapper">
+        <article  class="contenido2" id="page-content-wrapper">
+            <h3>Cabinas Más Vendidas</h3>
+            <div class="padding">
+
+                <div id="chart_div" style="width: 900px; height: 500px;"></div>
+            </div>
+            <br>
+        </article>
+    </section>
+</main>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawMultSeries);
+
+    function drawMultSeries() {
+        const data = google.visualization.arrayToDataTable([
+            ['Element', 'Cabina', {role: 'style'}],
+            ['{{ General }}', parseFloat('{{ cantidadGeneral }}'), '#b87333'],            // RGB value
+            ['{{ Familiar }}', parseFloat('{{ cantidadFamiliar }}'), 'silver'],            // English color name
+            ['{{ Suit }}', parseFloat('{{ cantidadSuit }}'), 'gold']
+        ]);
+
+        const options = {
+            hAxis: {
+                title: 'Tipo de cabinas',
+
+            },
+            vAxis: {
+                title: 'Cantidad de cabinas'
+            }
+        };
+
+        const chart = new google.visualization.ColumnChart(
+            document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+{{> footer}}

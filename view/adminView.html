@@ -27,6 +27,7 @@
                         <td><p>{{fecha}}</p></td>
                         <td><p>{{precio}}</p></td>
                         <td><a href="/admin/createReservas/codigoVuelo={{codigo}}">Generar Reservas</a></td>
+                        <td><a href="/admin/tasaDeOcupacionDelVuelo?codigoVuelo={{codigo}}">Ver estadisticas</a></td>
                     </tr>
                     {{/vuelos}}{{/admin}}</tbody>
                 </table>
@@ -34,6 +35,11 @@
             <br>
         </article>
     </section>
+    <article>
+        <div>
+            <a href="/admin/cabinasMasVendidas">Ver estadisticas</a>
+        </div>
+    </article>
 </main>
 
 {{> footer}}

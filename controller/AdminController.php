@@ -1,6 +1,7 @@
 <?php
 
 require_once "BaseController.php";
+require_once "ErrorController.php";
 
  class AdminController extends BaseController {
      private AdminModel $adminModel;
@@ -10,21 +11,19 @@ require_once "BaseController.php";
         $this->adminModel = $adminModel;
     }
 
-    public function show(){
-    if(!isset($_SESSION["rol"])||$_SESSION["rol"]=="cliente"){
+     public function show() {
+         if (!isset($_SESSION["rol"]) || $_SESSION["rol"] == "cliente") {
 
-      header("Location:/home");
+             header("Location:/home");
 
-    }else{
+         } else {
 
-      $data=$this->adminModel->getVuelosSinPasajes(); 
+             $data = $this->adminModel->getVuelosSinPasajes();
 
-      echo $this->printer->render("view/adminView.html",$data);
+             echo $this->printer->render("view/adminView.html", $data);
 
-    }
-
-                       
-    }
+         }
+     }
 
     public function createReservas(){
 
@@ -36,6 +35,35 @@ require_once "BaseController.php";
 
     }
 
+    public function tasaDeOcupacionDelVuelo() {
+        $codigoVuelo = $_GET["codigoVuelo"];
+
+        if ($codigoVuelo == null) {
+            ErrorController::showError();
+        }
+
+        $response = $this->adminModel->getTasaDeOcupacion($codigoVuelo);
+
+        if (empty($response)) {
+            ErrorController::showError();
+        }
+
+        $data = $response[0];
+
+        echo $this->printer->render("view/tasaDeOcupacionDelVueloView.html", $data);
+    }
+
+    public function cabinasMasVendidas() {
+        $response = $this->adminModel->getCabinasMasVendidas();
+
+        if (empty($response)) {
+            ErrorController::showError();
+        }
+
+        $data = $response[0];
+
+        echo $this->printer->render("view/cabinasMasVendidasVIew.html", $data);
+    }
 }
 
 ?>

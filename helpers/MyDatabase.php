@@ -18,7 +18,6 @@ class MyDatabase{
 
     public function query($sql): array {
         $databaseResult = mysqli_query($this->database, $sql);
-
         if (mysqli_num_rows($databaseResult) <= 0)
             return [];
 

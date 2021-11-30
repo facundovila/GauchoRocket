@@ -26,12 +26,20 @@ class AdminModel extends BaseModel{
 
           return $data;
 
-        }
+    }
 
-    
+    public function getTasaDeOcupacion($codigoVuelo) {
+        $query = "call GR_tasaDeOcupacionPorViaje(?)";
+        $param = array($codigoVuelo);
 
-   
+        return $this->database->executeQueryParams($param, $query);
+    }
+
+    public function getCabinasMasVendidas(): array {
+        $query = "call GR_cabinasMasVendidaB()";
+
+        return $this->database->query($query);
+    }
 }
-
 
 ?>
