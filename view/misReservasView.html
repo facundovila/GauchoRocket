@@ -30,10 +30,14 @@
                             <td><p>$ {{precio}}</p></td>
                             <td><p>{{pago}}</p></td>
 
-                        <td><a href="/MisReservas/verReservaPDF?codigoReserva={{codigoReserva}}">Ver Reserva</a></td>  
+                        <td><a href="/MisReservas/verReservaPDF?codigoReserva={{codigoReserva}}">Ver Reserva</a></td>
+                        {{^ pagado}}
                         <td><a href="/MisReservas/eliminarReserva?codigoReserva={{codigoReserva}}">Eliminar Reserva</a></td>
+                        {{/ pagado}}
 <!--                        <td><a href="/checkin?codigoReserva={{codigoReserva}}">Check In</a></td>-->
+                        {{^ pagado}}
                         <td><a href="/payment?reservaId={{codigoReserva}}">Pagar</a></td>
+                        {{/ pagado}}
 
                         </tr>
                         {{/ reservas}}</tbody>

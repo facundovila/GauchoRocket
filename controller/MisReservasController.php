@@ -24,7 +24,15 @@ class MisReservasController extends BaseController {
         $usuarioId = $_SESSION["id"];
         
         $data["reservas"] = $this->model->getReservas($usuarioId);
-        
+
+        for($i = 0; $i < sizeof($data["reservas"]); $i++) {
+            if ($data["reservas"][$i]["pago"] == "Confirmado") {
+                $data["reservas"][$i]["pagado"] = true;
+            } else {
+                $data["reservas"][$i]["pagado"] = false;
+            }
+
+        }
 
         echo $this->printer->render("view/misReservasView.html", $data);
     }
