@@ -1,6 +1,5 @@
 USE dbgr;
 
-
 drop procedure if exists GR_todosLosVuelos;
 DELIMITER //
 create procedure GR_todosLosVuelos()
@@ -232,7 +231,7 @@ end//
 DELIMITER ;
 
 
-drop procedure if exists GR_crearReservasVaciasParaUnVueloFinal;
+drop procedure if exists GR_crearReservasVaciasParaUnVueloFinal; -- Deprecado
 DELIMITER //
 create procedure GR_crearReservasVaciasParaUnVueloFinal(in codigoVuelo int)
 begin         
@@ -320,8 +319,10 @@ drop procedure if exists GR_ejecutarReservas;
 DELIMITER //
 create procedure GR_ejecutarReservas(in codigoVuelo int)
 begin
-		
+		if not exists(select checkin from reservaPasaje where fkCodigoVuelo = codigoVuelo and checkin is true)
+        then
 		call GR_vaciarReservasXVuelo(codigoVuelo);
+        end if;
 		call GR_capacidadDeUnVueloPorTipoDeCabinaOUT(codigoVuelo,@cSuite,@cGeneral,@cFamiliar);
         
         call GR_crearReservasVaciasParaUnVueloEX(codigoVuelo,1,@cGeneral);
@@ -851,17 +852,17 @@ begin
 
     set @Familiar='Familiar';
 
-    set @cantidadSuit=(select distinct count(ocupado) as vendidas from ubicacion as U
+    set @cantidadSuite=(select distinct count(ocupado) as vendidas from ubicacion as U
                                                                            inner join reservaPasaje as RP on U.fkcodigoReserva = RP.codigoReserva
                                                                            inner join pasaje as P on P.fkcodigoReserva = RP.codigoReserva
                                                                            inner join tipoDeCabina as TC on U.fkCodigoTipoDeCabina = TC.codigoTipoDeCabina
                        where P.fkcodigoReserva is not null and U.ocupado is true
-                         and TC.descripcion = 'Suit');
+                         and TC.descripcion = 'Suite');
 
-    set @Suit='Suit';
+    set @Suite='Suite';
 
     select @cantidadGeneral as cantidadGeneral,@General as General,@cantidadFamiliar as cantidadFamiliar,@Familiar as Familiar,
-           @cantidadSuit as cantidadSuit,@Suit as Suit;
+           @cantidadSuite as cantidadSuite,@Suite as Suite;
 
 end//
 DELIMITER ;
